@@ -12,9 +12,7 @@ def get_system_info():
 
 def get_application_status():
     """
-    For Docker-based processes, we might not easily 'see' the process name with psutil,
-    but you can do simple checks (like attempts to connect to services).
-    For simplicity, we'll mock or do minimal checks here.
+    status.
     """
 
     return {
