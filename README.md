@@ -47,7 +47,7 @@ The platform is designed for a diverse range of users, including:
 
 ## Key Features
 
-Our Cybersecurity Web Application is equipped with a robust suite of features designed to provide a comprehensive and interactive learning experience. Below are the core components that make ProxyAuthRequired.com a pivotal tool for cybersecurity professionals, students, and enthusiasts.
+This Cybersecurity Web Application is equipped with a robust suite of features designed to provide a comprehensive and interactive learning experience. Below are the core components that make ProxyAuthRequired.com a pivotal tool for cybersecurity professionals, students, and enthusiasts.
 
 ### GRC Wizard
 
