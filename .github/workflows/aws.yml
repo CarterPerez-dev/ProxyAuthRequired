@@ -43,8 +43,6 @@ jobs:
           # Stopping existing containers
           docker-compose down
 
-          docker system prune -a --volumes -f
-
           # Rebuilding containers with no cache
           docker-compose build 
 
