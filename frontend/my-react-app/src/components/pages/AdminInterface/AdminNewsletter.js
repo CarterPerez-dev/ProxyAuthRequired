@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AdminNewsletter.css';
 
-const ENDPOINT = "/api/admin/newsletter";
+const ENDPOINT = "https://www.proxyauthrequired.com/api/admin/newsletter";
 
 const AdminNewsletter = ({ apiKey }) => {
   const [content, setContent] = useState('');
