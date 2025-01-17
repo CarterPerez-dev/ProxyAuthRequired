@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   backend:
     container_name: backend_service
@@ -33,7 +35,7 @@ services:
     ports:
       - "27018:27017"
     volumes:
-      - mongodb_data:/data/db
+      - /mnt/storage/mongo_data:/data/db
     networks:
       - xploitcraft_network
     restart: unless-stopped
@@ -44,10 +46,19 @@ services:
     ports:
       - "6380:6379"
     volumes:
-      - redis_data:/data
+      - /mnt/storage/redis_data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: >
+      redis-server /usr/local/etc/redis/redis.conf
+      --requirepass ${REDIS_PASSWORD}
+      --appendonly yes
+      --protected-mode yes
+      --bind 0.0.0.0
+    env_file:
+      - .env
     networks:
       - xploitcraft_network
-    restart: unless-stopped
+    restart: always
 
   apache:
     container_name: apache_service
@@ -59,17 +70,17 @@ services:
     networks:
       - xploitcraft_network
     volumes:
-     - ./apache/apache_server.conf:/usr/local/apache2/conf/extra/apache_server.conf
-     - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./apache/apache_server.conf:/usr/local/apache2/conf/extra/apache_server.conf
+      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
     restart: always
-    
+
   nginx:
     container_name: nginx_proxy
     image: nginx:latest
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf          
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/sites-enabled:/etc/nginx/sites-enabled
     networks:
       - xploitcraft_network
@@ -77,18 +88,44 @@ services:
       - apache
     restart: unless-stopped
 
+  celery:
+    container_name: celery_worker
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    command: celery -A helpers.async_tasks worker --loglevel=info --concurrency=8
+    env_file:
+      - .env
+    depends_on:
+      - backend
+      - redis
+    networks:
+      - xploitcraft_network
+    restart: always
+    
+    
+  celery_beat:
+    container_name: celery_beat_service
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    command: celery -A helpers.celery_app beat --loglevel=info
+    env_file:
+      - .env
+    depends_on:
+      - backend
+      - redis
+    networks:
+      - xploitcraft_network
+    restart: always
+
+
 networks:
   xploitcraft_network:
     driver: bridge
 
-volumes:
-  mongodb_data:
-    driver: local
-  redis_data:
-    driver: local
 
 
 
-
-
+ 
 

@@ -4,12 +4,12 @@ body {
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevent horizontal overflow */
-  box-sizing: border-box; /* Ensure padding/border included in width calculations */
+  overflow-x: hidden; 
+  box-sizing: border-box; 
 }
 
 .analogy-hub-container {
-  width: 100vw; /* full width of viewport */
+  width: 100vw; 
   max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
@@ -23,8 +23,8 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   min-height: 100vh;
-  box-sizing: border-box; /* Ensure padding/border included in the element width/height */
-  overflow-x: hidden; /* Just in case */
+  box-sizing: border-box; 
+  overflow-x: hidden; 
 }
 
 .analogy-hub-title {
@@ -157,13 +157,18 @@ body {
   color: #000;
   border: 0.125rem solid #000;
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
   cursor: pointer;
   font-weight: bold;
+}
+
+
+.copy-button:active {
+  transform: scale(0.95);
+  opacity: 0.8;
 }
 
 .copy-button:hover {
   background-color: #00CED1;
 }
-

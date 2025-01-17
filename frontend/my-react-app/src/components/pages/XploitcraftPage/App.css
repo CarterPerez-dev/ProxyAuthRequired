@@ -29,13 +29,6 @@
   margin-top: 1rem;
 }
 
-.syntax-highlighter {
-  white-space: pre-wrap !important;
-  overflow-wrap: break-word !important;
-  word-break: break-all !important;
-  width: 100% !important;
-}
-
 .input-container-horizontal {
   display: flex;
   gap: 1rem;
@@ -116,34 +109,19 @@
 }
 
 .payload-content {
-  text-align: left;
   border-radius: 0.5rem;
-  overflow-y: auto;
   max-height: 37.5rem;
+  font-size: 1rem;
   overflow-x: hidden;
+  overflow-y: auto;
   word-wrap: break-word;
-  overflow-wrap: anywhere; /* Allows breaking at any point if necessary */
-  word-break: break-word;
-  hyphens: auto; /* Adds hyphens where words are broken */
-  color: #00ff00;
+  overflow-wrap: anywhere;
   line-height: 1.3;
   padding: 1rem;
   box-sizing: border-box;
-  max-width: 100%; /* Ensures content doesn't exceed container */
+  max-width: 100%;
 }
 
-.payload-content pre {
-  white-space: pre-wrap !important;
-  word-wrap: break-word !important;
-  word-break: break-word !important;
-}
-
-.App-link:hover {
-  color: #ff0055;
-  text-decoration: underline;
-}
-
-/* Logo Styles */
 .App-logo {
   max-width: 15.625rem;      
   max-height: 15.625rem;
@@ -152,7 +130,6 @@
   margin-bottom: -1.875rem;
 }
 
-/* Keyframes for spinning */
 @keyframes App-logo-spin {
   0% {
     transform: rotate(0deg);
@@ -165,13 +142,11 @@
   }
 }
 
-/* Main App Content with Sidebar Space - Use relative units and responsive adjustments */
 .main-content {
   margin-left: 13.75rem; 
   padding: 0;
 }
 
-/* Ensure that datalist dropdown is visible and styled */
 ::-webkit-calendar-picker-indicator {
   display: none;
 }
@@ -184,52 +159,20 @@
   color: #000;
   border: 1px solid #000;
   border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease;
 }
 
+.copy-button-payload:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
 .copy-button-payload:hover {
   background-color: #00CED1;
   color: #000;
-}
-
-/* New Styles for Payload Text */
-.payload-text {
-  color: #fff;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-word;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-/* Syntax Highlighting Styles */
-
-/* Numbers */
-.number {
-  color: #d62929;
-}
-
-/* The word "or" */
-.or-word {
-  color: #d62929;
-  font-weight: bold;
-}
-
-/* Grey Symbols: '-' and '/' */
-.grey-symbol {
-  color: #778899;
-}
-
-/* Yellow Symbols: ! @ # $ % ^ & * ( ) */
-.yellow-symbol {
-  color: #d62929;
-}
-
-/* Green Symbols: : ; " ' > < ? { } [ ] \ */
-.green-symbol {
-  color: #e6c300;
 }
 

@@ -33,4 +33,7 @@ gevent==23.9.1
 cffi==1.15.1
 greenlet
 faker
+tzdata
+Flask-Migrate
+psutil
 

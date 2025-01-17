@@ -12,11 +12,11 @@ def subscribe():
     frequency = data.get('frequency')
     time_slots = data.get('time_slots')
 
-    # Create a new subscription
+
     subscription = UserSubscription(email=email, topic=topic, frequency=frequency, time_slots=time_slots)
     subscription.save_to_db()
 
-    # Schedule emails using helper
+ 
     for time_slot in time_slots:
         schedule_email_task(subscription, time_slot)
 

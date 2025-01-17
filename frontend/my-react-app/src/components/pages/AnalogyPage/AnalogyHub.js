@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import './AnalogyHub.css';
-import backgroundImage from './backround1.jpg';
 import loadingImage from './loading2.png';
 
 const ENDPOINT = "/api"; 
@@ -9,7 +8,7 @@ const AnalogyHub = () => {
   const [analogyType, setAnalogyType] = useState('single');
   const [inputValues, setInputValues] = useState(['']);
   const [analogyCategory, setAnalogyCategory] = useState('real-world');
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isStreaming, setIsStreaming] = useState(false);
   const [generatedAnalogy, setGeneratedAnalogy] = useState('');
 
   const analogyRef = useRef(null);
@@ -37,9 +36,9 @@ const AnalogyHub = () => {
   };
 
   const handleGenerateClick = () => {
-    setIsGenerating(true);
+    setIsStreaming(true);
+    setGeneratedAnalogy('');
 
-    // Prepare data to send to backend
     const data = {
       analogy_type: analogyType,
       category: analogyCategory,
@@ -48,37 +47,46 @@ const AnalogyHub = () => {
       concept3: inputValues[2] || ''
     };
 
-    // Make the request to backend
-    fetch(`${ENDPOINT}/analogy/generate_analogy`, {
+    fetch(`${ENDPOINT}/analogy/stream_analogy`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          console.error('Backend error:', data.error);
-          setGeneratedAnalogy('An error occurred while generating the analogy.');
-        } else {
-          setGeneratedAnalogy(data.analogy);
-        }
-        setIsGenerating(false);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        setGeneratedAnalogy('An internal error occurred. Please try again later.');
-        setIsGenerating(false);
-      });
+    .then((res) => {
+      if (!res.ok) {
+        setIsStreaming(false);
+        return res.text().then((text) => {
+          console.error('Error from server: ', text);
+          setGeneratedAnalogy('An error occurred streaming the analogy.');
+        });
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      function readChunk() {
+        reader.read().then(({ done, value }) => {
+          if (done) {
+            setIsStreaming(false);
+            return;
+          }
+          const chunk = decoder.decode(value, { stream: true });
+          setGeneratedAnalogy((prev) => prev + chunk);
+          readChunk();
+        });
+      }
+      readChunk();
+    })
+    .catch((err) => {
+      console.error('Streaming error:', err);
+      setGeneratedAnalogy('An error occurred streaming the analogy.');
+      setIsStreaming(false);
+    });
   };
 
   const handleCopyClick = () => {
     if (generatedAnalogy) {
-      // Copy to clipboard
       navigator.clipboard.writeText(generatedAnalogy)
         .then(() => {
-          // Optional: you could show a small toast or notification that it's copied
           console.log('Copied to clipboard');
         })
         .catch(err => {
@@ -94,7 +102,7 @@ const AnalogyHub = () => {
 
       <div className="analogy-hub-form">
         <div className="analogy-type-section">
-          <select value={analogyType} onChange={handleTypeChange} className="analogy-hub-input">
+          <select value={analogyType} onChange={(e) => handleTypeChange(e)} className="analogy-hub-input">
             <option value="single">Single</option>
             <option value="comparison">Comparison</option>
             <option value="triple">Triple Comparison</option>
@@ -115,7 +123,11 @@ const AnalogyHub = () => {
         </div>
 
         <div className="analogy-category-section">
-          <select value={analogyCategory} onChange={(e) => setAnalogyCategory(e.target.value)} className="analogy-hub-input">
+          <select
+            value={analogyCategory}
+            onChange={(e) => setAnalogyCategory(e.target.value)}
+            className="analogy-hub-input"
+          >
             <option value="real-world">Real World Analogy</option>
             <option value="video-games">Video Games</option>
             <option value="tv-show">TV Show</option>
@@ -145,10 +157,15 @@ const AnalogyHub = () => {
         </div>
 
         <div className="button-and-loader">
-          <button className="analogy-generate-button" onClick={handleGenerateClick} disabled={isGenerating}>
-            {isGenerating ? "Generating..." : "Generate Analogy"}
+          <button
+            className="analogy-generate-button"
+            onClick={handleGenerateClick}
+            disabled={isStreaming}
+          >
+            {isStreaming ? "Streaming..." : "Generate Analogy"}
           </button>
-          {isGenerating && (
+
+          {isStreaming && (
             <img
               src={loadingImage}
               alt="Loading..."

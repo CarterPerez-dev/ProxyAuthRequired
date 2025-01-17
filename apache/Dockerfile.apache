@@ -10,7 +10,7 @@ RUN sed -i '/#LoadModule unixd_module/s/^#//' /usr/local/apache2/conf/httpd.conf
 
 RUN mkdir -p /usr/local/apache2/logs && chmod -R 777 /usr/local/apache2/logs
 
-# Expose port 8080
+
 EXPOSE 8080
 
 CMD ["httpd-foreground"]

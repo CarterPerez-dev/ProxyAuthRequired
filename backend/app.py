@@ -13,13 +13,14 @@ from flask import request, jsonify
 from routes.xploit_routes import xploit_bp  
 from routes.scenario_routes import scenario_bp 
 from routes.analogy_routes import analogy_bp
-from routes.email_routes import email_bp
 from routes.subscribe_routes import subscribe_bp
 from routes.unsubscribe_routes import unsubscribe_bp
-from routes.update_routes import update_bp
+from routes.admin_newsletter_routes import admin_newsletter_bp
 from database.models import create_user
 from routes.grc_routes import grc_bp
 from routes.log_routes import log_bp
+from routes.celery_routes import celery_bp
+from routes.status_routes import status_bp
 
 
 
@@ -61,6 +62,16 @@ app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_KEY_PREFIX'] = 'flask_session:'
 app.config['SESSION_REDIS'] = redis.StrictRedis(host='redis', port=6379, db=0)
 
+
+REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')  
+
+app.config['SESSION_REDIS'] = redis.StrictRedis(
+    host='redis',
+    port=6379,
+    db=0,
+    password=REDIS_PASSWORD
+)
+
 Session(app)
 
 
@@ -77,22 +88,43 @@ def log_request_info():
 app.register_blueprint(xploit_bp, url_prefix='/payload')
 app.register_blueprint(scenario_bp, url_prefix='/scenario')
 app.register_blueprint(analogy_bp, url_prefix='/analogy')
-app.register_blueprint(email_bp, url_prefix='/email')
-app.register_blueprint(subscribe_bp, url_prefix='/subscribe')
-app.register_blueprint(unsubscribe_bp, url_prefix='/unsubscribe')
-app.register_blueprint(update_bp, url_prefix='/update')
 app.register_blueprint(grc_bp, url_prefix='/grc')
 app.register_blueprint(log_bp, url_prefix='/logs')
+app.register_blueprint(subscribe_bp, url_prefix='/subscribe')
+app.register_blueprint(unsubscribe_bp, url_prefix='/unsubscribe')
+app.register_blueprint(admin_newsletter_bp, url_prefix='/admin/newsletter')
+app.register_blueprint(celery_bp, url_prefix='/celery')
+app.register_blueprint(status_bp, url_prefix='/status')
 
 @app.route('/register', methods=['POST'])
 def register():
     user_data = request.json
-    user_id = create_user(user_data)
-    return jsonify({"message": "User created", "user_id": str(user_id)})
+    try:
+        user_id = create_user(user_data)
+        return jsonify({"message": "User created", "user_id": str(user_id)}), 201
+    except ValueError as ve:
+        return jsonify({"error": str(ve)}), 400
+    except Exception as e:
+        logger.error(f"Error registering user: {e}")
+        return jsonify({"error": "Internal server error"}), 500
     
+ADMIN_API_KEY = os.getenv("ADMIN_API_KEY")   
+    
+@app.route('/authenticate', methods=['POST'])
+def authenticate():
+    data = request.get_json()
+    if not data or 'password' not in data:
+        return jsonify({"error": "Password is required."}), 400
+    
+    password = data['password']
+    
+    if password == ADMIN_API_KEY:
+        
+        return jsonify({"message": "Authentication successful."}), 200
+    else:
+        return jsonify({"error": "Invalid password."}), 401
 
 
-# WebSocket for real-time updates
 @socketio.on('connect')
 def handle_connect():
     logger.info('Client connected')

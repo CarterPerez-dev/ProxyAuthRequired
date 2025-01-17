@@ -314,7 +314,7 @@ const App = () => {
 
   const analyzeIndividualLog = async (log) => {
     setLoading(true);
-    setProgress(10); // Start progress immediately
+    setProgress(10); 
     const startTime = Date.now();
     try {
       const response = await axios.post(`${ENDPOINT}/logs/analyze`, {
@@ -329,7 +329,6 @@ const App = () => {
         return;
       }
 
-      // Update the log in the main list
       setLogs((prevLogs) =>
         prevLogs.map((l) => (l.id === log.id ? { ...l, analysis: analyzedLog } : l))
       );
@@ -347,8 +346,7 @@ const App = () => {
       const duration = endTime - startTime;
       const simulateProgress = () => {
         const interval = 100;
-        const totalIntervals = Math.max(1, Math.floor(duration / interval));
-        let currentInterval = 10; 
+        let currentInterval = 10;
         const progressInterval = setInterval(() => {
           currentInterval += 10;
           if (currentInterval > 100) currentInterval = 100;
@@ -387,7 +385,6 @@ const App = () => {
       case "json":
         filename += ".json";
         dataStr = JSON.stringify(logs, null, 2);
-        // Replace \n in strings with actual newlines for better readability
         dataStr = dataStr.replace(/\\n/g, "\n");
         break;
       case "csv":
@@ -396,13 +393,15 @@ const App = () => {
         const csvRows = [
           keys.join(","),
           ...logs.map((l) =>
-            keys.map((k) => {
-              let val = l[k];
-              if (typeof val === "object" && val !== null) {
-                val = JSON.stringify(val).replace(/\\n/g, "\n");
-              }
-              return `"${val || ""}"`;
-            }).join(",")
+            keys
+              .map((k) => {
+                let val = l[k];
+                if (typeof val === "object" && val !== null) {
+                  val = JSON.stringify(val).replace(/\\n/g, "\n");
+                }
+                return `"${val || ""}"`;
+              })
+              .join(",")
           ),
         ];
         dataStr = csvRows.join("\n");
@@ -434,7 +433,6 @@ const App = () => {
         break;
       case "pdf":
         filename += ".pdf";
-        // Just treat pdf as text for this demo
         dataStr = logs
           .map((l) => JSON.stringify(l, null, 2).replace(/\\n/g, "\n"))
           .join("\n\n");

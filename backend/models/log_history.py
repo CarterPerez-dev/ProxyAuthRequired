@@ -13,7 +13,7 @@ from .log_models import (
     SystemInfoLog, UserActivityLog, DeploymentLog, ServiceStatusLog
 )
 
-# Define a Union of all possible log types
+
 LogType = Union[
     FirewallLog, VulnerabilityLog, IntrusionLog, AccessControlLog,
     SystemEvent, ApplicationEvent, AuthenticationEvent, NetworkEvent,

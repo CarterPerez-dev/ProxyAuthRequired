@@ -1,0 +1,43 @@
+/* my-react-app/src/components/pages/AdminInterface/AdminMonitorStatus.css */
+
+.admin-monitor-status-container {
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 6px;
+}
+
+.admin-monitor-status-container h3 {
+  margin-bottom: 15px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.status-section {
+  margin-bottom: 20px;
+}
+
+.status-section h4 {
+  margin-bottom: 10px;
+}
+
+.status-section p, .status-section li {
+  margin: 5px 0;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+.status-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.status-section li {
+  background-color: #f8f9fa;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+

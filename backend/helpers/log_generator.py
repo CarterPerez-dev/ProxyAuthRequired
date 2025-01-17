@@ -185,7 +185,7 @@ def generate_system_event() -> SystemEvent:
     system_component = random.choice(["System Manager", "Monitor Module", "Health Checker"])
     action_performed = random.choice(["System Check", "Health Assessment", "Status Update"])
     result = random.choice(["Success", "Partial Success", "Failure"])
-    hardware_id = fake.uuid4()
+    
 
     return SystemEvent(
         type="event",

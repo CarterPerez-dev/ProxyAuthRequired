@@ -1,0 +1,93 @@
+/* frontend/my-react-app/src/components/pages/AdminInterface/AdminInterface.css */
+
+.admin-interface-container {
+  width: 100%;
+  min-height: 100vh;
+  max-width: 50%;
+  margin: 1.25rem auto; 
+  padding: 1.25rem; 
+  border-radius: 0.5rem; 
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); 
+  color: #787878;
+}
+
+.admin-interface-container h2 {
+  text-align: center;
+  margin-bottom: 1.25rem; 
+}
+
+.form-group {
+  margin-bottom: 0.938rem; 
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 0.313rem; 
+}
+
+.admin-input {
+  width: 50%;
+  padding: 0.625rem; 
+  border: 1px solid #8B0000;
+  border-radius: 0.25rem; 
+  background-color: #000;
+  color: #fff;
+}
+
+.admin-submit-button {
+  padding: 0.625rem 1.25rem; 
+  background-color: #8B0000;
+  border: none;
+  color: white;
+  font-size: 1rem; 
+  border-radius: 0.25rem; 
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 0.625rem;
+}
+
+.admin-submit-button:hover {
+  background-color: #0056b3;
+}
+
+.admin-message {
+  margin-top: 0.938rem; 
+  text-align: center;
+  font-weight: bold;
+  color: #8B0000;
+}
+
+@media (max-width: 768px) {
+  .admin-input {
+    width: 80%; 
+  }
+
+  .admin-interface-container {
+    padding: 1rem; 
+    margin: 1rem auto;
+  }
+
+  .admin-submit-button {
+    width: 100%; 
+  }
+}
+
+@media (min-width: 1200px) {
+  .admin-input {
+    width: 40%; 
+  }
+
+  .admin-submit-button {
+    width: 50%; 
+  }
+}
+
+
+
+
+
+
+

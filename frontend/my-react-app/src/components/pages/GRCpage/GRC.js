@@ -11,10 +11,13 @@ const GRC = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [feedback, setFeedback] = useState("");
 
-  const categories = ["Regulation", "Risk Management", "Compliance", "Audit", "Governance", "Management", "Policy", "Ethics", "Threat Assessment", "Leadership", "Business Continuity", "Random"];
+  const categories = [
+    "Regulation", "Risk Management", "Compliance", "Audit", "Governance", 
+    "Management", "Policy", "Ethics", "Threat Assessment", "Leadership", 
+    "Business Continuity", "Random"
+  ];
   const difficulties = ["Easy", "Medium", "Hard"];
 
-  
   const fetchQuestion = useCallback(async () => {
     setLoading(true);
     setFeedback("");
@@ -46,11 +49,14 @@ const GRC = () => {
   const handleAnswer = useCallback((index) => {
     if (!questionData) return;
     const correctIndex = questionData.correct_answer_index;
-
     if (index === correctIndex) {
-      setFeedback(`✅ Correct! ${questionData.explanations[index.toString()]}\nExam Tip: ${questionData.exam_tip}`);
+      setFeedback(
+        `✅ Correct! ${questionData.explanations[index.toString()]}\nExam Tip: ${questionData.exam_tip}`
+      );
     } else {
-      setFeedback(`❌ Incorrect. ${questionData.explanations[index.toString()]}\nExam Tip: ${questionData.exam_tip}`);
+      setFeedback(
+        `❌ Incorrect. ${questionData.explanations[index.toString()]}\nExam Tip: ${questionData.exam_tip}`
+      );
     }
   }, [questionData]);
 
@@ -69,7 +75,9 @@ const GRC = () => {
       <div className="grc-wizard-container">
         <div className="grc-wizard-header">
           <h1 className="grc-title">GRC Wizard</h1>
-          <p className="grc-subtitle">Choose a category and difficulty, then test your GRC knowledge.</p>
+          <p className="grc-subtitle">
+            Choose a category and difficulty, then test your GRC knowledge.
+          </p>
         </div>
 
         <div className="grc-wizard-controls">
@@ -113,12 +121,15 @@ const GRC = () => {
               onClick={fetchQuestion}
               disabled={loading}
               aria-label="Generate Question"
-            >
-              {loading ? "Generating..." : "Generate Question"}
+            >    
+              {loading ? (
+                <span className="grc-button-loading-version1" aria-label="Loading">
+                  Generating_
+                </span>
+              ) : (
+                "Generate Question"
+              )}
             </button>
-            {loading && (
-              <div className="grc-spinner" aria-label="Loading"></div>
-            )}
           </div>
         </div>
 
@@ -145,7 +156,11 @@ const GRC = () => {
         )}
 
         {feedback && (
-          <div className={`grc-feedback ${feedback.includes("Correct") ? "correct" : "incorrect"}`}>
+          <div
+            className={`grc-feedback ${
+              feedback.includes("Correct") ? "correct" : "incorrect"
+            }`}
+          >
             {feedback}
             <button className="copy-btn" onClick={handleCopy} aria-label="Copy Feedback">
               Copy

@@ -1,14 +1,20 @@
 // components/Sidebar/Sidebar.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import sidebarLogo from './sidebarlogo.png'; // Importing the logo
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
+  };
+
+  // Double-click handler to navigate to portfolio (Easter Egg)
+  const handleRootDoubleClick = () => {
+    navigate('/easteregg');
   };
 
   return (
@@ -18,7 +24,12 @@ const Sidebar = () => {
         {collapsed ? '☰' : '✖'}
       </button>
       <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
-        <h2 className="sidebar-title">root@</h2>
+        <h2 
+          className="sidebar-title" 
+          onDoubleClick={handleRootDoubleClick}
+        >
+          root@
+        </h2>
         <ul className="sidebar-list">
           <li><Link to="/xploitcraft">/Xploitcraft</Link></li>
           <li><Link to="/scenariosphere">/Scenario Sphere</Link></li>
@@ -29,6 +40,7 @@ const Sidebar = () => {
           <li><Link to="/resources">/Study Resources</Link></li>
           <li><Link to="/donate">/Donation</Link></li>
           <li><Link to="/about">/About</Link></li>
+          <li><Link to="/admin">Admin</Link></li>
         </ul>
         <div className="sidebar-logo-container">
           <img src={sidebarLogo} alt="Sidebar Logo" className="sidebar-logo" />
@@ -39,9 +51,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-
-
-
-
 

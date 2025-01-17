@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ScenarioSphere.css';
-import { ATTACK_TYPES } from './attacks'; 
-
+import { ATTACK_TYPES } from './attacks';
 
 const ENDPOINT = "/api";
 
@@ -11,25 +10,25 @@ const ScenarioSphere = () => {
   const [attackType, setAttackType] = useState("");
   const [skillLevel, setSkillLevel] = useState("Script Kiddie");
   const [threatIntensity, setThreatIntensity] = useState(50);
-  const [generatedScenario, setGeneratedScenario] = useState("");
+
+  const [scenarioText, setScenarioText] = useState("");
   const [interactiveQuestions, setInteractiveQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [feedback, setFeedback] = useState({});
 
-  // States for Autocomplete
+
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
-  const [showAllSuggestions, setShowAllSuggestions] = useState(false); 
+  const [showAllSuggestions, setShowAllSuggestions] = useState(false);
   const suggestionsRef = useRef(null);
 
-  // Handle clicks outside the suggestions dropdown to close it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (suggestionsRef.current && !suggestionsRef.current.contains(event.target)) {
         setShowSuggestions(false);
         setActiveSuggestionIndex(-1);
-        setShowAllSuggestions(false); // Reset to default when clicking outside
+        setShowAllSuggestions(false);
       }
     };
 
@@ -39,14 +38,77 @@ const ScenarioSphere = () => {
     };
   }, []);
 
-  const handleGenerateClick = () => {
-    // Validate input fields before making the API call
+  const handleAttackTypeChange = (e) => {
+    const userInput = e.target.value;
+    setAttackType(userInput);
+    setShowAllSuggestions(false);
+
+    if (userInput.length > 0) {
+      const filteredSuggestions = ATTACK_TYPES.filter(
+        (attack) =>
+          attack.toLowerCase().includes(userInput.toLowerCase())
+      );
+      setSuggestions(filteredSuggestions);
+      setShowSuggestions(true);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+    setActiveSuggestionIndex(-1);
+  };
+
+  const handleShowAllSuggestionsClick = () => {
+    setShowAllSuggestions(true);
+  };
+
+  const handleKeyDown = (e) => {
+    if (showSuggestions) {
+      if (e.key === 'ArrowDown') {
+        if (
+          activeSuggestionIndex <
+          (showAllSuggestions
+            ? suggestions.length - 1
+            : Math.min(suggestions.length, 10) - 1)
+        ) {
+          setActiveSuggestionIndex(activeSuggestionIndex + 1);
+        }
+      } else if (e.key === 'ArrowUp') {
+        if (activeSuggestionIndex > 0) {
+          setActiveSuggestionIndex(activeSuggestionIndex - 1);
+        }
+      } else if (e.key === 'Enter') {
+        if (
+          activeSuggestionIndex >= 0 &&
+          activeSuggestionIndex <
+            (showAllSuggestions
+              ? suggestions.length
+              : Math.min(suggestions.length, 10))
+        ) {
+          setAttackType(suggestions[activeSuggestionIndex]);
+          setSuggestions([]);
+          setShowSuggestions(false);
+          setActiveSuggestionIndex(-1);
+          setShowAllSuggestions(false);
+          e.preventDefault();
+        }
+      } else if (e.key === 'Escape') {
+        setShowSuggestions(false);
+        setActiveSuggestionIndex(-1);
+        setShowAllSuggestions(false);
+      }
+    }
+  };
+
+  const handleGenerateScenario = () => {
     if (!attackType.trim()) {
       alert("Please enter the Type of Attack.");
       return;
     }
-
     setIsGenerating(true);
+    setScenarioText("");
+    setInteractiveQuestions([]);
+    setUserAnswers({});
+    setFeedback({});
 
     const data = {
       industry,
@@ -55,32 +117,107 @@ const ScenarioSphere = () => {
       threat_intensity: threatIntensity,
     };
 
-    fetch(`${ENDPOINT}/scenario/generate_scenario`, {
+    fetch(`${ENDPOINT}/scenario/stream_scenario`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          setIsGenerating(false);
+          return response.text().then((text) => {
+            alert(`Error: ${text}`);
+          });
         }
-        return response.json();
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        let scenarioAccumulator = "";
+
+        function readChunk() {
+          reader.read().then(({ done, value }) => {
+            if (done) {
+              setIsGenerating(false);
+              setScenarioText(scenarioAccumulator.trim());
+              fetchQuestions(scenarioAccumulator.trim());
+              return;
+            }
+            const chunk = decoder.decode(value, { stream: true });
+            scenarioAccumulator += chunk;
+            setScenarioText(scenarioAccumulator);
+            readChunk();
+          });
+        }
+
+        readChunk();
       })
-      .then((data) => {
-        console.log("Received data:", data); // Debugging line
-        setGeneratedScenario(data.scenario);
-        setInteractiveQuestions(data.interactive_questions || []);
-        console.log("Interactive Questions:", data.interactive_questions); // Debugging line
+      .catch((err) => {
+        console.error(err);
+        alert("An error occurred while streaming scenario.");
         setIsGenerating(false);
-        setUserAnswers({});
-        setFeedback({});
+      });
+  };
+
+  const fetchQuestions = (finalScenarioText) => {
+    if (!finalScenarioText) return;
+
+    const data = { scenario_text: finalScenarioText };
+
+    fetch(`${ENDPOINT}/scenario/stream_questions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error("Error fetching questions.");
+          return response.text().then((t) => console.error(t));
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let jsonAccumulator = "";
+
+        function readChunk() {
+          reader.read().then(({ done, value }) => {
+            if (done) {
+              try {
+                console.log("Accumulated Questions JSON:", jsonAccumulator); 
+
+
+                const parsed = JSON.parse(jsonAccumulator);
+
+                if (Array.isArray(parsed)) {
+                  const errorObj = parsed.find(q => q.error);
+                  if (errorObj) {
+                    console.error("Error in questions generation:", errorObj.error);
+                    alert(`Error generating questions: ${errorObj.error}`);
+                  } else if (parsed.length === 3) {
+                    setInteractiveQuestions(parsed);
+                  } else {
+                    console.error("Expected exactly 3 questions, but received:", parsed);
+                    alert("Unexpected number of questions received.");
+                  }
+                } else {
+                  console.error("Parsed questions are not in an array format.");
+                  alert("Invalid format for interactive questions.");
+                }
+              } catch (e) {
+                console.error("Failed to parse question JSON:", e);
+                console.error("Received text:", jsonAccumulator);
+                alert("An error occurred while parsing interactive questions.");
+              }
+              return;
+            }
+            const chunk = decoder.decode(value, { stream: true });
+            jsonAccumulator += chunk;
+            readChunk();
+          });
+        }
+        readChunk();
       })
       .catch((error) => {
-        console.error('Error:', error);
-        alert("An error occurred while generating the scenario. Please try again.");
-        setIsGenerating(false);
+        console.error("Error streaming questions:", error);
       });
   };
 
@@ -105,7 +242,9 @@ const ScenarioSphere = () => {
   const renderQuestions = () => {
     return interactiveQuestions.map((question, index) => (
       <div key={index} className="question-container">
-        <p className="question-text">{index + 1}. {question.question}</p>
+        <p className="question-text">
+          {index + 1}. {question.question}
+        </p>
         <div className="options-container">
           {Object.entries(question.options).map(([optionLetter, optionText]) => (
             <label key={optionLetter} className="option-label">
@@ -117,80 +256,26 @@ const ScenarioSphere = () => {
                 onChange={() => handleAnswerSelect(index, optionLetter)}
                 disabled={userAnswers.hasOwnProperty(index)}
               />
-              <span className="option-text">{optionLetter}) {optionText}</span>
+              <span className="option-text">
+                {optionLetter}) {optionText}
+              </span>
             </label>
           ))}
         </div>
         {feedback.hasOwnProperty(index) && (
-          <div className={`feedback ${feedback[index].isCorrect ? 'correct' : 'incorrect'}`}>
+          <div
+            className={`feedback ${
+              feedback[index].isCorrect ? 'correct' : 'incorrect'
+            }`}
+          >
             {feedback[index].isCorrect ? "✅ Correct!" : "❌ Incorrect."}
-            <p className="explanation">Explanation: {feedback[index].explanation}</p>
+            <p className="explanation">
+              Explanation: {feedback[index].explanation}
+            </p>
           </div>
         )}
       </div>
     ));
-  };
-
-  // Handle input changes for the "Type of Attack" field
-  const handleAttackTypeChange = (e) => {
-    const userInput = e.target.value;
-    setAttackType(userInput);
-    setShowAllSuggestions(false); // Reset to default when user types
-
-    if (userInput.length > 0) {
-      const filteredSuggestions = ATTACK_TYPES.filter(
-        (attack) =>
-          attack.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-      );
-      setSuggestions(filteredSuggestions);
-      setShowSuggestions(true);
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
-    }
-    setActiveSuggestionIndex(-1);
-  };
-
-  // Handle suggestion click
-  const handleSuggestionClick = (suggestion) => {
-    setAttackType(suggestion);
-    setSuggestions([]);
-    setShowSuggestions(false);
-    setActiveSuggestionIndex(-1);
-    setShowAllSuggestions(false); // Reset after selection
-  };
-
-  // Handle "Show all options" click
-  const handleShowAllSuggestionsClick = () => {
-    setShowAllSuggestions(true);
-  };
-
-  // Handle keyboard navigation in suggestions
-  const handleKeyDown = (e) => {
-    if (showSuggestions) {
-      if (e.key === 'ArrowDown') {
-        if (activeSuggestionIndex < (showAllSuggestions ? suggestions.length - 1 : Math.min(suggestions.length, 10) - 1)) {
-          setActiveSuggestionIndex(activeSuggestionIndex + 1);
-        }
-      } else if (e.key === 'ArrowUp') {
-        if (activeSuggestionIndex > 0) {
-          setActiveSuggestionIndex(activeSuggestionIndex - 1);
-        }
-      } else if (e.key === 'Enter') {
-        if (activeSuggestionIndex >= 0 && activeSuggestionIndex < (showAllSuggestions ? suggestions.length : Math.min(suggestions.length, 10))) {
-          setAttackType(suggestions[activeSuggestionIndex]);
-          setSuggestions([]);
-          setShowSuggestions(false);
-          setActiveSuggestionIndex(-1);
-          setShowAllSuggestions(false); // Reset after selection
-          e.preventDefault();
-        }
-      } else if (e.key === 'Escape') {
-        setShowSuggestions(false);
-        setActiveSuggestionIndex(-1);
-        setShowAllSuggestions(false); // Reset on escape
-      }
-    }
   };
 
   return (
@@ -200,10 +285,9 @@ const ScenarioSphere = () => {
           <h1 className="scenario-title">Scenario Sphere</h1>
           <p className="scenario-tagline">Step into the real world of cyber defense...</p>
 
-          {/* Industry Selection */}
           <div className="scenario-input-wrapper">
             <label htmlFor="industry-select">Industry</label>
-            <select 
+            <select
               id="industry-select"
               className="scenario-input-field scenario-industry"
               value={industry}
@@ -225,7 +309,6 @@ const ScenarioSphere = () => {
             </select>
           </div>
 
-          {/* Type of Attack with Autocomplete */}
           <div className="scenario-input-wrapper" ref={suggestionsRef}>
             <label htmlFor="attack-type-input">Type of Attack</label>
             <input
@@ -244,15 +327,27 @@ const ScenarioSphere = () => {
             />
             {showSuggestions && suggestions.length > 0 && (
               <ul className="suggestions-list">
-                { (showAllSuggestions ? suggestions : suggestions.slice(0, 10)).map((suggestion, index) => (
-                  <li
-                    key={suggestion}
-                    className={index === activeSuggestionIndex ? 'suggestion-active' : ''}
-                    onClick={() => handleSuggestionClick(suggestion)}
-                  >
-                    {suggestion}
-                  </li>
-                ))}
+                {(showAllSuggestions ? suggestions : suggestions.slice(0, 10)).map(
+                  (suggestion, index) => (
+                    <li
+                      key={suggestion}
+                      className={
+                        index === activeSuggestionIndex
+                          ? 'suggestion-active'
+                          : ''
+                      }
+                      onClick={() => {
+                        setAttackType(suggestion);
+                        setSuggestions([]);
+                        setShowSuggestions(false);
+                        setActiveSuggestionIndex(-1);
+                        setShowAllSuggestions(false);
+                      }}
+                    >
+                      {suggestion}
+                    </li>
+                  )
+                )}
                 {!showAllSuggestions && suggestions.length > 10 && (
                   <li
                     className="show-all-suggestions"
@@ -265,7 +360,6 @@ const ScenarioSphere = () => {
             )}
           </div>
 
-          {/* Skill Level Selection */}
           <div className="scenario-input-wrapper">
             <label htmlFor="skill-level-select">Skill Level</label>
             <select
@@ -281,7 +375,6 @@ const ScenarioSphere = () => {
             </select>
           </div>
 
-          {/* Threat Intensity Slider */}
           <div className="scenario-input-wrapper">
             <label htmlFor="threat-intensity-slider">Threat Intensity</label>
             <input
@@ -296,36 +389,38 @@ const ScenarioSphere = () => {
             <span className="threat-intensity-value">{threatIntensity}</span>
           </div>
 
-          {/* Generate Button and Loading Sphere */}
           <div className="button-and-sphere">
             <button
               className="scenario-generate-button"
-              onClick={handleGenerateClick}
+              onClick={handleGenerateScenario}
               disabled={isGenerating}
             >
               {isGenerating ? "Generating..." : "Generate Scenario"}
             </button>
-            {isGenerating && (
-              <div className="loading-sphere"></div>
-            )}
+            {isGenerating && <div className="loading-sphere"></div>}
           </div>
         </div>
 
-        {/* Scenario Output */}
         <div className="scenario-output-container">
-          {generatedScenario && (
+          {scenarioText && (
             <>
               <h2 className="scenario-output-title">Generated Scenario</h2>
-              <div className="scenario-output-box">{generatedScenario}</div>
+              {/* 
+                white-space: pre-wrap to preserve 
+                newlines (paragraphs) from the model
+              */}
+              <div
+                className="scenario-output-box"
+                style={{ whiteSpace: 'pre-wrap' }}
+              >
+                {scenarioText}
+              </div>
             </>
           )}
-          {!generatedScenario && (
-            <div className="scenario-output-box">
-              hidden-pr0cess.axx
-            </div>
+          {!scenarioText && (
+            <div className="scenario-output-box">hidden-pr0cess.axx</div>
           )}
 
-          {/* Interactive Questions */}
           {interactiveQuestions && interactiveQuestions.length > 0 && (
             <div className="interactive-questions">
               <h3>Interactive Questions</h3>

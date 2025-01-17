@@ -2,7 +2,7 @@
 
 from flask import Blueprint, request, jsonify
 from helpers.log_generator import generate_logs
-from helpers.log_helper import analyze_log, serialize_log  # Use analyze_log instead of analyze_logs_bulk
+from helpers.log_helper import analyze_log, serialize_log  
 import logging
 from models.log_models import (
     Log, SecurityLog, FirewallLog, VulnerabilityLog, IntrusionLog, AccessControlLog,
@@ -13,11 +13,11 @@ from models.log_models import (
 )
 from datetime import datetime
 
-# Initialize Flask Blueprint
+
 log_bp = Blueprint("logs", __name__)
 logger = logging.getLogger(__name__)
 
-# Configure logger if not already configured
+
 if not logger.handlers:
     handler = logging.StreamHandler()
     formatter = logging.Formatter(
@@ -27,9 +27,6 @@ if not logger.handlers:
     logger.addHandler(handler)
     logger.setLevel(logging.DEBUG)
 
-# ---------------------------------
-# Unified Log Generation Route (Only Generate)
-# ---------------------------------
 
 @log_bp.route("/generate", methods=["POST"])
 def generate_logs_route():
@@ -37,18 +34,18 @@ def generate_logs_route():
     Endpoint to generate logs based on category and count.
     """
     try:
-        # Extract request data
+       
         data = request.get_json()
         category = data.get("category", "security").lower()
         count = int(data.get("count", 5))
         
-        # Generate logs
+        
         logs = generate_logs(category, count)
         if not logs:
             logger.warning(f"No logs generated for category: {category}")
             return jsonify({"error": "Invalid log category."}), 400
         
-        # Serialize logs
+        
         serialized_logs = [serialize_log(log) for log in logs]
 
         logger.info(f"Generated {count} logs for category: {category}")
@@ -63,9 +60,7 @@ def generate_logs_route():
         logger.error(f"Error generating logs: {e}")
         return jsonify({"error": str(e)}), 500
 
-# ---------------------------------
-# Analyze Existing Log Route (Only Analyze Single Log)
-# ---------------------------------
+
 
 @log_bp.route("/analyze", methods=["POST"])
 def analyze_log_route():
@@ -73,7 +68,7 @@ def analyze_log_route():
     Endpoint to analyze a manually provided single log.
     """
     try:
-        # Extract request data
+        
         data = request.get_json()
         log = data.get("log", None)
         
@@ -81,7 +76,7 @@ def analyze_log_route():
             logger.warning("No log provided for analysis.")
             return jsonify({"error": "No log provided."}), 400
         
-        # Deserialize log back into model object
+        # Deserializing logs back into model object
         log_type = log.get("type")
         source = log.get("source", "").lower()
         log_obj = None
@@ -148,10 +143,10 @@ def analyze_log_route():
             logger.warning("Invalid log data provided.")
             return jsonify({"error": "Invalid log data provided."}), 400
 
-        # Analyze the log
+       
         analysis = analyze_log(log_obj)
 
-        # Serialize the log
+       
         serialized_log = serialize_log(log_obj)
 
         logger.info(f"Analyzed log: {serialized_log.get('id', 'N/A')}")
@@ -165,9 +160,7 @@ def analyze_log_route():
         logger.error(f"Error analyzing log: {e}")
         return jsonify({"error": str(e)}), 500
 
-# ---------------------------------
-# Health Check Route
-# ---------------------------------
+
 
 @log_bp.route("/healthcheck", methods=["GET"])
 def health_check():
@@ -176,9 +169,7 @@ def health_check():
     """
     return jsonify({"status": "running", "service": "Log Analysis API"}), 200
 
-# ---------------------------------
-# Database History Routes (If Needed)
-# ---------------------------------
+
 
 def init_log_routes(db):
     """
@@ -188,7 +179,6 @@ def init_log_routes(db):
     def save_log_history():
         try:
             data = request.get_json()
-            # Assuming LogHistory is a Pydantic model or a compatible dict
             db.log_history.insert_one(data)
             return jsonify({"status": "success", "message": "Log history saved."}), 200
         except Exception as e:

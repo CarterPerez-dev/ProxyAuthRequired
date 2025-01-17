@@ -9,10 +9,10 @@ from sendgrid.helpers.mail import Mail, Email, To, Content
 from sendgrid import SendGridAPIClient
 
 
-# Load environment variables from .env file
+
 load_dotenv()
 
-# Function to send email using SendGrid
+
 def send_email(to_email, subject, content):
     sg_api_key = os.getenv("SENDGRID_API_KEY")
 
@@ -20,9 +20,9 @@ def send_email(to_email, subject, content):
         print("SendGrid API key not found. Please ensure it is set in your environment variables.")
         return False
 
-    # Set up the email
+    
     message = Mail(
-        from_email='dailycyberbrief@proxyauthrequired.com',  # Must be verified in SendGrid
+        from_email='dailycyberbrief@proxyauthrequired.com',  
         to_emails=to_email,
         subject=subject,
         html_content=content

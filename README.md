@@ -13,17 +13,10 @@
 4. [Key Features](#key-features)
 5. [Project Structure](#project-structure)
 6. [Technologies Used](#technologies-used)
-7. [Setup Instructions](#setup-instructions)
-    - [Prerequisites](#prerequisites)
-    - [Installation Steps](#installation-steps)
-8. [Environment Variables](#environment-variables)
-9. [Architecture Overview](#architecture-overview)
-10. [API Documentation](#api-documentation)
-11. [Styling and Theming](#styling-and-theming)
-12. [Debugging and Logs](#debugging-and-logs)
-13. [Frequently Asked Questions (FAQ)](#faq)
-14. [Future Enhancements](#future-enhancements)
-15. [Contact Me](#contact-me).
+7. [Dev Ops and Deployment](#dev-ops-and-deployment)
+8. [API Documentation](#api-documentation)
+9. [Future Enhancements](#future-enhancements)
+10. [Contact Me](#contact-me).
 
 ---
 
@@ -96,20 +89,20 @@ Our Cybersecurity Web Application is equipped with a robust suite of features de
 
 ### Xploitcraft
 
-- **Supported Scenarios:** Features over 200 simulated attack scenarios, including SQL Injection, Cross-Site Scripting (XSS), Denial-of-Service (DoS), and Cross-Site Request Forgery (CSRF). This extensive library allows users to practice and understand a wide range of attack vectors.
-- **Step-by-Step Guides:** Provides detailed walkthroughs for each simulated exploit, including setup instructions, execution steps, and prevention techniques. These guides facilitate hands-on learning and practical application of cybersecurity concepts.
+- **Supported Scenarios:** Features over 400 simulated attack scenarios, including SQL Injection, Cross-Site Scripting (XSS), Denial-of-Service (DoS), and Cross-Site Request Forgery (CSRF). This extensive library allows users to practice and understand a wide range of attack vectors aswell as over 400 evasion techniques.
+- **Step-by-Step Guides:** Provides detailed walkthroughs for each simulated exploit,such as execution steps, mitigation techniques and prevention techniques. These guides facilitate hands-on learning and practical application of cybersecurity concepts.
 - **Custom Simulations:** Empowers users to design and deploy personalized attack scenarios tailored to their specific learning objectives. This flexibility enables users to explore unique threat landscapes and reinforce their security knowledge through customized practice.
 
 ### Scenario Sphere
 
-- **Interactive Cybersecurity Training:** Generates dynamic training exercises based on simulated attacks and system vulnerabilities, offering a realistic and immersive learning environment.
+- **Interactive Cybersecurity Training:** Generates dynamic training exercises based on over 2000 simulated attacks and system vulnerabilities, offering a realistic and immersive learning environment.
 - **Customizable Scenarios:** Users can define various parameters such as threat types, incident triggers, and response expectations to create tailored training scenarios. This customization ensures that training aligns with specific learning goals and organizational requirements.
-- **Incident Response Practice:** Provides hands-on experience with mock incidents, including data breaches, ransomware infections, and phishing attacks. Users can practice and refine their incident response strategies in a controlled and risk-free setting.
-- **Detailed Reporting:** Offers comprehensive post-simulation performance reviews, including metrics on response time, decision-making accuracy, and areas for improvement. Additionally, the system provides tailored improvement suggestions and test questions to help users enhance their skills and knowledge further.
+- **Incident Response Practice:** Provides hands-on experience with mock incidents, including data breaches, ransomware infections, phishing attacks and more. Users can practice and refine their incident response strategies in a controlled and risk-free setting.
+- **Detailed Reporting:** The system provides tailored improvement suggestions and test questions to help users enhance their skills and knowledge further.
 
 ### Analogy Hub
 
-- **AI-Powered Analogy Creation:** Utilizes artificial intelligence to translate complex cybersecurity terms and concepts into simple, relatable analogies. This feature aids in demystifying technical jargon and making advanced topics more accessible.
+- **Analogy Creation:** Translates complex cybersecurity terms and concepts into simple, relatable analogies. This feature aids in demystifying technical jargon and making advanced topics more accessible.
 - **Category-Specific Analogies:** Covers a wide range of topics using diverse contexts such as pop culture, video games, mythology, history, and everyday objects. This variety ensures that analogies resonate with users from different backgrounds and interests.
 - **Interactive Queries:** Allows users to submit queries on challenging topics and receive easy-to-understand explanations through tailored analogies. This interactive approach facilitates personalized learning and clarification of difficult concepts.
 - **Educational Support:** Serves as a valuable tool for instructors, students, and content creators seeking clear and effective communication of technical ideas. By simplifying complex topics, the Analogy Hub enhances the overall educational experience and promotes better retention of information.
@@ -120,7 +113,7 @@ Our Cybersecurity Web Application is equipped with a robust suite of features de
 
 Our platform boasts a visually appealing and user-friendly interface, meticulously designed to enhance the user experience and facilitate seamless navigation.
 
-- **Modern UI Design:** The application features a dark-themed, responsive interface that adapts fluidly to various screen sizes. The intuitive navigation ensures users can effortlessly access different modules and resources without encountering unnecessary complexity.
+- **Modern UI Design:** The application features a  responsive interface that adapts fluidly to various screen sizes. The intuitive navigation ensures users can effortlessly access different modules and resources without encountering unnecessary complexity.
 
 - **Hacker-Inspired Aesthetic:** Drawing inspiration from the critically acclaimed series *Mr. Robot*, the platform embodies a hacker-themed visual design. This aesthetic not only adds a distinctive and engaging look but also resonates with the cybersecurity community, making the platform both functional and visually captivating.
 
@@ -138,6 +131,9 @@ Our platform boasts a visually appealing and user-friendly interface, meticulous
 The project follows a modular structure, with clear separation of concerns:
 
 ```
+.
+├── AWS.md
+├── INSTALL.md
 ├── README.md
 ├── apache
 │   ├── Dockerfile.apache
@@ -149,49 +145,59 @@ The project follows a modular structure, with clear separation of concerns:
 │   ├── Dockerfile.backend
 │   ├── app.py
 │   ├── database
-│   │   └── models.py
+│   │   ├── models.py
+│   │   ├── newsletter_content.py
+│   │   └── user_subscription.py
 │   ├── helpers
 │   │   ├── analogy_helper.py
+│   │   ├── async_tasks.py
+│   │   ├── celery_app.py
+│   │   ├── daily_newsletter_helper.py
+│   │   ├── daily_newsletter_task.py
 │   │   ├── email_helper.py
-│   │   ├── emailopenai_helper.py
 │   │   ├── grc_helper.py
 │   │   ├── log_generator.py
 │   │   ├── log_helper.py
-│   │   ├── openai_helper.py
 │   │   ├── scenario_helper.py
-│   │   ├── schedule_tasks.py
-│   │   ├── scheduler_helper.py
+│   │   ├── status_helper.py
 │   │   └── xploitcraft_helper.py
 │   ├── models
 │   │   ├── log_history.py
 │   │   ├── log_models.py
+│   │   ├── newsletter_content.py
 │   │   └── user_subscription.py
 │   ├── requirements.txt
 │   ├── routes
+│   │   ├── admin_newsletter_routes.py
 │   │   ├── analogy_routes.py
+│   │   ├── celery_routes.py
 │   │   ├── daily_brief_routes.py
-│   │   ├── email_routes.py
 │   │   ├── grc_routes.py
 │   │   ├── log_routes.py
 │   │   ├── scenario_routes.py
+│   │   ├── status_routes.py
 │   │   ├── subscribe_routes.py
 │   │   ├── unsubscribe_routes.py
-│   │   ├── update_routes.py
 │   │   └── xploit_routes.py
 │   └── scenario_logic
 │       ├── interactive_logic.py
 │       └── scenario_flow_manager.py
+├── bandit.yaml
+├── certificate.csr
 ├── database
 │   └── models.py
 ├── docker-compose.yml
 ├── env_EXAMPLE
 ├── frontend
 │   └── my-react-app
+│       ├── Dockerfile.audit
 │       ├── Dockerfile.dev
 │       ├── Dockerfile.frontend
+│       ├── eslint.config.mjs
 │       ├── package-lock.json
 │       ├── package.json
 │       ├── public
+│       │   ├── appLogo.png
 │       │   ├── favicon.ico
 │       │   ├── index.html
 │       │   ├── logo2.png
@@ -201,6 +207,23 @@ The project follows a modular structure, with clear separation of concerns:
 │           ├── App.js
 │           ├── App.test.js
 │           ├── components
+│           │   ├── EasterEgg
+│           │   │   ├── A.png
+│           │   │   ├── CASP.png
+│           │   │   ├── CarterPerez.pdf
+│           │   │   ├── Portfolio.css
+│           │   │   ├── Portfolio.js
+│           │   │   ├── Portfolio_notegg.css
+│           │   │   ├── Portfolio_notegg.js
+│           │   │   ├── cysa.png
+│           │   │   ├── egg.txt
+│           │   │   ├── me.png
+│           │   │   ├── network.png
+│           │   │   ├── pcep.png
+│           │   │   ├── pentest.png
+│           │   │   ├── project1.jpg
+│           │   │   ├── project2.jpg
+│           │   │   └── sec.png
 │           │   ├── Sidebar
 │           │   │   ├── Sidebar.css
 │           │   │   ├── Sidebar.js
@@ -210,6 +233,18 @@ The project follows a modular structure, with clear separation of concerns:
 │           │       │   ├── About.css
 │           │       │   ├── About.js
 │           │       │   └── AboutBackground.jpg
+│           │       ├── AdminInterface
+│           │       │   ├── AdminInterface.css
+│           │       │   ├── AdminInterface.js
+│           │       │   ├── AdminMonitorStatus.css
+│           │       │   ├── AdminMonitorStatus.js
+│           │       │   ├── AdminNewsletter.css
+│           │       │   ├── AdminNewsletter.js
+│           │       │   ├── AdminSubscribers.css
+│           │       │   ├── AdminSubscribers.js
+│           │       │   ├── AdminTriggerTasks.css
+│           │       │   ├── AdminTriggerTasks.js
+│           │       │   └── adminbackground.jpg
 │           │       ├── AnalogyPage
 │           │       │   ├── AnalogyHub.css
 │           │       │   ├── AnalogyHub.js
@@ -229,8 +264,8 @@ The project follows a modular structure, with clear separation of concerns:
 │           │       │   └── GRCbackground.jpg
 │           │       ├── LogPage
 │           │       │   ├── Log.js
-│           │       │   ├── Logbackground1.jpg
-│           │       │   └── log.css
+│           │       │   ├── log.css
+│           │       │   └── logbackground.jpg
 │           │       ├── ResourcesPage
 │           │       │   ├── Resourcebackground.jpg
 │           │       │   ├── Resources.css
@@ -238,6 +273,7 @@ The project follows a modular structure, with clear separation of concerns:
 │           │       ├── ScenarioPage
 │           │       │   ├── ScenarioSphere.css
 │           │       │   ├── ScenarioSphere.js
+│           │       │   ├── attacks.js
 │           │       │   └── backround5.jpg
 │           │       └── XploitcraftPage
 │           │           ├── App.css
@@ -253,9 +289,13 @@ The project follows a modular structure, with clear separation of concerns:
 │   ├── nginx.conf
 │   └── sites-enabled
 │       └── reverse_proxy.conf
+├── package-lock.json
 ├── redis
 │   └── redis.conf
-└── requirements.txt
+├── requirements.txt
+└── xploitcraft.pem
+
+31 directories, 132 files
 
 ```
 
@@ -389,6 +429,31 @@ The frontend is developed using modern JavaScript frameworks and libraries, ensu
 - **Browser Compatibility:**
   - **Browserslist**: Configures supported browsers for both production and development environments, ensuring that the application functions correctly across a wide range of user agents.
 
+
+## Environment Variables
+
+### Overview of Environment Variables
+
+| Variable               | Description                                                  | Example / Notes                                      |
+|-----------------------|--------------------------------------------------------------|------------------------------------------------------|
+| **OPENAI_API_KEY**     | API key for OpenAI GPT integration.                          | your_openai_key                                      |
+| **SMTP_SERVER**        | SMTP server for SendGrid.                                    | smtp.sendgrid.net                                    |
+| **SMTP_PORT**          | SMTP port for email delivery.                                | 587                                                  |
+| **SMTP_USER**          | SMTP user (usually "apikey").                                | apikey                                               |
+| **SMTP_PASSWORD**      | API key used for SendGrid SMTP login.                        | your_sendgrid_api_key                                |
+| **EMAIL_FROM**         | The email address used to send outgoing emails.              | your_email                                           |
+| **SENDGRID_API_KEY**   | SendGrid API key for sending emails.                         | Sendgrid_api_key                                     |
+| **SECRET_KEY**         | Application secret key for session security.                 | create_a_long_complex_key                            |
+| **MONGO_URI**          | MongoDB URI for database connection.                         | mongodb://mongodb:27017/xploitcraft                  |
+| **CELERY_BROKER_URL**  | Redis URL for Celery task queue broker.                      | redis://redis:6379/                                  |
+| **CELERY_RESULT_BACKEND** | Redis URL for Celery result backend.                        | redis://redis:6379/0                                 |
+| **ADMIN_API_KEY**      | Admin API key for accessing protected routes.                | create_password                                      |
+| **REDIS_PASSWORD**     | Password for Redis authentication.                           | create_password                                      |
+
+
+---
+
+
 # DevOps and Deployment
 
 -  ## Apache:
@@ -436,326 +501,8 @@ Utilizes AWS Web Application Firewall (WAF) for advanced protection against DDoS
 
 ---
 
-# Setup Instructions
 
-### To run locally and or Devlop further
-
-## Prerequisites
-
-Before you begin, ensure that your system meets the following requirements:
-
-### Operating System
-- Linux (Ubuntu/Debian recommended)
-
-### Installed Software
-- Git
-- Docker
-- Docker Compose
-- A text editor (e.g., nano, vim, gedit)
-
-## Installation Steps
-
-### Step 1: Open a Terminal
-Start by opening your preferred terminal application.
-
-### Step 2: Navigate to Your Desired Directory
-Choose the directory where you want to clone the project repository. For example, to navigate to the `Projects` directory in your home folder:
-
-```bash
-cd ~/Projects
-```
-
-### Step 3: Clone the Repository
-Clone the ProxyAuthRequired repository using HTTPS for simplicity:
-
-```bash
-git clone https://github.com/CarterPerez-dev/ProxyAuthRequired.git
-```
-
-### Step 4: Navigate into the Application Directory
-Change your current directory to the cloned repository:
-
-```bash
-cd ProxyAuthRequired
-```
-
-### Step 5: Create and Configure the `.env` File
-The application requires specific environment variables to function correctly.
-
-#### Create the `.env` File:
-Use any text editor (nano, vim, or gedit). Example with `nano`:
-
-```bash
-nano .env
-```
-
-#### Populate the `.env` File:
-Copy the contents from the provided `ENV_example` file into your `.env` file:
-
-```bash
-cp ENV_example .env
-nano .env
-```
-
-#### Example `.env` Configuration:
-
-```env
-# .env
-
-# Backend Configuration
-FLASK_ENV=production
-FLASK_APP=app.py
-SECRET_KEY=your_secret_key
-DATABASE_URI=mongodb://mongodb:27017/proxyauthrequired
-
-# OpenAI API Key
-OPENAI_API_KEY=your_openai_api_key
-
-# Redis Configuration
-REDIS_HOST=redis
-REDIS_PORT=6379
-
-# SendGrid API Key
-SENDGRID_API_KEY=your_sendgrid_api_key
-```
-
-#### Save and Exit:
-- In `nano`, press `CTRL + O` to write changes, then `CTRL + X` to exit.
-- In `vim`, press `ESC`, type `:wq`, and press `ENTER`.
-- In `gedit`, save and close the file.
-
-### Step 6: Update and Upgrade System Packages
-
-```bash
-sudo apt update && sudo apt upgrade -y
-```
-
-### Step 7: Install Docker
-
-#### Install Docker:
-
-```bash
-sudo apt install -y docker.io
-```
-
-#### Start and Enable Docker Service:
-
-```bash
-sudo systemctl start docker
-sudo systemctl enable docker
-```
-
-#### Verify Docker Installation:
-
-```bash
-docker --version
-```
-
-Expected Output:
-```plaintext
-Docker version 23.xx.x, build xxxxxxx
-```
-
-### Step 8: Install Docker Compose
-
-```bash
-sudo apt install -y docker-compose
-```
-
-#### Verify Installation:
-
-```bash
-docker-compose --version
-```
-
-Expected Output:
-```plaintext
-docker-compose version 1.29.2, build 5becea4c
-```
-
-### Step 9: Add Your User to the Docker Group
-To run Docker commands without `sudo`:
-
-```bash
-sudo usermod -aG docker $USER
-```
-
-**Important:** Log out and log back in or run:
-
-```bash
-newgrp docker
-```
-
-### Step 10: Build and Run the Application with Docker Compose
-
-```bash
-docker-compose up --build
-```
-
-#### Explanation:
-- `docker-compose up`: Starts the containers.
-- `--build`: Rebuilds Docker images to incorporate the latest changes.
-
-#### Accessing the Application:
-
-Open your web browser and navigate to:
-
-```plaintext
-http://localhost
-```
-
-You should see the ProxyAuthRequired.com application running.
-
----
-
-## Development and Editing Instructions
-
-### Step 1: Modify `docker-compose.yml` for Development
-
-```bash
-nano docker-compose.yml
-```
-
-#### Add `node_modules` Volume:
-
-```yaml
-frontend:
-  container_name: frontend_service
-  build:
-    context: ./frontend/my-react-app
-    dockerfile: Dockerfile.dev
-  ports:
-    - "3000:3000"
-  volumes:
-    - ./frontend/my-react-app:/app
-    - /app/node_modules
-  networks:
-    - xploitcraft_network
-  restart: always
-```
-
-#### Update Build Context and Dockerfile:
-
-```yaml
-frontend:
-  build:
-    context: ./frontend/my-react-app
-    dockerfile: Dockerfile.dev
-```
-
-#### Save and Exit:
-- In `nano`, press `CTRL + O`, then `CTRL + X`.
-- In `vim`, press `ESC`, type `:wq`, and press `ENTER`.
-- In `gedit`, save and close the file.
-
-### Step 2: Rebuild and Restart the Containers
-
-```bash
-docker-compose down
-docker-compose up --build
-```
-
-### Step 3: Edit Docker Compose Configuration (Optional)
-
-```bash
-nano docker-compose.yml
-```
-
-### Step 4: Accessing the Development Environment
-
-- **Frontend:** Located in `./frontend/my-react-app`
-- **Backend:** Located in `./backend`
-
----
-
-## Additional Configuration Tips
-
-### Environment Variables
-Ensure all necessary environment variables are correctly set in the `.env` file. Refer to `ENV_example` for guidance.
-
-### Managing Docker Permissions
-
-```bash
-groups $USER
-```
-
-If `docker` is not listed, re-add your user:
-
-```bash
-sudo usermod -aG docker $USER
-newgrp docker
-```
-
-### Stopping the Application
-
-```bash
-docker-compose down
-```
-
-### Viewing Logs
-
-```bash
-docker-compose logs -f
-```
-
----
-
-## Troubleshooting
-
-### Docker Daemon Not Running
-
-```bash
-sudo systemctl status docker
-```
-
-If it’s not running:
-
-```bash
-sudo systemctl start docker
-```
-
-### Port Conflicts
-
-```bash
-sudo lsof -i -P -n | grep LISTEN
-```
-
-### Rebuilding Containers
-
-```bash
-docker-compose build --no-cache
-docker-compose up --build
-```
-
-By following these detailed setup instructions, you can successfully run ProxyAuthRequired.com locally, enabling you to develop, test, and deploy the application effectively.
-
-
-# Environment Variables
-
-This application uses the following environment variables for configuration. Ensure that the `.env` file is kept private and included in `.gitignore`.
-
-| Variable              | Description                                |
-|----------------------|--------------------------------------------|
-| `OPENAI_API_KEY`     | API key for OpenAI integration.           |
-| `SMTP_SERVER`        | SMTP server for sending emails.           |
-| `SMTP_PORT`          | Port used for SMTP communication.         |
-| `SMTP_USER`          | Username for SMTP authentication.         |
-| `SMTP_PASSWORD`      | Password or API key for SMTP service.     |
-| `EMAIL_FROM`         | Default email sender address.             |
-| `SENDGRID_API_KEY`   | API key for SendGrid email service.       |
-| `SECRET_KEY`         | A long, complex secret key for app security. |
-| `MONGO_URI`          | MongoDB connection URI.                   |
-
-## Note
-Keep the `.env` file secure and add it to `.gitignore` to avoid exposing sensitive information.
-
----
-
-## Architecture Overview
-
-
-
-## API Documentation
+# API Documentation
 
 ### GRC Endpoint
 **POST /api/grc/generate_question**
@@ -781,30 +528,178 @@ Keep the `.env` file secure and add it to `.gitignore` to avoid exposing sensiti
     "exam_tip": "Risk management is essential for business continuity."
   }
   ```
-...more
+# ProxyAuthRequired.com
+
+
+## API Documentation
+
+### GRC Endpoint
+**POST /api/grc/generate_question**
+- **Request**:
+  ```json
+  {
+    "category": "Risk Management",
+    "difficulty": "Easy"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "question": "What is the main goal of risk management?",
+    "options": {
+      "A": "Increase costs",
+      "B": "Mitigate potential risks",
+      "C": "Ignore threats",
+      "D": "Reduce operational efficiency"
+    },
+    "correct_answer_index": 1,
+    "explanations": {
+      "0": "Increasing costs is not a goal.",
+      "1": "Mitigating potential risks is correct.",
+      "2": "Ignoring threats is dangerous.",
+      "3": "Risk management increases efficiency."
+    },
+    "exam_tip": "Risk management is essential for business continuity."
+  }
+  ```
+
+### Scenario Generation Endpoint
+**POST /api/scenario/generate_scenario**
+- **Request**:
+  ```json
+  {
+    "industry": "Healthcare",
+    "attack_type": "Ransomware",
+    "skill_level": "Advanced",
+    "threat_intensity": 85
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "context": "A major healthcare provider experiences a ransomware attack during a routine system update...",
+    "actors": "The attack is orchestrated by an advanced persistent threat (APT) group...",
+    "risks": [
+      "Risk of patient data loss",
+      "Operational disruption",
+      "Reputational damage"
+    ],
+    "mitigation_steps": [
+      "Regular data backups",
+      "Implement advanced endpoint protection",
+      "Conduct regular security training"
+    ]
+  }
+  ```
+
+### Xploitcraft Payload Generation
+**POST /api/xploitcraft/generate_payload**
+- **Request**:
+  ```json
+  {
+    "vulnerability": "SQL Injection",
+    "evasion_technique": "Encoding payloads"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "payload": "SELECT * FROM users WHERE username='admin' AND password='';--",
+    "explanation": "This payload exploits an SQL Injection by appending a comment sequence to bypass authentication checks..."
+  }
+  ```
+
+### Log Analysis Endpoint
+**POST /api/logs/analyze**
+- **Request**:
+  ```json
+  {
+    "log_type": "SecurityLog",
+    "log_details": {
+      "event": "Failed SSH login attempt",
+      "ip_address": "192.168.1.10",
+      "timestamp": "2024-01-01T14:00:00Z"
+    }
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "analysis": "The failed SSH login attempt from IP 192.168.1.10 suggests a potential brute force attack. Mitigate by blocking the IP and enabling two-factor authentication.",
+    "recommendations": [
+      "Blacklist IP address",
+      "Enforce strong password policies",
+      "Deploy fail2ban to limit repeated login attempts"
+    ]
+  }
+  ```
+
+### Analogy Hub - Generate Concept Analogy
+**POST /api/analogy/generate**
+- **Request**:
+  ```json
+  {
+    "concept": "Firewalls",
+    "category": "Security"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "analogy": "A firewall is like a security guard standing at the entrance of a building...",
+    "key_takeaway": "Firewalls filter traffic and prevent unauthorized access."
+  }
+  ```
+
+### Analogy Hub - Comparison Analogy
+**POST /api/analogy/compare**
+- **Request**:
+  ```json
+  {
+    "concept1": "Encryption",
+    "concept2": "Hashing",
+    "category": "Data Security"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "analogy": "Encryption is like locking a message in a safe with a key, while hashing is like shredding the message so it can’t be put back together...",
+    "key_difference": "Encryption is reversible with a key, while hashing is a one-way process."
+  }
+  ```
+
 ---
 
-## Styling and Theming
-
-
----
-
-## Debugging and Logs
-
-
-
-### Backend Logs
-
-
-
-### Common Errors
-
-
-## Frequently Asked Questions (FAQ)
-
-\
 
 ## Future Enhancements
 
+
+### Planned Features
+1. **New Pages**:
+   - **Threat Intelligence Dashboard** – A real-time dashboard displaying active threats, vulnerabilities, and industry alerts.
+   - **Automated Application Bot** – Integrate an auto-apply bot for LinkedIn and Indeed job postings.
+   - **Cybersecurity Labs** – Hands-on labs for penetration testing, network analysis, and incident response simulations.
+
+2. **Enhancements to Log Page**:
+   - **Advanced Filtering** – Implement enhanced filtering options for logs by category, severity, and date.
+   - **Graphical Visualizations** – Add interactive graphs and charts for log data visualization.
+   - **Threat Correlation** – Integrate AI-powered log correlation to detect patterns and identify potential threats.
+
+3. **Resource Hub Expansion**:
+   - **Tool Integrations** – Add more cybersecurity tools, frameworks, and resources.
+   - **Community Contributions** – Allow users to submit and share resources.
+   - **Certification Roadmaps** – Detailed roadmaps for cybersecurity certifications with recommended learning paths and resources.
+
+4. **Security Improvements**:
+   - **Vulnerability Scanner** – Implement automated vulnerability scans across the platform.
+   - **Bug Bounty Program** – Launch a bug bounty initiative to identify and fix vulnerabilities reported by users.
+
+
+
+# Contact me
+
+### Email: CarterPerez-dev@ProxyAuthRequired.com
+### Phone: 443-510-0866
 
 

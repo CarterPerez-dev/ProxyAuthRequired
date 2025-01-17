@@ -1,0 +1,9 @@
+# bandit.yaml
+exclude:
+  - "backend/venv/*"
+  - "backend/__pycache__/*"
+  - "backend/*/tests/*"
+  - "backend/*.pyc"
+  - "backend/database/*"  
+
+

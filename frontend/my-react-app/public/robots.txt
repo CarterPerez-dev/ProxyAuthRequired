@@ -1,4 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow: /.env
-
+Disallow: /api/
+Disallow: /private/
+Disallow: /admin/

@@ -1,0 +1,55 @@
+/* my-react-app/src/components/pages/AdminInterface/AdminSubscribers.css */
+
+.admin-subscribers-container {
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 6px;
+}
+
+.admin-subscribers-container h3 {
+  margin-bottom: 15px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.subscribers-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.subscribers-table th,
+.subscribers-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.subscribers-table th {
+  background-color: #f2f2f2;
+}
+
+.unsubscribe-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.unsubscribe-button:hover {
+  background-color: #c82333;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+

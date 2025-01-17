@@ -1,16 +1,25 @@
 #Please keep .env in your .gitignore- this is an example of my .env for this app.
+
 OPENAI_API_KEY=your_openai_key
 
 SMTP_SERVER=smtp.sendgrid.net
-SMTP_PORT=587
-SMTP_USER=apikey
-SMTP_PASSWORD=your_sendgrid_api_key
-EMAIL_FROM=your_email
-SENDGRID_API_KEY=Sendgrid_api_key
+SMTP_PORT=587 
+SMTP_USER=apikey # The SMTP_USER is literally "apikey"
+SMTP_PASSWORD=your_sendgrid_api_key # This is api key to sign into your sendgrid account
+EMAIL_FROM=your_email # Email you are using to send emails with sendgrid
+SENDGRID_API_KEY=Sendgrid_api_key # This is the api key to actually send the emails with sendgrid 
+
+# I know this Sendgrid set up is confusing so read this - https://www.twilio.com/docs/sendgrid/for-developers/sending-email/quickstart-python
 
 SECRET_KEY=create_a_long_complex_key
 
-MONGO_URI=mongodb://mongodb:<port>/name
+MONGO_URI=mongodb://mongodb:27017/xploitcraft
 
+CELERY_BROKER_URL=redis://redis:6379/
+CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+ADMIN_API_KEY=create_password
+
+REDIS_PASSWORD=create_password
 
 

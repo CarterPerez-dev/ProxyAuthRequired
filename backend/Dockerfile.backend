@@ -1,9 +1,9 @@
 FROM python:3.11.3
 
-# Set the working directory in the container
+
 WORKDIR /app
 
-# Update and install system dependencies
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
@@ -14,31 +14,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 
-# Create a virtual environment
+
 RUN python3 -m venv /venv
 
-# Upgrade pip and setuptools within the virtual environment
+
 RUN /venv/bin/pip install --upgrade pip setuptools wheel
 
-# Copy the requirements file
+
 COPY requirements.txt /app/requirements.txt
 
-# Install Python dependencies
+
 RUN /venv/bin/pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy the rest of the application files
+
 COPY . /app
 
-# Set environment variables
+
 ENV VIRTUAL_ENV="/venv"
 ENV PATH="/venv/bin:$PATH"
 ENV FLASK_ENV=production
 ENV FLASK_APP=app.py
 
-# Ensure the application is executable
+
 RUN chmod +x /app/app.py
 
-# Expose the application port
+
 EXPOSE 5000
 
 CMD ["/venv/bin/gunicorn", "-k", "gevent", "-b", "0.0.0.0:5000", "app:app", "--timeout", "120"]

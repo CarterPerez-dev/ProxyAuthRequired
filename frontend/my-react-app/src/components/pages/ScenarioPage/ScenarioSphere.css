@@ -1,4 +1,3 @@
-/* Reset and Base Styles */
 body, html {
   margin: 0;
   padding: 0;
@@ -18,7 +17,7 @@ body, html {
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-/* Scenario Body */
+
 .scenario-body {
   background-image: url('backround5.jpg');
   background-size: cover;
@@ -32,7 +31,7 @@ body, html {
   box-sizing: border-box;
 }
 
-/* Container */
+
 .scenario-container {
   display: flex;
   flex-wrap: wrap;
@@ -46,11 +45,11 @@ body, html {
   background-color: rgba(30, 30, 30, 0.85);
   border-radius: 12px;
   padding: 20px;
-  flex: 1 1 100%; /* On small screens, stack */
+  flex: 1 1 100%;
   box-sizing: border-box;
 }
 
-/* Autocomplete Suggestions */
+
 .suggestions-list {
   position: absolute;
   background-color: #2a2a2a;
@@ -59,7 +58,7 @@ body, html {
   max-height: 200px;
   overflow-y: auto;
   width: 100%;
-  z-index: 1000; /* Ensure it appears above other elements */
+  z-index: 1000;
   list-style-type: none;
   padding-left: 0;
   margin-top: 3.75rem;
@@ -89,12 +88,11 @@ body, html {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Ensure the suggestions list is above other elements */
 .scenario-input-wrapper {
   position: relative;
 }
 
-/* Scenario Titles */
+
 .scenario-title {
   color: #cc0000;
   font-size: 2em;
@@ -108,14 +106,12 @@ body, html {
   margin-bottom: 30px;
 }
 
-/* Input Wrappers */
 .scenario-input-wrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
 }
 
-/* Input Fields and Sliders */
 .scenario-input-field, .scenario-input-slider {
   padding: 12px;
   border-radius: 8px;
@@ -131,9 +127,8 @@ body, html {
   border-color: #00ffcc;
 }
 
-/* Slider Styles for WebKit (Safari, iOS) */
 .scenario-input-slider {
-  -webkit-appearance: none; /* Remove default styling */
+  -webkit-appearance: none;
   width: 100%;
   height: 8px;
   background: #ccc;
@@ -174,8 +169,6 @@ body, html {
   transform: scale(1.1);
 }
 
-
-/* Button and Loading Sphere */
 .button-and-sphere {
   display: flex;
   align-items: center;
@@ -202,20 +195,58 @@ body, html {
   color: #000;
 }
 
+
 .loading-sphere {
-  width: 30px;
-  height: 30px;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: #000;
+  border: 2px solid #00ffcc;
+  overflow: hidden;
   border-radius: 50%;
-  border: 5px solid #008080;
-  border-top: 5px solid #fff;
-  animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px #00ffcc;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.loading-sphere::before,
+.loading-sphere::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(0,255,204,0.2) 0,
+    rgba(0,255,204,0.2) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: rotateGrid 1.5s linear infinite;
 }
 
-/* Scenario Output */
+.loading-sphere::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,255,204,0.4) 0,
+    rgba(0,255,204,0.4) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation-delay: 0.75s;
+  opacity: 0.7;
+}
+
+@keyframes rotateGrid {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 .scenario-output-box {
   padding: 20px;
   background-color: #2a2a2a;
@@ -237,7 +268,6 @@ body, html {
   font-weight: bold;
 }
 
-/* Interactive Questions */
 .interactive-questions {
   margin-top: 20px;
 }
@@ -260,7 +290,6 @@ body, html {
   line-height: 1.4;
 }
 
-/* Question Container */
 .question-container {
   margin-bottom: 20px;
   padding: 10px;
@@ -300,7 +329,7 @@ body, html {
 }
 
 .option-label input[type="radio"] {
-  accent-color: #00ffcc; /* Custom radio button color */
+  accent-color: #00ffcc;
   font-weight: bold;
 }
 
@@ -308,7 +337,6 @@ body, html {
   outline: 2px solid #00ffcc;
 }
 
-/* Feedback Styles */
 .feedback {
   margin-top: 10px;
   padding: 10px;
@@ -333,15 +361,11 @@ body, html {
   color: #f5f5f5;
 }
 
-/* Enhanced Feedback Styles */
 .feedback.correct,
 .feedback.incorrect {
   font-size: 1rem;
 }
 
-/* Responsive Design */
-
-/* For Tablets and Larger Devices */
 @media (min-width: 768px) {
   .scenario-container {
     flex-direction: row;
@@ -368,7 +392,6 @@ body, html {
   }
 }
 
-/* For Desktops and Larger Monitors */
 @media (min-width: 1024px) {
   .scenario-container {
     flex-direction: row;
@@ -391,7 +414,6 @@ body, html {
   }
 }
 
-/* For Mobile Devices */
 @media (max-width: 767px) {
   .scenario-container {
     flex-direction: column;

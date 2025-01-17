@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 body, html {
   margin: 0;
   padding: 0;
@@ -18,6 +19,7 @@ body, html {
   margin-left: 0;
 }
 
+
 .donate-page-wrapper {
   width: 100%;
   min-height: 100vh;
@@ -31,105 +33,278 @@ body, html {
 }
 
 
-
 .donate-container {
   width: 100%;
-  max-width: 100%;
-  height: 100vh;
-  max-height: 100%;
+  max-width: 600px;
+  min-height: 100vh;
   box-sizing: border-box;
-  background: url('./backround3.jpg') center center no-repeat;
-  background-size: cover;
+  background: rgba(0, 0, 0, 0.6); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
+
 .donate-box {
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 20px;
   text-align: center;
-  border: 2px solid #fff;
-  border-radius: 20px;
-  opacity: 0.95;
-  box-sizing: border-box;
+  margin-bottom: 30px;
 }
+
 
 .donate-title {
   font-family: 'Orbitron', sans-serif;
-  color: #ff0000;
-  font-size: 2rem;
+  color: #ffdd57;
+  font-size: 2.5rem;
   margin-bottom: 20px;
-  text-shadow: 2px 2px #00FFFF;
+  text-shadow: 3px 3px #ff4e50;
 }
+
 
 .donate-description {
   font-family: 'Arial', sans-serif;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #ffffff;
-  margin-bottom: 30px;
-  line-height: 1.4;
+  margin-bottom: 40px;
+  line-height: 1.6;
 }
 
-.bitcoin-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
+
+.buy-coffee-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #FFDD57;
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-#bitcoinAddress {
-  width: 70%;
-  max-width: 300px;
-  padding: 15px;
-  border: 2px solid #ff004d;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.9);
-  color: #00FFFF;
-  font-family: 'Courier New', monospace;
+.buy-coffee-button:hover {
+  background-color: #FFC107;
+  transform: translateY(-3px);
+}
+
+
+.impact-section {
+  margin-top: 30px;
   text-align: center;
 }
 
-.copy-button {
-  margin-left: 12px;
-  position: relative;
-  padding: 10px;
-  background-color: #ff004d;
-  color: #000000;
-  font-weight: bold;
-  border: 2px solid #ffffff;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+.impact-section h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: #ffdd57;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
-.copy-button:hover {
-  background-color: #00ff00;
-  color: #000000;
+.impact-section p {
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.5;
 }
+
+
+.goals-section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.goals-section h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: #ffdd57;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.goals-section p {
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+
+.leaderboard-section {
+  margin-top: 40px;
+  text-align: center;
+  background: rgba(255, 221, 87, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.leaderboard-section h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: #ffdd57;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.leaderboard-section p {
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+
+.leaderboard-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.leaderboard-form label {
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.leaderboard-form input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 80%;
+  max-width: 300px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #ffdd57;
+  color: #000000;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #ffc107;
+  transform: translateY(-2px);
+}
+
+
+.confirmation-message {
+  font-family: 'Arial', sans-serif;
+  color: #00FF00;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+
+.manual-leaderboard {
+  margin-top: 20px;
+}
+
+.manual-leaderboard h4 {
+  font-family: 'Orbitron', sans-serif;
+  color: #ffdd57;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.manual-leaderboard ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.manual-leaderboard li {
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
 
 .thanks-message p {
   font-family: 'Orbitron', sans-serif;
-  color: #ff0000;
+  color: #ffdd57;
   font-weight: bold;
   font-size: 1.2rem;
-  text-shadow: 2px 2px #00FFFF;
+  text-shadow: 2px 2px #ff4e50;
+  margin-top: 20px;
 }
 
+
 @media (max-width: 768px) {
-  .bitcoin-box {
-    flex-direction: column;
+  .donate-container {
+    padding: 30px;
+  }
+
+  .donate-title {
+    font-size: 2rem;
+  }
+
+  .buy-coffee-button {
+    width: 100%;
+    padding: 15px 0;
+  }
+
+  .donate-description {
+    font-size: 1rem;
+  }
+
+  .impact-section h3,
+  .goals-section h3,
+  .leaderboard-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+
+  .thanks-message p {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .donate-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
-  #bitcoinAddress {
+
+  .buy-coffee-button {
+    font-size: 1rem;
+  }
+
+  .donate-description {
+    font-size: 0.95rem;
+  }
+
+  .impact-section h3,
+  .goals-section h3,
+  .leaderboard-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .leaderboard-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .leaderboard-form input {
     width: 100%;
   }
+
+  .submit-button {
+    width: 100%;
+  }
+
   .thanks-message p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 

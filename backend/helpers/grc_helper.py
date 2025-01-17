@@ -18,14 +18,13 @@ def generate_grc_question(category, difficulty):
     """
 
     prompt = f""" 
-You are an expert in Governance, Risk, and Compliance (GRC) topics, as well as broad information security governance and frameworks 
-found in certifications like CISSP, CompTIA Advanced Security Practitioner (CASP+), CISM, CRISC, and others. Your role is to generate 
-challenging and diverse test questions related to governance, risk management, risk thresholds, types of risk, Audit, Management, Policy, Cyber Security Ethics, Threat Assessment, 
-Leadership, Business Continuity, compliance ,regulations, incident resposne, and more. focusing on preparing for exams like CISSP and CompTIA certifications. Ensure the questions cover a wide range of scenarios,
-principles, and concepts, with multiple-choice answers that are nuanced and complex, avoiding repetitive patterns or overly simplified examples.
+You are an expert in concepts found in certifications like CISSP, CompTIA Advanced Security Practitioner (CASP+), CISM, CRISC, and others. Your role is to generate 
+challenging and diverse test questions using advanced mult-layered reasoning, related to governance, risk management, risk thresholds, types of risk, Audit, Management, Policy, Cyber Security Ethics, Threat Assessment, 
+Leadership, Business Continuity, compliance, regulations, incident resposne, Incident Response and more. focusing on preparing for exams like CISSP/ISC2 and CompTIA certifications. Ensure the questions cover a wide range of scenarios,
+principles, and concepts, with multiple-choice answers that are nuanced and complex and specific, avoiding repetitive patterns or overly simplified examples.
 
 CONTEXT: The user has selected:
-- Category: {category} (e.g., 'Regulation', 'Risk Management', 'Compliance', 'Audit', 'Governance', 'Management', 'Policy', 'Ethics', 'Threat Assessment', 'Leadership', 'Business Continuity', 'Random')
+- Category: {category} (e.g., 'Regulation', 'Risk Management', 'Compliance', 'Audit', 'Governance', 'Management', 'Policy', 'Ethics', 'Threat Assessment', 'Leadership', 'Business Continuity', 'Incident Response', 'Random')
 - Difficulty: {difficulty} (e.g., 'Easy', 'Medium', 'Hard')
 
 REQUIREMENTS
@@ -33,13 +32,12 @@ REQUIREMENTS
 
 2. Explanations:
    - For the correct answer: Provide multiple sentences detailing exactly why it’s correct, clearly tying it back to the question’s scenario or concept. Show how it fulfills the requirements asked in the question as well as why the other answer choices are incorrect/not the correct answer..
-   - For each incorrect answer: Provide multiple sentences detailing why it is NOT correct aswell as why the other incorrect answer choices are incorrect, and why then tell the user what the correct answer is and why it is correct. 
-     Do not just say it’s incorrect; fully explain what that framework/control/standard/principle primarily addresses and why it falls short. 
+   - For each incorrect answer: Provide multiple sentences detailing why it is NOT correct aswell as why the other incorrect answer choices are incorrect, and why then tell the user what the correct answer is and why it is correct using advanced multi-layered reasoning. 
+     Do not just say it’s incorrect; fully explain why it falls short. 
      Highlight conceptual differences, limitations, or focus areas that differ from the question’s criteria.
-   - All explanations should be in-depth and more than just naming what something is—explain conceptually why it aligns or does not align with the question’s key point.
-   - Regardless of user choice, the generated output must contain full explanations for all answer choices provided. The explanations are produced in advance as part of the JSON object. Each explanation should be at least 3 sentences, rich in detail and conceptual clarity.
+   - Regardless of user choice, the generated output must contain full explanations for all answer choices provided. The explanations are produced in advance as part of the JSON object. Each explanation should be at least 3 sentences, rich in detail and conceptual clarity using advanced multi-layered reasoning.
 
-3. Include an "exam_tip" field that provides a short, memorable takeaway or mnemonic to help differentiate the correct concept from the others. The exam tip should help the user recall why the correct answer stands out.
+3. Include an "exam_tip" field that provides a short, memorable takeaway or mnemonic to help differentiate the correct concept from the others. The exam tip should help the user recall why the correct answer stands out using advanced multi-layered reasoning.
 
 4. Return ONLY a JSON object with the fields:
    "question", "options", "correct_answer_index", "explanations", and "exam_tip"
@@ -47,9 +45,9 @@ REQUIREMENTS
 
 5. For each explanation (correct and incorrect):
    - At minimum of 3 sentences for the correct answer.
-   - if the user gets the answer correct provide minium 3 senetence answer as to why it is correct, but also why the other answer choices listed are not the correct answer.
+   - if the user gets the answer correct provide minium 3 senetence answer as to why it is correct, but also why the other answer choices listed are not the correct answer using advanced multi-layered reasoning.
    - Substantial detail.
-   - Clearly articulate conceptual reasons, not just factual statements.
+   - Clearly articulate conceptual reasons, not just factual statements using advanced multi-layered reasoning.
 
 EXAMPLE FORMAT (this is not real content, just structure, make sure to use all topics not just the topic provided in this example):
 {{
@@ -57,12 +55,12 @@ EXAMPLE FORMAT (this is not real content, just structure, make sure to use all t
   "options": ["Option 0","Option 1","Option 2","Option 3"],
   "correct_answer_index": 2,
   "explanations": {{
-    "0": "Explain thoroughly why option 0 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect.",
-    "1": "Explain thoroughly why option 1 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect.",
-    "2": "Explain thoroughly why option 2 is correct, linking its characteristics to the question scenario and why the other answer choices are incorrect",
-    "3": "Explain thoroughly why option 3 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect."
+    "0": "Explain thoroughly why option 0 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect using advanced multi-layered reasoning.",
+    "1": "Explain thoroughly why option 1 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect using advanced multi-layered reasoning.",
+    "2": "Explain thoroughly why option 2 is correct, linking its characteristics to the question scenario and why the other answer choices are incorrect using advanced multi-layered reasoning",
+    "3": "Explain thoroughly why option 3 fails. Mention its scope, focus areas, and why that doesn't meet the question criteria and then explain what the correct answer is and why it is correct aswell as why the other answer choices are incorrect using advanced multi-layered reasoning."
   }},
-  "exam_tip": "A short, memorable hint or mnemonic that differentiates the correct approach from others."
+  "exam_tip": "A short, memorable hint or mnemonic that differentiates the correct approach from others using advanced multi-layered reasoning."
 }}
 
 Now generate the JSON object following these instructions.
@@ -74,13 +72,13 @@ Now generate the JSON object following these instructions.
         response = client.chat.completions.create(
             model="gpt-4o",  
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=800,
-            temperature=0.7,
+            max_tokens=900,
+            temperature=0.6,
         )
 
         content = response.choices[0].message.content.strip()
 
-        # Remove code fences if present
+      
         content = re.sub(r'^```.*\n', '', content)
         content = re.sub(r'\n```$', '', content)
 

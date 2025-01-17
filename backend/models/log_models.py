@@ -81,7 +81,6 @@ class EventLog(Log):
 class SystemEvent(EventLog):
     os_version: str
     kernel_version: Optional[str] = None
-    hardware_id: str
     uptime: str
     resource_usage: Dict[str, str]
     network_interfaces: List[str]
