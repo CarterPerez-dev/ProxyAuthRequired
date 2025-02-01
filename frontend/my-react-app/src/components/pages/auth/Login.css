@@ -1,0 +1,108 @@
+/* src/components/pages/auth/Login.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #0e0e0e, #1a1a1a);
+}
+
+.login-card {
+  background: #1f1f1f;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.login-title {
+  margin-bottom: 1.5rem;
+  color: #ff5555;
+  font-size: 2rem;
+}
+
+.login-form {
+  text-align: left;
+}
+
+.login-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: #333;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.login-form input:focus {
+  outline: none;
+  box-shadow: 0 0 5px #ff5555;
+}
+
+.error-msg {
+  color: #ff5555;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, #ff5555, #ff0000);
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, #ff0000, #ff5555);
+  transform: scale(1.03);
+}
+
+.login-forgot {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-forgot a {
+  color: #ff5555;
+  text-decoration: none;
+}
+
+.login-forgot a:hover {
+  text-decoration: underline;
+}
+
+.login-switch {
+  margin-top: 1.5rem;
+  color: #cccccc;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-switch a {
+  color: #ff5555;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-switch a:hover {
+  text-decoration: underline;
+}
+

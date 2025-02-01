@@ -1,50 +1,47 @@
+/* Sidebar.css */
+
 body, html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: Arial, sans-serif;
+  font-family: 'Orbitron', sans-serif;
 }
 
-/* Sidebar */
+/* Sidebar Container */
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 220px;
   height: 100vh;
   background-color: #121212;
-  color: #cc0000;
+  color: #ffffff;
   padding: 10px;
   border: 3px solid #ffffff;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transform: translateX(0);
-  transition: transform 0.3s ease;
+  transform: translateX(-220px);
+  transition: transform 0.3s ease, width 0.3s ease;
   z-index: 1500;
   overflow-y: auto;
 }
 
-/* Custom scrollbar for sidebar */
-.sidebar::-webkit-scrollbar {
-  display: none
-}
-.sidebar::-webkit-scrollbar-track {
-  background: #1e1e1e;
-}
-.sidebar::-webkit-scrollbar-thumb {
-  background: #cc0000;
-  border-radius: 3px;
-}
-.sidebar::-webkit-scrollbar-thumb:hover {
-  background: #ff0000;
+.sidebar:not(.collapsed) {
+  transform: translateX(0);
 }
 
 .sidebar.collapsed {
   transform: translateX(-220px);
 }
 
+/* Hide scrollbar */
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sidebar Title */
 .sidebar-title {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.9em;
@@ -53,6 +50,7 @@ body, html {
   text-align: center;
 }
 
+/* Sidebar List */
 .sidebar-list {
   list-style-type: none;
   padding: 0;
@@ -63,6 +61,7 @@ body, html {
   margin-bottom: 35px;
 }
 
+/* Standard Link */
 .sidebar-list li a {
   color: #ffffff;
   text-decoration: none;
@@ -87,11 +86,74 @@ body, html {
   color: #ffffff;
 }
 
+/* Group Header (for Tools, Practice Tests) */
+.sidebar-group .group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 15px 0;
+  transition: color 0.2s ease, transform 0.1s ease;
+  border-bottom: 1px solid #333;
+}
+
+.sidebar-group .group-header:hover {
+  color: #cc0000;
+  transform: scale(1.03);
+}
+
+.sidebar-group .group-header::before {
+  content: "~";
+  margin-right: 5px;
+  color: #cc0000;
+}
+
+.sidebar-group .group-header:hover::before {
+  content: ">>";
+  color: #ffffff;
+}
+
+/* Group Sublist */
+.group-sublist {
+  list-style-type: none;
+  padding-left: 20px;
+  margin-top: 10px;
+  transition: max-height 0.3s ease;
+}
+
+.group-sublist li {
+  margin-bottom: 20px;
+}
+
+.group-sublist li a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.1s ease;
+}
+
+.group-sublist li a:hover {
+  color: #cc0000;
+  transform: scale(1.03);
+}
+
+.group-sublist li a::before {
+  content: "-";
+  margin-right: 5px;
+  color: #cc0000;
+}
+
+.group-sublist li a:hover::before {
+  content: "→";
+  color: #ffffff;
+}
+
+/* Sidebar Logo */
 .sidebar-logo-container {
   text-align: center;
-  margin-top: -10px;
-  margin-right: 40px;
-  padding-bottom: 85px;
+  margin-top: 10px;
+  padding-bottom: 20px;
 }
 
 .sidebar-logo {
@@ -101,69 +163,117 @@ body, html {
   filter: brightness(2.2);
 }
 
-/* Toggle button visible on all screens */
+/* Toggle Button */
 .sidebar-toggle {
-  position: absolute;
+  position: fixed;
   top: 10px;
-  left: 230px;
+  left: 10px;
   z-index: 2001;
   background-color: #121212;
   border: 2px solid #ffffff;
   border-radius: 50%;
   color: #cc0000;
-  padding: 10px;
-  font-size: 1.2rem;
+  padding: 12px;
+  font-size: 1.8rem;
   cursor: pointer;
-  transition: left 0.3s ease, background-color 0.3s ease;
-  width: 40px;
-  height: 40px;
+  transition: left 0.3s ease, background-color 0.3s ease, padding 0.3s ease, font-size 0.3s ease;
+  width: 50px;
+  height: 50px;
   text-align: center;
-  line-height: 20px;
+  line-height: 25px;
 }
 
-/* A cooler hover effect for toggle */
 .sidebar-toggle:hover {
   background-color: #cc0000;
   color: #ffffff;
 }
 
-/* If sidebar is collapsed, move toggle button closer to screen edge */
+/* When collapsed, adjust toggle button position */
 .sidebar.collapsed ~ .sidebar-toggle {
   left: 10px;
 }
 
-/* Main content area adjusts margin based on sidebar state */
-.main-content {
-  margin-left: 220px;
-  transition: margin-left 0.3s ease;
-  padding: 20px;
-  box-sizing: border-box;
-}
+/* Responsive Adjustments */
 
-.sidebar.collapsed ~ .main-content {
-  margin-left: 0;
-}
-
-/* Responsive */
+/* Tablets */
 @media (max-width: 768px) {
   .sidebar {
-    width: 200px;
+    width: 180px;
+    transform: translateX(-180px);
   }
-
+  .sidebar:not(.collapsed) {
+    transform: translateX(0);
+  }
   .sidebar.collapsed {
-    transform: translateX(-200px);
+    transform: translateX(-180px);
   }
+  .sidebar-title {
+    font-size: 1.7em;
+    margin-bottom: 24px;
+  }
+  .sidebar-toggle {
+    padding: 14px;
+    font-size: 1.6rem;
+    width: 55px;
+    height: 55px;
+    line-height: 28px;
+  }
+  .sidebar-logo-container {
+    padding-bottom: 70px;
+  }
+  .sidebar-logo {
+    max-width: 160px;
+  }
+  .group-sublist {
+    padding-left: 18px;
+  }
+}
 
+/* Mobile Phones */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 160px;
+    transform: translateX(-160px);
+    border-radius: 0;
+  }
+  .sidebar:not(.collapsed) {
+    transform: translateX(0);
+  }
+  .sidebar.collapsed {
+    transform: translateX(-160px);
+  }
   .sidebar-title {
     font-size: 1.5em;
+    margin-bottom: 20px;
   }
-
   .sidebar-toggle {
-    left: 210px;
+    padding: 16px;
+    font-size: 1.8rem;
+    width: 60px;
+    height: 60px;
+    line-height: 30px;
   }
+  .sidebar-logo-container {
+    padding-bottom: 60px;
+  }
+  .sidebar-logo {
+    max-width: 140px;
+  }
+  .group-sublist {
+    padding-left: 15px;
+  }
+}
 
-  .sidebar.collapsed ~ .sidebar-toggle {
-    left: 10px;
-  }
+/* Logout Button */
+.logout-button {
+  background: none;
+  border: none;
+  color: #ff0000;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+}
+.logout-button:hover {
+  text-decoration: underline;
 }
 

@@ -1,0 +1,104 @@
+/* src/components/pages/auth/Register.css */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #0e0e0e, #1a1a1a);
+}
+
+.register-card {
+  background: #1f1f1f;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.register-title {
+  margin-bottom: 1.5rem;
+  color: #4caf50;
+  font-size: 2rem;
+}
+
+.register-form {
+  text-align: left;
+}
+
+.register-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: #333;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.register-form input:focus {
+  outline: none;
+  box-shadow: 0 0 5px #4caf50;
+}
+
+.error-msg {
+  color: #ff5555;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, #4caf50, #43a047);
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.register-btn:hover {
+  background: linear-gradient(135deg, #43a047, #4caf50);
+  transform: scale(1.03);
+}
+
+.register-switch {
+  margin-top: 1.5rem;
+  color: #cccccc;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.register-switch a {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Placeholder for Stripe integration */
+.stripe-placeholder {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #333;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+

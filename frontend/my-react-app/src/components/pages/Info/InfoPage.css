@@ -1,0 +1,193 @@
+/* src/components/pages/InfoPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0e0e0e, #1a1a1a);
+  color: #e0e0e0;
+  padding: 2rem;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.info-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInDown 1s ease-out;
+  width: 100%;
+}
+
+.site-title {
+  font-size: 3rem;
+  color: #ff5555;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.tagline {
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+  color: #cccccc;
+  animation: fadeInDown 1.5s ease-out;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.auth-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #ff5555, #ff0000);
+  color: #ffffff;
+}
+
+.register-btn {
+  background: linear-gradient(135deg, #4caf50, #43a047);
+  color: #ffffff;
+}
+
+.auth-btn:hover {
+  transform: scale(1.03);
+}
+
+.subscription-info {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.subscription-info .price {
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Features Section */
+.info-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 3rem;
+  animation: fadeIn 2s ease-out;
+}
+
+.feature {
+  background: #1f1f1f;
+  border: 1px solid #333;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #ff5555;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.feature-text {
+  font-size: 1rem;
+  color: #cccccc;
+}
+
+/* Call-to-Action Section */
+.info-cta {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.cta-text {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.cta-btn:hover {
+  transform: scale(1.03);
+}
+
+/* Footer */
+.info-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 2rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .site-title {
+    font-size: 2.5rem;
+  }
+  .tagline {
+    font-size: 1.3rem;
+  }
+  .info-features {
+    grid-template-columns: 1fr;
+  }
+  .auth-buttons {
+    flex-direction: column;
+  }
+}
+

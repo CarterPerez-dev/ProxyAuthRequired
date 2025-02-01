@@ -21,6 +21,9 @@ from routes.grc_routes import grc_bp
 from routes.log_routes import log_bp
 from routes.celery_routes import celery_bp
 from routes.status_routes import status_bp
+from routes.pbq_routes import pbq_bp
+from routes.test_routes import api_bp
+from models.database import db
 
 
 
@@ -95,6 +98,8 @@ app.register_blueprint(unsubscribe_bp, url_prefix='/unsubscribe')
 app.register_blueprint(admin_newsletter_bp, url_prefix='/admin/newsletter')
 app.register_blueprint(celery_bp, url_prefix='/celery')
 app.register_blueprint(status_bp, url_prefix='/status')
+app.register_blueprint(pbq_bp, url_prefix='/pbq')
+app.register_blueprint(api_bp, url_prefix='/test')
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -123,6 +128,8 @@ def authenticate():
         return jsonify({"message": "Authentication successful."}), 200
     else:
         return jsonify({"error": "Invalid password."}), 401
+
+
 
 
 @socketio.on('connect')

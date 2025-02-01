@@ -1,0 +1,54 @@
+/* src/components/pages/store/ShopPage.css */
+.shop-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.shop-container h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.shop-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.shop-item {
+  background: #444;
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.shop-item h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.shop-description {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.shop-item button {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #FFC107;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.shop-item button:hover {
+  background: #e6ac00;
+}
+

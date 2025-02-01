@@ -14,7 +14,6 @@ Jinja2==3.1.4
 MarkupSafe==3.0.2
 openai==1.54.3
 pydantic==2.9.2
-pymongo==4.10.1
 python-engineio==4.10.1
 python-socketio==5.11.4
 simple-websocket==1.1.0
@@ -36,4 +35,6 @@ faker
 tzdata
 Flask-Migrate
 psutil
+pymongo[srv]
+Flask_Pymongo
 

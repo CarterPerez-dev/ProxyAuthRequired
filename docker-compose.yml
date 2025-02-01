@@ -22,23 +22,26 @@ services:
     container_name: frontend_service
     build:
       context: ./frontend/my-react-app
-      dockerfile: Dockerfile.frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend/my-react-app:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
     networks:
       - xploitcraft_network
     restart: always
 
-  mongodb:
-    container_name: mongodb_service
-    image: mongo:latest
-    ports:
-      - "27018:27017"
-    volumes:
-      - /mnt/storage/mongo_data:/data/db
-    networks:
-      - xploitcraft_network
-    restart: unless-stopped
+# mongodb:
+#     container_name: mongodb_service
+#     image: mongo:latest
+#     ports:
+#       - "27018:27017"
+#     volumes:
+#       - /mnt/storage/mongo_data:/data/db
+#     networks:
+#       - xploitcraft_network
+#     restart: unless-stopped
 
   redis:
     container_name: redis_service

@@ -1,0 +1,208 @@
+/* src/components/pages/store/UserProfile.css */
+
+/* Base styles and font settings */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0e0e0e;
+  color: #e0e0e0;
+}
+
+/* Profile Container */
+.profile-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #444;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.profile-title {
+  font-size: 2.5rem;
+  color: #cc0000;
+  margin: 0;
+}
+
+.logout-button {
+  background-color: #cc0000;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.75rem 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #ff3333;
+  transform: scale(1.05);
+}
+
+/* Profile Overview Card */
+.profile-overview {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.profile-card {
+  background: #1f1f1f;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  text-align: left;
+}
+
+.profile-card h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #ff5555;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+.profile-details p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #cc0000;
+}
+
+/* Profile Actions Card */
+.profile-actions {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.action-card {
+  background: #1f1f1f;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.action-card h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #ff5555;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+.action-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.profile-btn {
+  background: linear-gradient(135deg, #cc0000, #ff0000);
+  border: none;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.profile-btn:hover {
+  background: linear-gradient(135deg, #ff3333, #ff6666);
+  transform: scale(1.05);
+}
+
+/* Extra Cards for Achievements & Purchases */
+.profile-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.extra-card {
+  background: #1f1f1f;
+  padding: 1.5rem;
+  border-radius: 10px;
+  flex: 1;
+  min-width: 300px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.extra-card h2 {
+  font-size: 1.8rem;
+  color: #ff5555;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.extra-content {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #cccccc;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1.5rem;
+    margin: 2rem auto;
+  }
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .profile-title {
+    font-size: 2rem;
+  }
+  .logout-button {
+    align-self: flex-end;
+    margin-top: 0.5rem;
+  }
+  .profile-extra {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .profile-card, .action-card, .extra-card {
+    padding: 1rem;
+  }
+  .profile-title {
+    font-size: 1.8rem;
+  }
+  .logout-button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+}
+

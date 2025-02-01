@@ -1,0 +1,230 @@
+/* PBQWizard.css */
+
+/* Overall page */
+.pbq-wizard-page {
+  background-color: #0f0f0f;
+  color: #c9d1d9;
+  font-family: "Courier New", Courier, monospace;
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Header */
+.pbq-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pbq-header h1 {
+  font-size: 2rem;
+  color: #39ff14;
+  margin: 0.5rem 0;
+  text-shadow: 1px 1px 2px #003300;
+}
+
+.pbq-header p {
+  color: #8b949e;
+}
+
+/* Controls */
+.pbq-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  background: #1f1f1f;
+  padding: 1rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.control-group label {
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.control-group input[type="text"],
+.control-group select {
+  background-color: #101010;
+  border: 1px solid #3f3f3f;
+  color: #fff;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+}
+
+.generate-pbq-button {
+  background-color: #3399ff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.generate-pbq-button:hover {
+  background-color: #1e90ff;
+}
+
+/* Main content */
+.pbq-main-content {
+  background-color: #1f1f1f;
+  border: 1px solid #3f3f3f;
+  border-radius: 6px;
+  min-height: 500px;
+  padding: 1rem;
+}
+
+/* PBQ Container */
+.pbq-container {
+  margin-top: 1rem;
+  overflow-y: auto;
+  max-height: 70vh; /* Example to keep scroll manageable */
+}
+
+.pbq-title {
+  color: #66d9ef;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.pbq-difficulty {
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+/* Terminal window */
+.terminal-window {
+  background-color: #161b22;
+  border: 1px solid #3f3f3f;
+  border-radius: 6px;
+  min-height: 200px;
+  max-height: 300px;
+  padding: 1rem;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
+  color: #c9d1d9;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.terminal-line {
+  margin: 0.1rem 0;
+}
+
+/* Terminal input */
+.terminal-input-form {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.terminal-input {
+  flex: 1;
+  background-color: #0f0f0f;
+  border: 1px solid #3f3f3f;
+  color: #39ff14;
+  padding: 0.4rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95rem;
+}
+
+/* Sub-task details */
+.subtask-details {
+  background-color: #262626;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.subtask-title {
+  font-size: 1.1rem;
+  color: #ffcc66;
+  margin-bottom: 0.3rem;
+}
+
+.subtask-description {
+  color: #c9d1d9;
+  margin-bottom: 0.5rem;
+}
+
+.followup-question {
+  margin-top: 0.5rem;
+  color: #ffcc66;
+  font-weight: bold;
+}
+
+.possible-answers {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.possible-answers label {
+  cursor: pointer;
+  color: #c9d1d9;
+  margin-bottom: 0.25rem;
+}
+
+.submit-answer-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+/* Explanation block */
+.explanation-block {
+  margin-top: 0.75rem;
+  background-color: #333;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: #dcdcdc;
+}
+
+/* Overall summary */
+.pbq-overallSummary {
+  margin-top: 1rem;
+  background-color: #333;
+  padding: 0.75rem;
+  border-radius: 4px;
+  color: #dcdcdc;
+}
+
+.pbq-score {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+/* Error message */
+.error-msg {
+  color: #ff6666;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+/* Debug section */
+.debug-section {
+  margin-top: 1rem;
+  background: #222;
+  padding: 1rem;
+  border-radius: 4px;
+  color: #ccc;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
+
