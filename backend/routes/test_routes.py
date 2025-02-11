@@ -403,3 +403,41 @@ def fetch_achievements_route():
     for ach in ach_list:
         ach["_id"] = str(ach["_id"])
     return jsonify(ach_list), 200
+    
+    
+    
+    
+@api_bp.route('/leaderboard', methods=['GET'])
+def get_leaderboard():
+    """
+    Returns the top 100 users by level (descending).
+    Embeds avatarUrl from shop_collection if the user
+    has a currentAvatar set.
+    """
+    top_users_cursor = mainusers_collection.find(
+        {},
+        {"username": 1, "level": 1, "xp": 1, "currentAvatar": 1}
+    ).sort("level", -1).limit(100)
+
+    results = []
+    rank = 1
+    for user in top_users_cursor:
+        # Basic fields
+        user_data = {
+            "username": user.get("username", "unknown"),
+            "level": user.get("level", 1),
+            "xp": user.get("xp", 0),
+            "rank": rank,
+            "avatarUrl": None
+        }
+
+        # Lookup avatar image if exists
+        if user.get("currentAvatar"):
+            avatar_item = shop_collection.find_one({"_id": user["currentAvatar"]})
+            if avatar_item and "imageUrl" in avatar_item:
+                user_data["avatarUrl"] = avatar_item["imageUrl"]
+
+        results.append(user_data)
+        rank += 1
+
+    return jsonify(results), 200

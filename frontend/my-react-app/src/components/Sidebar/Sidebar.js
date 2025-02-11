@@ -56,6 +56,14 @@ const Sidebar = () => {
               /Shop
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/leaderboard" className={({ isActive }) => isActive ? 'active-link' : ''}>
+              /Leaderboard
+            </NavLink>
+          </li>
+          
+          
+          
 
           {/* Tools group: Contains several tool pages */}
           <li className="sidebar-group">

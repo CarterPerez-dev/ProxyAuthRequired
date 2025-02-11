@@ -5,7 +5,7 @@
 .achievement-page {
   padding: 2rem;
   min-height: 100vh;
-  background: url('ach.png') center center no-repeat;
+
   background-attachment: fixed;
   background-size: cover;
   color: #e0e0e0;
@@ -24,14 +24,14 @@
 
 .achievement-header h1 {
   font-size: 3rem;
-  color: #F5F5F5;
+  color: #e6c300;
   margin: 0;
   text-shadow: 2px 2px 0 #000, 4px 4px 0 #a93226;
 }
 
 .achievement-header p {
   font-size: 1rem;
-  color: #F5F5F5;
+  color: #e6c300;
   margin-top: 0.5rem;
 }
 

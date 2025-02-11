@@ -14,7 +14,7 @@ import Login from './components/pages/auth/Login';
 import Register from './components/pages/auth/Register';
 import ForgotPassword from './components/pages/auth/ForgotPassword';
 
-// Protected pages
+// Pages
 import ProtectedRoute from './components/ProtectedRoute';
 import Sidebar from './components/Sidebar/Sidebar';
 import AchievementPage from './components/pages/store/AchievementPage';
@@ -30,6 +30,7 @@ import AdminInterface from './components/pages/AdminInterface/AdminInterface';
 import PBQWizard from './components/pages/PBQpage/PBQWizard';
 import ShopPage from './components/pages/store/ShopPage';
 import UserProfile from './components/pages/store/UserProfile';
+import LeaderboardPage from './components/pages/store/LeaderboardPage';
 
 // Test Pages
 import APlusTestPage from './components/pages/aplus/APlusTestPage';
@@ -95,6 +96,11 @@ function App() {
           <Route path="/shop" element={
             <ProtectedRoute>
               <ShopPage />
+            </ProtectedRoute>
+          }/>
+          <Route path="/leaderboard" element={
+            <ProtectedRoute>
+              <LeaderboardPage />
             </ProtectedRoute>
           }/>
           <Route path="/xploitcraft" element={

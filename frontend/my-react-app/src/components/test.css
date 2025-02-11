@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+
+
+
+
 /* ===================== */
 /* Global Reset & Basics */
 /* ===================== */
@@ -28,9 +45,10 @@ body {
   font-size: 2.8rem;
   margin-bottom: 1rem;
   /* Bold neon yellow with a spray-paint feel */
-  color: #ffea00;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  color: #f0f8ff;
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 #a93226;
   text-align: center;
+  font-family: 'Merriweather', serif;
 }
 
 .tests-list-grid {
@@ -49,7 +67,7 @@ body {
   padding: 1.7rem;
   border-radius: 8px;
   /* A bold neon pink border as a spray-painted accent */
-  border: 1px solid #ff4081;
+  border: 1px solid #a93226;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   overflow: hidden;
@@ -62,17 +80,18 @@ body {
 
 .test-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.7);
+  box-shadow: 0 4px 15px #fff
 }
 
 /* Test Badge (number) */
 .test-badge {
   font-size: 1.6rem;
   font-weight: bold;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Merriweather', serif;
   margin-bottom: 0.3rem;
   /* A vivid neon orange for an attention-grabbing look */
-  color: #ff9100;
+  color: #a93226;
+  text-shadow: .5px .5px 0 #fff, .5px .5px 0 #fff;
 }
 
 /* Difficulty label under test number */
@@ -86,7 +105,7 @@ body {
 .test-progress {
   font-size: 1rem;
   /* A striking neon blue */
-  color: #00e5ff;
+  color: #bfbfbf;
   margin-bottom: 0.5rem;
 }
 
@@ -99,10 +118,10 @@ body {
 }
 
 .resume-button {
-  background: #00e5ff; /* Electric blue */
-  color: #000;
+  background: #1a8cff; /* Electric blue */
+  color: #fff;
   padding: 0.5rem 1rem;
-  border: none;
+  border: 1px solid #000;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s;
@@ -110,20 +129,22 @@ body {
 
 .resume-button:hover {
   background: #00b0ff;
+  border: 1px solid #000;
 }
 
 .restart-button-testlist {
-  background: #d50000; /* Bold red */
+  background: #a93226; /* Bold red */
   color: #fff;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s;
+  border: 1px solid #000;
 }
 
 .restart-button-testlist:hover {
-  background: #c51162;
+  background: #d62929;
 }
 
 /* The "Click to Start" button */
@@ -131,16 +152,17 @@ body {
   width: 100%;
   padding: 0.75rem;
   font-size: 1rem;
-  background: #6a1b9a; /* Deep purple */
+  background: #a93226; /* Deep purple */
   color: #fff;
-  border: none;
+  border: 1px solid #000;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s;
 }
 
 .start-button:hover {
-  background: #4a148c;
+  background: #d9d9d9;
+  color: #000;
 }
 
 .back-to-list-btn {
@@ -180,6 +202,7 @@ body {
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  font-family: 'Merriweather', serif;
 }
 
 /* ===================== */
@@ -197,22 +220,24 @@ body {
 }
 
 .avatar-image {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   /* Placeholder image styled to resemble a graffiti sticker */
   background: url('https://via.placeholder.com/60') no-repeat center/cover;
-  border: 2px solid #ff4081;
+  border: 2px solid #000;
   border-radius: 50%;
   margin-bottom: 0.5rem;
+  box-shadow: 0px 0px 4px #fff
 }
 
 .avatar-level,
 .xp-level-display,
 .coins-display {
-  font-size: 1rem;
+  font-size: 1.1rem;
   /* Neon pink accents for a consistent graffiti look */
-  color: #ff4081;
+  color: #1a8cff;
   text-align: center;
+  font-family: 'Orbitron', sans-serif;
 }
 
 /* ===================== */
@@ -234,7 +259,7 @@ body {
   color: #000;
   font-weight: bold;
   line-height: 24px;
-  transition: width 0.4s ease-in-out;
+  transition: width 0.3s ease-in-out;
 }
 
 /* ===================== */
@@ -250,12 +275,12 @@ body {
 }
 
 .question-text {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   margin-bottom: 1rem;
-  font-family: 'Trebuchet MS', sans-serif;
-  line-height: 1.3;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
   /* Neon yellow to pop against the dark background */
-  color: #ffeb3b;
+  color: #d9d9d9;
   font-weight: bold;
 }
 
@@ -279,18 +304,18 @@ body {
   background: #212121;
   /* Neon green text for a bold statement */
   color: #00e676;
-  transition: background 0.3s ease;
+  transition: background 0.5s ease;
   outline: none;
 }
 
 .option-button:hover {
-  background: #424242;
+  background: #737373;
 }
 
 /* Correct/Incorrect Animations */
 .correct-option {
   animation: correctAnswer 0.3s ease;
-  background: #00e676 !important;
+  background: #239023 !important;
   color: #fff !important;
 }
 
@@ -302,7 +327,7 @@ body {
 
 .incorrect-option {
   animation: incorrectAnswer 0.3s ease;
-  background: #ff1744 !important;
+  background: #c12525 !important;
   color: #fff !important;
 }
 
@@ -315,11 +340,11 @@ body {
 .explanation {
   margin-top: 1rem;
   /* A translucent layer of neon blue to hint at urban murals */
-  background: rgba(0, 229, 255, 0.2);
+  background: #465d7d;
   padding: 1rem;
   border-radius: 6px;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 1.1rem;
+  line-height: 1.5;
   font-family: 'Trebuchet MS', sans-serif;
 }
 
@@ -636,8 +661,8 @@ body {
 }
 
 .top-control-bar .flag-btn {
-  background: #212121;
-  color: #fff;
+  background: #ffea00;
+  color: #000;
 }
 
 .top-control-bar .flag-btn:hover {
