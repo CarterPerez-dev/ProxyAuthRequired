@@ -1,3 +1,5 @@
+/* src/components/pages/analogy/AnalogyHub.css */
+
 body {
   background-color: #0c0c0c; 
   color: #00ffea; 
@@ -77,6 +79,7 @@ body {
   box-sizing: border-box;
 }
 
+/* Main styling for analogy-hub-input */
 .analogy-hub-input {
   padding: 0.9375rem;
   background-color: #222;
@@ -163,7 +166,6 @@ body {
   font-weight: bold;
 }
 
-
 .copy-button:active {
   transform: scale(0.95);
   opacity: 0.8;
@@ -171,4 +173,26 @@ body {
 
 .copy-button:hover {
   background-color: #00CED1;
+}
+
+/* 
+===============================================
+FORCE OVERRIDE: Ensures the user profile's 
+global input[type] styles do NOT override 
+AnalogyHub’s own input styling.
+===============================================
+*/
+.analogy-hub-container input.analogy-hub-input[type="text"],
+.analogy-hub-container select.analogy-hub-input,
+.analogy-hub-container textarea.analogy-hub-input {
+  /* Re-assert your desired styling, optionally use !important if needed. */
+  background-color: #222;
+  color: #00ffea;
+  border: 0.125rem solid #8B0000;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 30rem;
+  box-sizing: border-box;
+  padding: 0.9375rem;
 }
