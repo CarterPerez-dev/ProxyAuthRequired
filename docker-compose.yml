@@ -22,10 +22,7 @@ services:
     container_name: frontend_service
     build:
       context: ./frontend/my-react-app
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./frontend/my-react-app:/app
-      - /app/node_modules
+      dockerfile: Dockerfile.frontend
     env_file:
       - .env
     ports:
