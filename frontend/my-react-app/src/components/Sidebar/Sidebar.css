@@ -279,6 +279,7 @@ body, html {
   backdrop-filter: blur(5px);
 }
 
+
 .sidebar-toggle:hover {
   background-color: var(--sidebar-accent);
   color: white;
