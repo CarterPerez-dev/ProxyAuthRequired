@@ -743,7 +743,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  font-family: sans-serif;
+  font-family: roboto;
 }
 
 .profile-setting-card {
