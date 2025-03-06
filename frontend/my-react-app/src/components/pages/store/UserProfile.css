@@ -7,8 +7,8 @@
   --profile-accent-glow: #8a58fc;
   --profile-accent-secondary: #ff4c8b;
   --profile-border: #2a2c3d;
-  --profile-text: #e2e2e2;
-  --profile-text-secondary: #9da8b9;
+  --profile-text: #fff;
+  --profile-text-secondary: #f0ebfa;
   --profile-success: #2ebb77;
   --profile-error: #ff4e4e;
   --profile-warning: #ffc107;
@@ -312,7 +312,7 @@
   color: var(--profile-text-secondary);
   cursor: pointer;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   transition: all 0.2s;
   min-width: max-content;
@@ -390,6 +390,7 @@
 
 .profile-card-content {
   flex-grow: 1;
+  font-family: sabs-serif;
 }
 
 .profile-detail-item {
@@ -401,7 +402,8 @@
 
 .profile-detail-label {
   color: var(--profile-text-secondary);
-  font-size: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .profile-detail-value {
@@ -741,6 +743,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  font-family: sans-serif;
 }
 
 .profile-setting-card {
@@ -784,6 +787,7 @@
   color: var(--profile-text-secondary);
   font-size: 14px;
   margin: 0;
+  font-weight: bold;
 }
 
 .profile-setting-current span {
