@@ -1,0 +1,26 @@
+ok so i have some 7 test categopries. each category is different curriuclum. so for each catgroy there are 10 tests. each test contains 100 questions each. tests 1-10 increase in diffculty with 1 being normal which means its not on a scale of any diffculty its just average youd say. then it ranges from very easy to ultra level hard. i already created teh tesst hwoever i haev soem duplciate questions. so i have duplciate qauestions within teh saem test ( a single test has duplciate questions) and then also i have some duplciate questions across al tests in the categroy (so liek e.g test 1 question 17 is also in test 3 as question 20 and so on.). so giving you all 1000 questiosn fri each test wouldnt be vuiaable. so first im gonmna give you each test with duplciate questions inisde the singhle test an weree gonan fix those first. the after that iw ill give you duplciates across all tests. - now here are some prerequisiute insuirtctions first you have to know.
+
+
+You are a professional test-question writer.Provide enough detail to ensure the question stands out from others in the same topic area 
+   (e.g., add subtle real-world or hypothetical details). Avoid reusing text or phrasing from common open-source question banks. befor i tell you to create news questions i will preface the difficulty level of said test we are on.The new question must remain a single-question, multiple-choice format. It must remain as the same mongo syntax aswell as the asame fromat as teh questions right now in terms of: question, options (4 options no less no more) and correct anser index (only one), explantion, and then exam tip. so here are some instructions on hwo the questions should vary- 🧩 Multilayered reasoning required: Questions will demand deep technical analysis and stepwise critical thinking.
+🚫 Minimal use of “BEST/MOST” phrasing: Focus on precise, direct, and scenario driven questions.
+🔀 Blended concepts: Each question may span multiple exam domains
+✅ Only 1 correct answer per question
+✅ Mix of styles:
+Scenario-based (~30%)
+PBQ-style (~15%) (matching in question 5)
+BEST/MOST (~15%)
+Direct and conceptual (~40%)
+✅ All answer choices highly plausible
+✅ Expert-level nuance required to distinguish correct answers
+
+I will give you the test curriculum before i ask you (e.g CompTIA A+ core 1)
+
+and one major major important detail taht you must enstill and do like your life depends on it- Zero obvious elimination clues: All distractors will sound plausible, forcing a decision based purely on expert level nuance.
+💀 Near Identical Distractors: Each option is technically plausible, requiring expert knowledge to pick the correct one.
+💀 Extreme Distractor Plausibility: Every distractor is technically valid in some context—only minuscule details distinguish the correct answer.
+🧬 No Obvious Process of Elimination: Every option is expert-level plausible, forcing painstaking analysis.
+💀 Extremely challenging distractors: All options will be nearly indistinguishable from the correct answer—every option will feel right.
+💀 Unrelenting Distractor Plausibility: Every distractor is highly plausible—only microscopic technical nuances reveal the correct answer.
+
+and only replace one of tyhe duplicate questions- so if lets say e.g question 44 and 77 are the saem we just need to delete one of those qwuetsions and make a new one so they are no longer duplciates. if tehre aare triple duplciates so 44,77,90 are all the same then were gonan delete two and make 2 new- the point is we dont need to remake all of them. Also one last thing is you wont klnow the other tests right away (you will slowly learn all th euqetsiosn throughout fixing each test but not at first and stuff) so you hav to make the question subject insanely unique that it would be impossible for any test to have that question (still must remain within scope of test curriuclkum though.) so all that sound good?

@@ -1,0 +1,40 @@
+When provided with a batch of 50 questions, please:
+
+Preserve Original Content:
+
+Keep every word in the test questions exactly as provided.
+Do not alter the phrasing or wording of any question, option, explanation, or exam tip—except to fix issues in syntax, spacing, or obvious typos that break the JS structure.
+Fix Syntax and Formatting Issues:
+
+Correct any JS syntax errors (e.g., missing commas, mismatched brackets, quotation issues) so that the output is valid JS for Mongosh.
+Adjust spacing and indentation to make the JS structure clear and correct.
+Address Spelling and Minor Typos:
+
+Correct spelling mistakes only when they interfere with the readability or functionality of the JS.
+Avoid "fixing" wording that might be intentional; only change what is necessary for clarity and syntactical correctness.
+Remove Unwanted Comments and Phrases:
+
+Delete any line or text that contains //replace this comment.
+Remove any occurrence of the phrase "Use code with caution".
+Handle Unusable or Incomplete Content:
+
+If a question is so malformed that it cannot be fixed (e.g., missing critical fields or entirely broken syntax), flag it for review rather than attempting an automatic fix.
+Include a brief note indicating which question(s) are affected and the nature of the issue.
+Processing in Batches:
+
+I will send you 50 questions at a time.
+For each batch, fix the syntax, spacing, and formatting issues and output the corrected JS ready for insertion into Mongosh.
+Do not output additional commentary or the entire test; only include the cleaned-up JS and, if necessary, a brief summary of any issues that you were unable to correct.
+Output Requirements:
+
+Primary Output: The corrected JS for the batch of 50 questions.
+Secondary (Optional) Report: If any question is flagged as unusable or has issues that you couldn’t automatically fix, provide a concise summary with the affected question numbers and a short description of the problem.
+If all questions are successfully fixed, simply output the corrected JS with no extra commentary.
+Example Output Scenario:
+
+Input Batch: 50 questions with various syntax errors, spacing issues, stray comments, and minor typos.
+Output:
+A block of 50 corrected JS objects, properly formatted and free of unwanted comments/phrases.
+(Optional) A short summary if, for instance, “Question 12 is missing a closing bracket” or “Question 25 appears to be incomplete.”
+Final Note:
+Your corrections should be strictly limited to syntax, spacing, formatting, and removal of unwanted comments/phrases. Do not modify the content or wording of the test questions beyond what is necessary to ensure the JS is valid and clean. If you’re unsure about any element, flag it for manual review.

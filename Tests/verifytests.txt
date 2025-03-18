@@ -1,0 +1,63 @@
+Context: I have 10 tests (JSON format, for a MongoDB database) with each test containing exactly 100 questions. Each question should have:
+
+A unique question number (1–100, in correct ascending order with no gaps or duplicates).
+A question text (fully written, with no obvious missing words or cut-off sentences).
+Four answer options (labeled or listed in some way, e.g., "optionA," "optionB," "optionC," "optionD").
+An explanation (full, no apparent missing words or truncated text).
+An exam tip (full, no apparent missing words or truncated text).
+Your task:
+
+Check Question Order (1–100)
+
+Verify that each test contains exactly 100 questions.
+Ensure there are no skipped or duplicated question numbers.
+If any question numbers are out of order, missing, or duplicated, please note it.
+Check Completeness of Each Question
+
+Confirm each question has all required fields: a question text, four options, an explanation, and an exam tip.
+If any required field is missing for a question, report it.
+Check for Exactly Four Options
+
+Verify that each question has exactly four answer options.
+If a question has fewer or more than four options, note which question it is and how many options it contains.
+Check for Missing or Truncated Text
+
+Examine each question text, each option, the explanation, and the exam tip.
+Flag if there are obvious partial sentences, abrupt cut-offs, or places where it looks like the text was not finished (e.g., ends mid-sentence).
+Flag if you notice suspiciously missing words (for instance, “because you need to” followed by an abrupt stop) in the question, options, explanation, or exam tip.
+Check for Spelling Errors
+
+Look for obvious spelling mistakes in the question text, options, explanations, and exam tips.
+Report any words that appear to be significantly misspelled. (High sensitivity: even if you are not 100% certain, note the potential error.)
+Check for Syntax Issues
+also keep in mind theres 10 tests per category 100 questions each, so after i send all 10 tests then i will ask you to check for dduplciate sounding questions in all 1-10 tests not just the 1-100 questions. so if if i give you test 1 and theres no duplciates in test 1 cool, but then make sure theres no test 1 questions in test 10 either and so on.
+
+Verify that the JSON structure is valid and does not contain syntax errors.
+Identify any parsing issues or improperly formatted JSON.
+Check for Out-of-Place Words
+
+If any question, option, explanation, or exam tip includes words that clearly do not belong in context (e.g., random or nonsensical strings), flag them.
+Report Findings
+
+Do not re-output the entire test content.
+Provide a concise but detailed report summarizing any errors or warnings found.
+If everything is correct, clearly state that there are no issues.
+Important Notes:
+
+High sensitivity: If you suspect a problem (e.g., unusual wording that seems like a mistake, incomplete sentences, or suspicious spelling), list it as a potential error.
+The goal is not to automatically correct or rewrite anything but rather to identify potential issues for me to double-check.
+If a test appears entirely fine, explicitly say so.
+Example of Desired Output (hypothetical illustration):
+
+Test 1:
+Questions numbered correctly, 1 to 100, no duplicates or missing.
+All four options present for each question.
+Potential spelling error in question #35 (“enviornment” instead of “environment”).
+Explanation in question #59 seems cut off. (“In order to pass the exam you must be” … no continuation).
+Test 2:
+Question #7 and question #8 both contain the same text. This might be a duplicate question.
+Everything else looks fine.
+Tests 3 to 10: No issues found; everything is correct.
+End of example.
+
+Please perform this analysis on all 10 tests, abiding by the above instructions, and then provide a concise, organized summary of your findings or a confirmation that everything seems correct.
