@@ -98,7 +98,7 @@ def log_request_info():
 @app.before_request
 def log_api_request():s
     if request.path.startswith('/static/') or request.path == '/health':
-        return
+    return
     
     log_entry = {
         "type": "api",
