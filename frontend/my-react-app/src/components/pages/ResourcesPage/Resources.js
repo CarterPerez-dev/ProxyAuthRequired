@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './Resources.css'; 
 import { 
   FaSearch, 
@@ -35,9 +37,10 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaAws,
-  FaUserShield
+  FaUserShield,
+  FaCrown,
+  FaStar
 } from 'react-icons/fa';
-
 
 const cyberSecurityTools = [
   { name: 'Nmap', url: 'https://nmap.org/' },
@@ -1144,6 +1147,40 @@ function Resources() {
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
   const [showRandomModal, setShowRandomModal] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  
+  // Add state for premium upgrade modal
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [selectedResource, setSelectedResource] = useState(null);
+  
+  // Get navigation and subscription status from Redux
+  const navigate = useNavigate();
+  const { subscriptionActive } = useSelector(state => state.user);
+
+  // Handle link click for resource items
+  const handleResourceClick = (event, resource) => {
+    // If user is not a premium subscriber, prevent default link behavior
+    if (!subscriptionActive) {
+      event.preventDefault();
+      setSelectedResource(resource);
+      setShowUpgradeModal(true);
+    }
+    // For premium users, the link will work normally
+  };
+  
+  // Close the premium upgrade modal
+  const closeUpgradeModal = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      setShowUpgradeModal(false);
+      setSelectedResource(null);
+      setFadeOut(false);
+    }, 300);
+  };
+  
+  // Navigate to subscription page
+  const handleUpgradeClick = () => {
+    navigate('/subscription');
+  };
 
   // Switch between resource categories and certification categories
   const toggleCertCategories = () => {
@@ -1301,6 +1338,23 @@ return (
               </div>
             </div>
           </div>
+
+          {/* Subscription banner for free users */}
+          {!subscriptionActive && (
+            <div className="resources-premium-banner">
+              <FaCrown className="resources-premium-icon" />
+              <div className="resources-premium-text">
+                <h3>Upgrade to Premium</h3>
+                <p>Unlock access to all resources and links</p>
+              </div>
+              <button
+                className="resources-premium-button"
+                onClick={() => navigate('/subscription')}
+              >
+                Upgrade Now <FaChevronRight />
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -1326,7 +1380,7 @@ return (
 
         <div className="resources-filter-container">
           <div className="resources-category-select">
-            <div 
+            <div
               className="resources-selected-category"
               onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
             >
@@ -1338,24 +1392,24 @@ return (
               </span>
               {showCategoryDropdown ? <FaChevronUp /> : <FaChevronDown />}
             </div>
-            
+
             {showCategoryDropdown && (
               <div className="resources-category-dropdown">
                 <div className="resources-category-tabs">
-                  <button 
+                  <button
                     className={`resources-category-tab ${!showCerts ? 'active' : ''}`}
                     onClick={toggleCertCategories}
                   >
                     Resource Types
                   </button>
-                  <button 
+                  <button
                     className={`resources-category-tab ${showCerts ? 'active' : ''}`}
                     onClick={toggleCertCategories}
                   >
                     Certifications
                   </button>
                 </div>
-                
+
                 <div className="resources-category-list">
                   {!showCerts ? (
                     resourceCategories.map((category) => (
@@ -1386,26 +1440,26 @@ return (
           </div>
 
           <div className="resources-actions">
-            <button 
+            <button
               className={`resources-action-btn ${sorted ? 'active' : ''}`}
               onClick={handleToggleSort}
               title={sorted ? "Unsort" : "Sort A-Z"}
             >
               {sorted ? <FaSortAlphaUp /> : <FaSortAlphaDown />}
             </button>
-            
-            <button 
+
+            <button
               className="resources-action-btn"
               onClick={toggleViewMode}
               title={viewMode === 'grid' ? "List View" : "Grid View"}
             >
-              {viewMode === 'grid' ? 
-                <FaList className="view-icon" /> : 
+              {viewMode === 'grid' ?
+                <FaList className="view-icon" /> :
                 <FaTable className="view-icon" />
               }
             </button>
-            
-            <button 
+
+            <button
               className="resources-action-btn resources-random-btn"
               onClick={handleRandomResource}
               disabled={loading}
@@ -1413,8 +1467,8 @@ return (
             >
               {loading ? <FaSyncAlt className="loading-spinner" /> : <FaDice />}
             </button>
-            
-            <button 
+
+            <button
               className="resources-action-btn"
               onClick={handleReset}
               title="Reset Filters"
@@ -1424,7 +1478,7 @@ return (
           </div>
         </div>
       </div>
-      
+
       {/* Results Count */}
       <div className="resources-results-count">
         <div className="resources-count-badge">
@@ -1432,7 +1486,7 @@ return (
         </div>
       </div>
 
-      {/* Resources Content */}
+      {/* Resources Content --- FIX #1 APPLIED HERE --- */}
       <div className={`resources-content ${viewMode === 'grid' ? 'grid-view' : 'list-view'}`}>
         {filteredResources.length > 0 ? (
           filteredResources.map((resource, index) => (
@@ -1440,23 +1494,28 @@ return (
               <div className="resource-item-content">
                 {getSourceIcon(resource)}
                 <div className="resource-details">
+                  {/* --- Added missing <a> tag here --- */}
                   <a
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="resource-title"
+                    className={`resource-title ${!subscriptionActive ? 'resource-premium-link' : ''}`}
+                    onClick={(e) => !subscriptionActive && handleResourceClick(e, resource)}
                   >
                     {resource.name}
+                    {!subscriptionActive && (
+                      <span className="resource-premium-indicator">
+                        <FaCrown />
+                      </span>
+                    )}
                   </a>
                 </div>
-                <a
-                  href={resource.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="resource-link-icon"
+                <div
+                  className={`resource-link-icon ${!subscriptionActive ? 'resource-premium-icon' : ''}`}
+                  onClick={(e) => !subscriptionActive ? handleResourceClick(e, resource) : window.open(resource.url, '_blank')}
                 >
-                  <FaExternalLinkAlt />
-                </a>
+                  {!subscriptionActive ? <FaLock /> : <FaExternalLinkAlt />}
+                </div>
               </div>
             </div>
           ))
@@ -1471,42 +1530,57 @@ return (
           </div>
         )}
       </div>
-      
-      {/* Random Resource Modal */}
+
+      {/* Random Resource Modal --- FIX #2 APPLIED HERE --- */}
       {showRandomModal && randomResource && (
         <div className={`resource-modal ${fadeOut ? 'fade-out' : ''}`}>
           <div className="resource-modal-content">
             <button className="resource-modal-close" onClick={closeRandomModal}>
               <FaTimes />
             </button>
-            
+
             <div className="resource-modal-header">
               <div className="resource-modal-icon">
                 <FaLightbulb />
               </div>
               <h2 className="resource-modal-title">Resource Spotlight</h2>
             </div>
-            
+
             <div className="resource-modal-body">
               <h3 className="resource-modal-resource-title">
                 {randomResource.name}
               </h3>
-              
+
               <div className="resource-modal-desc">
                 <p>Expand your cybersecurity knowledge with this resource:</p>
               </div>
-              
-              <a
-                href={randomResource.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="resource-modal-link"
-              >
-                <span>Open Resource</span>
-                <FaExternalLinkAlt />
-              </a>
-              
-              <button 
+
+              {subscriptionActive ? (
+                // --- Added missing <a> tag here ---
+                <a
+                  href={randomResource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="resource-modal-link"
+                >
+                  <span>Open Resource</span>
+                  <FaExternalLinkAlt />
+                </a>
+              ) : (
+                <button
+                  className="resource-modal-premium-link"
+                  onClick={() => {
+                    closeRandomModal();
+                    setSelectedResource(randomResource);
+                    setShowUpgradeModal(true);
+                  }}
+                >
+                  <span>Unlock Resource</span>
+                  <FaLock />
+                </button>
+              )}
+
+              <button
                 className="resource-modal-random-btn"
                 onClick={() => {
                   closeRandomModal();
@@ -1517,6 +1591,58 @@ return (
               >
                 <FaRandom />
                 <span>Try Another</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Premium Upgrade Modal */}
+      {showUpgradeModal && selectedResource && (
+        <div className={`resource-modal premium-modal ${fadeOut ? 'fade-out' : ''}`}>
+          <div className="resource-modal-content">
+            <button className="resource-modal-close" onClick={closeUpgradeModal}>
+              <FaTimes />
+            </button>
+
+            <div className="resource-modal-header premium-header">
+              <div className="resource-modal-icon">
+                <FaCrown />
+              </div>
+              <h2 className="resource-modal-title">Premium Feature</h2>
+            </div>
+
+            <div className="resource-modal-body">
+              <h3 className="resource-modal-resource-title">
+                {selectedResource.name}
+              </h3>
+
+              <div className="resource-premium-desc">
+                <p>Access to external resources is a premium feature.</p>
+                <p>Upgrade to unlock all resources and accelerate your cybersecurity journey!</p>
+              </div>
+
+              <div className="premium-features-list">
+                <div className="premium-feature-item">
+                  <FaStar className="premium-feature-icon" />
+                  <span>Unlimited access to all resource links</span>
+                </div>
+                <div className="premium-feature-item">
+                  <FaStar className="premium-feature-icon" />
+                  <span>Access to premium tools and courses</span>
+                </div>
+                <div className="premium-feature-item">
+                  <FaStar className="premium-feature-icon" />
+                  <span>Enhanced learning paths and certifications</span>
+                </div>
+              </div>
+
+              <button
+                className="resource-upgrade-btn"
+                onClick={handleUpgradeClick}
+              >
+                <FaCrown className="upgrade-icon" />
+                <span>Upgrade to Premium</span>
               </button>
             </div>
           </div>

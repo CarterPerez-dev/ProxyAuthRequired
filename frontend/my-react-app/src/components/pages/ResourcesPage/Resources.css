@@ -716,6 +716,170 @@
   border-color: var(--resources-accent);
 }
 
+/* Add these styles to your Resources.css file */
+
+/* Premium banner at the top */
+.resources-premium-banner {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #4b79a1, #283e51);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #ffd700;
+}
+
+.resources-premium-icon {
+  font-size: 1.8rem;
+  color: #ffd700;
+  margin-right: 1rem;
+}
+
+.resources-premium-text {
+  flex: 1;
+}
+
+.resources-premium-text h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.resources-premium-text p {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.resources-premium-button {
+  background-color: #ffd700;
+  color: #283e51;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resources-premium-button:hover {
+  background-color: #f8cc00;
+  transform: translateY(-2px);
+}
+
+/* Premium link styles */
+.resource-premium-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.resource-premium-indicator {
+  font-size: 0.7rem;
+  color: #ffd700;
+  margin-left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.resource-premium-icon {
+  color: #ffd700;
+  cursor: pointer;
+}
+
+/* Premium modal styles */
+.premium-modal .resource-modal-content {
+  border: 2px solid #ffd700;
+}
+
+.premium-header {
+  background: linear-gradient(135deg, #4b79a1, #283e51);
+}
+
+.premium-header .resource-modal-icon {
+  color: #ffd700;
+}
+
+.resource-premium-desc {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.premium-features-list {
+  background-color: rgba(255, 215, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.premium-feature-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.premium-feature-item:last-child {
+  margin-bottom: 0;
+}
+
+.premium-feature-icon {
+  color: #ffd700;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.resource-upgrade-btn {
+  background: linear-gradient(135deg, #4b79a1, #283e51);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.resource-upgrade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.upgrade-icon {
+  color: #ffd700;
+}
+
+.resource-modal-premium-link {
+  background-color: #283e51;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.resource-modal-premium-link:hover {
+  background-color: #4b79a1;
+}
 /* =================== */
 /* RESPONSIVE STYLES   */
 /* =================== */
