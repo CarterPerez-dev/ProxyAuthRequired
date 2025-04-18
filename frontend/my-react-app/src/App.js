@@ -42,6 +42,7 @@ import AnalogyHub from './components/pages/AnalogyPage/AnalogyHub';
 import GRC from './components/pages/GRCpage/GRC';
 import DailyCyberBrief from './components/pages/DailyPage/DailyCyberBrief';
 import Resources from './components/pages/ResourcesPage/Resources';
+import StatsPage from './components/pages/StatsPage/StatsPage';
 
 // Gamified components and userprofile
 import DailyStationPage from './components/pages/store/DailyStationPage';
@@ -290,7 +291,11 @@ function App() {
               <Resources />
             </ProtectedRoute>
           }/>
-         
+          <Route path="/performance" element={
+            <ProtectedRoute requiresPremium={false}>
+              <StatsPage />
+            </ProtectedRoute>
+          }/>         
           <Route path="/practice-tests/a-plus" element={
             <ProtectedRoute requiresPremium={false}>
               <APlusTestPage />

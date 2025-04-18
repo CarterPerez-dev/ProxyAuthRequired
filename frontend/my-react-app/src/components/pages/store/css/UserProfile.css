@@ -1482,7 +1482,20 @@
   --test-bg-card: var(--theme-bg-card);
   --test-gradient-primary: var(--theme-gradient-primary);
   --test-gradient-secondary: var(--theme-gradient-secondary);
-}
+  
+  --stats-accent: var(--theme-accent);
+  --stats-accent-glow: var(--theme-accent-glow);
+  --stats-accent-secondary: var(--theme-accent-secondary);
+  --stats-bg-dark: var(--theme-bg-dark);
+  --stats-bg-card: var(--theme-bg-card);
+  --stats-gradient-primary: var(--theme-gradient-primary);
+  --stats-gradient-secondary: var(--theme-gradient-secondary);
+}  
+  
+  
+
+
+
 
 /* Update the background image patterns to use theme variables */
 .user-profile-container,
@@ -1496,7 +1509,8 @@
 .grc-wizard-page,
 .testlist-container,
 .aplus-test-container,
-.resources-container {
+.resources-container
+.stats-page-container {
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(var(--theme-accent-rgb), 0.2) 0%, transparent 45%),
     radial-gradient(circle at 80% 70%, rgba(var(--theme-accent-rgb), 0.15) 0%, transparent 40%),

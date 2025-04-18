@@ -16,7 +16,8 @@ import {
   FaTools,
   FaNewspaper,
   FaBook,
-  FaLaptopCode
+  FaLaptopCode,
+  FaChessKnight
 } from 'react-icons/fa';
 
 const Sidebar = () => {
@@ -73,6 +74,7 @@ const Sidebar = () => {
       case '/my-support': return <FaQuestion className="sidebar-icon" />;
       case '/dailycyberbrief': return <FaNewspaper className="sidebar-icon" />;
       case '/resources': return <FaBook className="sidebar-icon" />;
+      case '/performance': return <FaChessKnight className="sidebar-icon" />;
       default: return null;
     }
   };
@@ -188,7 +190,13 @@ const Sidebar = () => {
                   <span className="sidebar-link-text">/Study Resources</span>
                 </NavLink>
               </li>
-
+              {/* Stats/Performance Dashboard */}
+              <li>
+                <NavLink to="/performance" className={({ isActive }) => `sidebar-link ${isActive ? 'active-link' : ''}`}>
+                  {getIcon('/performance')}
+                  <span className="sidebar-link-text">/Stats</span>
+                </NavLink>
+              </li>
               {/* Practice Tests group */}
               <li className="sidebar-group">
                 <div
