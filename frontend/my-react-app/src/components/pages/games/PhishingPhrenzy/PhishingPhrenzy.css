@@ -1,0 +1,281 @@
+/* src/components/pages/games/PhishingPhrenzy/PhishingPhrenzy.css */
+.phishing-phrenzy-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0f0f18;
+  color: #e2e2e2;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.phishing-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #5f4bb6;
+}
+
+.phishing-header h1 {
+  font-size: 2.5rem;
+  color: #7a68d4;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.phishing-header p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* Start Screen */
+.phishing-start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: #161625;
+  border-radius: 8px;
+  border: 1px solid #232535;
+}
+
+.phishing-start-screen h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #7a68d4;
+}
+
+.phishing-start-screen p {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
+
+.difficulty-selector {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+
+.difficulty-selector h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #7a68d4;
+}
+
+.difficulty-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.difficulty-buttons button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: #232535;
+  color: #e2e2e2;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.difficulty-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
+}
+
+.difficulty-buttons button.active {
+  background-color: #5f4bb6;
+  color: white;
+  box-shadow: 0 0 10px rgba(95, 75, 182, 0.7);
+}
+
+.difficulty-details {
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #2a2a3d;
+}
+
+.difficulty-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.start-game-button {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  background-color: #5f4bb6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.start-game-button:hover {
+  background-color: #7a68d4;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(95, 75, 182, 0.7);
+}
+
+.high-score-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: #ffd700;
+}
+
+/* Gameplay */
+.phishing-gameplay {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+  background-color: #161625;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  border: 1px solid #232535;
+}
+
+.timer, .score, .streak {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer {
+  color: #e2e2e2;
+}
+
+.score {
+  color: #7a68d4;
+  font-weight: bold;
+}
+
+.streak {
+  color: #ff6b6b;
+}
+
+.answer-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.answer-buttons button {
+  flex: 1;
+  padding: 15px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.legitimate-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.legitimate-button:hover {
+  background-color: #388e3c;
+  transform: scale(1.03);
+}
+
+.phishing-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.phishing-button:hover {
+  background-color: #d32f2f;
+  transform: scale(1.03);
+}
+
+.answer-buttons button:disabled {
+  background-color: #555;
+  transform: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.feedback {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.feedback.correct {
+  background-color: rgba(76, 175, 80, 0.2);
+  border: 1px solid #4caf50;
+  color: #4caf50;
+}
+
+.feedback.incorrect {
+  background-color: rgba(244, 67, 54, 0.2);
+  border: 1px solid #f44336;
+  color: #f44336;
+}
+
+/* Loading and Error States */
+.phishing-loading, .phishing-error {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+}
+
+.phishing-error {
+  color: #f44336;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .phishing-header h1 {
+    font-size: 2rem;
+  }
+  
+  .game-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .answer-buttons {
+    flex-direction: column;
+  }
+  
+  .difficulty-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,90 @@
+/* src/components/pages/games/IncidentResponder/DifficultySelector.css */
+.difficulty-selector {
+  margin-top: 10px;
+}
+
+.difficulty-selector h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.difficulty-options {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.difficulty-button {
+  flex: 1;
+  background-color: #232535;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.difficulty-button:hover {
+  background-color: #2d2d40;
+  transform: translateY(-3px);
+}
+
+.difficulty-button.active {
+  background-color: #1a1a2e;
+  border-color: #5f4bb6;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(95, 75, 182, 0.2);
+}
+
+.difficulty-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #e2e2e2;
+}
+
+.difficulty-button.active .difficulty-name {
+  color: #7a68d4;
+}
+
+.difficulty-indicators {
+  display: flex;
+  gap: 15px;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.selected-difficulty-info {
+  background-color: #1a1a2e;
+  padding: 12px 15px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .difficulty-options {
+    flex-direction: column;
+  }
+  
+  .difficulty-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .difficulty-indicators {
+    flex-direction: column;
+    gap: 5px;
+  }
+}

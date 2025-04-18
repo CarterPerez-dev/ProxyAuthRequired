@@ -1,0 +1,311 @@
+/* src/components/pages/games/IncidentResponder/ScenarioStage.css */
+.scenario-stage {
+  padding: 25px;
+}
+
+.stage-header {
+  margin-bottom: 25px;
+}
+
+.stage-header h2 {
+  font-size: 1.8rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.stage-meta {
+  display: flex;
+  gap: 25px;
+  font-size: 1rem;
+}
+
+.stage-step,
+.stage-score,
+.stage-timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #232535;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
+.stage-timer.urgent {
+  background-color: #f44336;
+  color: white;
+  animation: pulse 1s infinite;
+}
+
+.stage-situation {
+  background-color: #161625;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+  border: 1px solid #232535;
+}
+
+.situation-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.situation-header svg {
+  color: #f44336;
+  font-size: 1.3rem;
+}
+
+.situation-header h3 {
+  font-size: 1.3rem;
+  color: #e2e2e2;
+}
+
+.stage-situation p {
+  line-height: 1.6;
+}
+
+.additional-info {
+  margin-top: 20px;
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.additional-info h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  color: #7a68d4;
+  margin-bottom: 10px;
+}
+
+/* Action Selection */
+.action-selection {
+  background-color: #161625;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #232535;
+}
+
+.action-selection h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.action-button {
+  background-color: #232535;
+  color: #e2e2e2;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 20px;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+}
+
+.action-button:hover {
+  background-color: #2d2d40;
+  transform: translateY(-2px);
+}
+
+.action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Action Explanation */
+.action-explanation {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.selected-action {
+  background-color: #161625;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #232535;
+}
+
+.selected-action.best {
+  border-color: #4caf50;
+}
+
+.selected-action.good {
+  border-color: #8bc34a;
+}
+
+.selected-action.fair {
+  border-color: #ffc107;
+}
+
+.selected-action.poor {
+  border-color: #f44336;
+}
+
+.selected-action h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.selected-action p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.action-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.points-awarded {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.points-label {
+  font-size: 1rem;
+}
+
+.points-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.quality-indicator {
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.quality-indicator.best {
+  background-color: #4caf50;
+  color: white;
+}
+
+.quality-indicator.good {
+  background-color: #8bc34a;
+  color: white;
+}
+
+.quality-indicator.fair {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.quality-indicator.poor {
+  background-color: #f44336;
+  color: white;
+}
+
+.explanation-container {
+  background-color: #161625;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #232535;
+}
+
+.explanation-container h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.explanation-container p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.explanation h4,
+.best-practice h4 {
+  font-size: 1.1rem;
+  color: #e2e2e2;
+  margin-bottom: 10px;
+}
+
+.explanation {
+  margin-bottom: 20px;
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.best-practice {
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid #4caf50;
+}
+
+.continue-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.continue-button {
+  background-color: #5f4bb6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.continue-button:hover {
+  background-color: #7a68d4;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
+}
+
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stage-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .action-result {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  .stage-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .selected-action h3,
+  .explanation-container h3 {
+    font-size: 1.2rem;
+  }
+}

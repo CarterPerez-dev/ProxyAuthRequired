@@ -1,0 +1,146 @@
+/* src/components/pages/games/CipherChallenge/CipherDisplay.css */
+.cipher-display {
+  background-color: #1a1a2e;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  border: 1px solid #232535;
+}
+
+.cipher-display-header {
+  background-color: #232535;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cipher-display-header h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #e2e2e2;
+}
+
+.copy-button {
+  background-color: #2d2d40;
+  color: #e2e2e2;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+  background-color: #3d3d50;
+}
+
+.copy-button.copied {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cipher-text {
+  padding: 20px;
+  background-color: #0f0f18;
+  min-height: 100px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.cipher-text pre {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+  color: #7a68d4;
+  user-select: all;
+}
+
+.symbolic-cipher {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f0f18;
+}
+
+.cipher-image {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.morse-legend {
+  padding: 15px;
+  background-color: #161625;
+  border-top: 1px solid #232535;
+}
+
+.morse-legend h4 {
+  font-size: 1rem;
+  color: #7a68d4;
+  margin-bottom: 10px;
+}
+
+.morse-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.morse-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.morse-letter {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  background-color: #232535;
+  padding: 5px 8px;
+  border-radius: 4px;
+  min-width: 70px;
+  text-align: center;
+}
+
+/* Scrollbar styling */
+.cipher-text::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cipher-text::-webkit-scrollbar-track {
+  background: #161625;
+}
+
+.cipher-text::-webkit-scrollbar-thumb {
+  background-color: #2d2d40;
+  border-radius: 10px;
+}
+
+.cipher-text::-webkit-scrollbar-thumb:hover {
+  background-color: #3d3d50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .morse-row {
+    gap: 8px;
+  }
+  
+  .morse-letter {
+    min-width: auto;
+    font-size: 0.8rem;
+  }
+  
+  .cipher-text pre {
+    font-size: 1rem;
+  }
+}

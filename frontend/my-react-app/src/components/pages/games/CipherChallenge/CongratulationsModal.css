@@ -1,0 +1,369 @@
+/* src/components/pages/games/CipherChallenge/CongratulationsModal.css */
+.congratulations-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease;
+}
+
+.congratulations-modal {
+  background-color: #161625;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(95, 75, 182, 0.4);
+  animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.confetti-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 30px;
+  background: #7a68d4;
+  top: -10%;
+  opacity: 0;
+}
+
+.confetti-piece:nth-child(1) {
+  left: 7%;
+  transform: rotate(15deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 182ms;
+  animation-duration: 1137ms;
+  background: #5f4bb6;
+}
+
+.confetti-piece:nth-child(2) {
+  left: 14%;
+  transform: rotate(53deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 161ms;
+  animation-duration: 1012ms;
+  background: #ffd700;
+}
+
+.confetti-piece:nth-child(3) {
+  left: 21%;
+  transform: rotate(61deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 481ms;
+  animation-duration: 1036ms;
+  background: #4caf50;
+}
+
+.confetti-piece:nth-child(4) {
+  left: 28%;
+  transform: rotate(35deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 334ms;
+  animation-duration: 1162ms;
+  background: #5f4bb6;
+}
+
+.confetti-piece:nth-child(5) {
+  left: 35%;
+  transform: rotate(46deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 302ms;
+  animation-duration: 1214ms;
+  background: #ffd700;
+}
+
+.confetti-piece:nth-child(6) {
+  left: 42%;
+  transform: rotate(38deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 310ms;
+  animation-duration: 1379ms;
+  background: #4caf50;
+}
+
+.confetti-piece:nth-child(7) {
+  left: 49%;
+  transform: rotate(11deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 197ms;
+  animation-duration: 1032ms;
+  background: #5f4bb6;
+}
+
+.confetti-piece:nth-child(8) {
+  left: 56%;
+  transform: rotate(49deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 84ms;
+  animation-duration: 1205ms;
+  background: #ffd700;
+}
+
+.confetti-piece:nth-child(9) {
+  left: 63%;
+  transform: rotate(20deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 433ms;
+  animation-duration: 1077ms;
+  background: #4caf50;
+}
+
+.confetti-piece:nth-child(10) {
+  left: 70%;
+  transform: rotate(57deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 338ms;
+  animation-duration: 1116ms;
+  background: #5f4bb6;
+}
+
+.confetti-piece:nth-child(11) {
+  left: 77%;
+  transform: rotate(103deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 422ms;
+  animation-duration: 1140ms;
+  background: #ffd700;
+}
+
+.confetti-piece:nth-child(12) {
+  left: 84%;
+  transform: rotate(94deg);
+  animation: makeItRain 1s infinite ease-out;
+  animation-delay: 384ms;
+  animation-duration: 1005ms;
+  background: #4caf50;
+}
+
+@keyframes makeItRain {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(1000px);
+  }
+}
+
+.modal-content {
+  padding: 30px;
+  text-align: center;
+}
+
+.trophy-container {
+  margin-bottom: 20px;
+}
+
+.trophy-icon {
+  font-size: 3.5rem;
+  color: #ffd700;
+  animation: pulse 2s infinite;
+}
+
+.congratulations-title {
+  font-size: 2rem;
+  color: #7a68d4;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px rgba(95, 75, 182, 0.7);
+}
+
+.level-info {
+  margin-bottom: 30px;
+}
+
+.level-info h3 {
+  font-size: 1.5rem;
+  color: #7a68d4;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.level-info p {
+  opacity: 0.9;
+}
+
+.unlocked-level {
+  background-color: #1a1a2e;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid #232535;
+  position: relative;
+  animation: glow 2s infinite alternate;
+}
+
+.unlock-icon {
+  position: absolute;
+  top: -15px;
+  left: calc(50% - 15px);
+  width: 30px;
+  height: 30px;
+  background-color: #161625;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4caf50;
+  font-size: 1.1rem;
+  border: 1px solid #232535;
+}
+
+.unlocked-level h3 {
+  font-size: 1.3rem;
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+
+.new-level-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #7a68d4;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.unlocked-level p {
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.rewards-container {
+  margin-bottom: 30px;
+}
+
+.rewards-container h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.rewards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.reward-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reward-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coins-icon {
+  font-size: 1.5rem;
+}
+
+.reward-label {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.modal-actions {
+  background-color: #1a1a2e;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #232535;
+}
+
+.continue-button {
+  background-color: #5f4bb6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.continue-button:hover {
+  background-color: #7a68d4;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 5px rgba(95, 75, 182, 0.3); }
+  to { box-shadow: 0 0 20px rgba(95, 75, 182, 0.7); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .congratulations-title {
+    font-size: 1.7rem;
+  }
+  
+  .level-info h3,
+  .new-level-name {
+    font-size: 1.3rem;
+  }
+  
+  .unlocked-level h3,
+  .rewards-container h3 {
+    font-size: 1.1rem;
+  }
+  
+  .rewards {
+    gap: 20px;
+  }
+  
+  .reward-value {
+    font-size: 1.5rem;
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+}

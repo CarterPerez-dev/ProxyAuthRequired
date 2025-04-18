@@ -1,0 +1,213 @@
+/* src/components/pages/games/IncidentResponder/IncidentResponder.css */
+.incident-responder-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  color: #e2e2e2;
+}
+
+.incident-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #5f4bb6;
+}
+
+.incident-header h1 {
+  font-size: 2.5rem;
+  color: #7a68d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.incident-header p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.incident-content {
+  background-color: #0f0f18;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Scenario Selection */
+.scenario-selection {
+  padding: 25px;
+}
+
+.selection-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.selection-header h2 {
+  font-size: 1.8rem;
+  color: #7a68d4;
+  margin-bottom: 10px;
+}
+
+.selection-header p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.scenario-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+  background-color: #161625;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #232535;
+}
+
+.type-filter h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.type-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.type-buttons button {
+  background-color: #232535;
+  color: #e2e2e2;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.type-buttons button:hover {
+  background-color: #2d2d40;
+  transform: translateY(-2px);
+}
+
+.type-buttons button.active {
+  background-color: #5f4bb6;
+  color: white;
+}
+
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.scenario-card {
+  background-color: #161625;
+  border-radius: 8px;
+  border: 1px solid #232535;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scenario-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
+  border-color: #5f4bb6;
+}
+
+.scenario-icon {
+  background-color: #232535;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: #7a68d4;
+}
+
+.scenario-info {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.scenario-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #e2e2e2;
+}
+
+.scenario-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.scenario-type {
+  background-color: #232535;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.scenario-difficulty {
+  color: #ffd700;
+  font-size: 0.9rem;
+}
+
+.scenario-info p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.incident-loading, .incident-error {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.3rem;
+}
+
+.incident-error {
+  color: #f44336;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .scenarios-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .incident-header h1 {
+    font-size: 2rem;
+  }
+  
+  .selection-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .scenarios-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .type-buttons {
+    flex-direction: column;
+  }
+  
+  .type-buttons button {
+    width: 100%;
+  }
+}

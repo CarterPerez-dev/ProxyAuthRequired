@@ -1,0 +1,206 @@
+/* src/components/pages/games/CipherChallenge/LevelSelector.css */
+.level-selector {
+  margin-bottom: 20px;
+}
+
+.level-selector h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.levels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.level-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.level-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 15px;
+  background-color: #232535;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.level-item:hover {
+  background-color: #2d2d40;
+  transform: translateX(3px);
+}
+
+.level-item.locked {
+  background-color: #191925;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.level-item.active {
+  background-color: #2d2d40;
+  border-color: #5f4bb6;
+  border-radius: 8px 8px 0 0;
+}
+
+.level-item.complete {
+  border-left: 3px solid #4caf50;
+}
+
+.level-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #161625;
+}
+
+.lock-icon {
+  color: #f44336;
+  font-size: 1.1rem;
+}
+
+.unlock-icon {
+  color: #7a68d4;
+  font-size: 1.1rem;
+}
+
+.complete-icon {
+  color: #4caf50;
+  font-size: 1.1rem;
+}
+
+.level-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.level-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.level-difficulty {
+  display: flex;
+  gap: 3px;
+}
+
+.level-star {
+  color: #ffd700;
+  font-size: 0.8rem;
+}
+
+.level-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 60px;
+}
+
+.progress-bar {
+  width: 60px;
+  height: 6px;
+  background-color: #161625;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #5f4bb6;
+  border-radius: 3px;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.challenges-list {
+  display: flex;
+  flex-direction: column;
+  background-color: #161625;
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #232535;
+  border-top: none;
+  margin-top: -1px;
+  animation: fadeIn 0.3s ease;
+}
+
+.challenge-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.challenge-item:hover {
+  background-color: #232535;
+}
+
+.challenge-item.selected {
+  background-color: #5f4bb6;
+}
+
+.challenge-item.completed {
+  border-left: 2px solid #4caf50;
+}
+
+.challenge-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background-color: #232535;
+  border-radius: 50%;
+  font-size: 0.8rem;
+}
+
+.challenge-number {
+  color: #e2e2e2;
+}
+
+.completed-icon {
+  color: #4caf50;
+  font-size: 0.9rem;
+}
+
+.challenge-name {
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .level-item {
+    gap: 10px;
+  }
+  
+  .level-progress {
+    min-width: 40px;
+  }
+  
+  .progress-bar {
+    width: 40px;
+  }
+}

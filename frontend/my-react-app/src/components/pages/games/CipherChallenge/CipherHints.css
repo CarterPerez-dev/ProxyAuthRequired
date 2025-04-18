@@ -1,0 +1,128 @@
+/* src/components/pages/games/CipherChallenge/CipherHints.css */
+.cipher-hints-container {
+  background-color: #1a1a2e;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border: 1px solid #232535;
+  overflow: hidden;
+}
+
+.hints-header {
+  background-color: #232535;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hints-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #e2e2e2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hint-count {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-left: 5px;
+}
+
+.toggle-hints-button {
+  background: none;
+  border: none;
+  color: #e2e2e2;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.hints-content {
+  padding: 20px;
+}
+
+.hint-item {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hint-number {
+  background-color: #232535;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.hint-text {
+  background-color: #161625;
+  padding: 15px;
+  line-height: 1.5;
+  border: 1px solid #232535;
+  border-top: none;
+  font-size: 0.95rem;
+}
+
+.locked-hint {
+  background-color: #161625;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #232535;
+  border-top: none;
+}
+
+.lock-icon {
+  font-size: 1.5rem;
+  color: #f44336;
+  margin-bottom: 5px;
+}
+
+.hint-locked-message {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.unlock-hint-button {
+  background-color: #5f4bb6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unlock-hint-button:hover {
+  background-color: #7a68d4;
+  transform: translateY(-2px);
+}
+
+.unlock-hint-button:disabled {
+  background-color: #3d3d50;
+  color: #a0a0a0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.hints-info {
+  background-color: #161625;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.hints-info p {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin: 0;
+}

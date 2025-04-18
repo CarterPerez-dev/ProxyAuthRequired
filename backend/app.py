@@ -16,23 +16,43 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 # routes
-from routes.xploit_routes import xploit_bp
-from routes.scenario_routes import scenario_bp
-from routes.analogy_routes import analogy_bp
-from routes.grc_routes import grc_bp
-from routes.test_routes import api_bp
-from routes.cracked_admin import cracked_bp
-from routes.support_routes import support_bp
-from routes.newsletter_routes import newsletter_bp
-from routes.admin_newsletter_routes import admin_news_bp
+# AI Blueprints
+from routes.AI.analogy_routes import analogy_bp
+from routes.AI.grc_routes import grc_bp
+from routes.AI.scenario_routes import scenario_bp
+from routes.AI.xploit_routes import xploit_bp
+
+# SubscriptionAuth Blueprints
+from routes.SubscriptionAuth.oauth_routes import oauth_bp, oauth
+from routes.SubscriptionAuth.password_reset_routes import password_reset_bp
+from routes.SubscriptionAuth.subscription_routes import subscription_bp
+
+# Admin Blueprints
+from routes.admin.admin_newsletter_routes import admin_news_bp
+from routes.admin.cracked_admin import cracked_bp, api_logs
+
+# Games Blueprints
+from routes.games.cipher_routes import cipher_bp
+from routes.games.incident_routes import incident_bp
+from routes.games.phishing_routes import phishing_bp
+
+# Info Blueprints
+from routes.info.contact_form import contact_bp
+
+# Main Blueprints 
+from routes.main import api_bp
+from routes.main.leaderboard_routes import public_leaderboard_bp
+from routes.main.newsletter_routes import newsletter_bp
+from routes.main.support_routes import support_bp
+
+# Models
 from models.test import create_user, get_user_by_id, update_user_fields
+
+# Database
 from mongodb.database import db
-from routes.password_reset_routes import password_reset_bp
-from routes.oauth_routes import oauth_bp, oauth
-from routes.test_routes import public_leaderboard_bp 
-from routes.contact_form import contact_bp
-from routes.subscription_routes import subscription_bp
-from routes.cracked_admin import api_logs
+
+
+
 from helpers.global_rate_limiter import apply_global_rate_limiting, setup_rate_limit_headers
 from middleware.subscription_check import check_subscription_middleware
 
@@ -133,20 +153,37 @@ def check_user_subscription():
 
 
 # blueprints
+
+# AI blueprints
 app.register_blueprint(xploit_bp, url_prefix='/payload')
 app.register_blueprint(scenario_bp, url_prefix='/scenario')
 app.register_blueprint(analogy_bp, url_prefix='/analogy')
 app.register_blueprint(grc_bp, url_prefix='/grc')
+
+# Main Blueprints
 app.register_blueprint(api_bp, url_prefix='/test')
+
+# Admin/Main
 app.register_blueprint(cracked_bp, url_prefix="/cracked")
 app.register_blueprint(support_bp, url_prefix="/support")
 app.register_blueprint(newsletter_bp, url_prefix='/newsletter')
 app.register_blueprint(admin_news_bp, url_prefix="/cracked") 
+
+# Auth
 app.register_blueprint(password_reset_bp, url_prefix='/password-reset')
 app.register_blueprint(oauth_bp, url_prefix='/oauth')
+
+# Info
 app.register_blueprint(public_leaderboard_bp, url_prefix='/public-leaderboard')
 app.register_blueprint(contact_bp, url_prefix='/contact-form')
+
+# Subscription
 app.register_blueprint(subscription_bp, url_prefix='/subscription')
+
+# Games
+app.register_blueprint(cipher_bp, url_prefix='/cipher')
+app.register_blueprint(incident_bp, url_prefix='/incident')
+app.register_blueprint(phishing_bp, url_prefix='/phishing')
 
 
 

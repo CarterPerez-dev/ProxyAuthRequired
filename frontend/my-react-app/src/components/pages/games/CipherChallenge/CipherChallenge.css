@@ -1,0 +1,235 @@
+/* src/components/pages/games/CipherChallenge/CipherChallenge.css */
+.cipher-challenge-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  color: #e2e2e2;
+}
+
+.cipher-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cipher-header h1 {
+  font-size: 2.5rem;
+  color: #7a68d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cipher-header p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.info-button {
+  background-color: #232535;
+  color: #e2e2e2;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px auto 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.info-button:hover {
+  background-color: #2d2d40;
+  transform: translateY(-2px);
+}
+
+.cipher-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  background-color: #0f0f18;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.cipher-sidebar {
+  background-color: #161625;
+  padding: 20px;
+  border-right: 1px solid #232535;
+}
+
+.cipher-tools-container {
+  margin-top: 30px;
+}
+
+.cipher-tools-container h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cipher-main {
+  padding: 25px;
+}
+
+.challenge-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.challenge-header h2 {
+  font-size: 1.8rem;
+  color: #7a68d4;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.unlocked-icon {
+  color: #4caf50;
+}
+
+.locked-icon {
+  color: #f44336;
+}
+
+.challenge-metadata {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.challenge-type {
+  background-color: #232535;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.challenge-difficulty {
+  color: #ffd700;
+}
+
+.challenge-description {
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border: 1px solid #232535;
+  line-height: 1.5;
+}
+
+.no-challenge-selected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.no-challenge-selected h2 {
+  font-size: 1.8rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.no-challenge-selected p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.cipher-introduction {
+  max-width: 600px;
+  background-color: #1a1a2e;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #232535;
+  text-align: left;
+}
+
+.cipher-introduction h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cipher-introduction ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cipher-introduction li {
+  margin-bottom: 10px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.cipher-introduction li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #7a68d4;
+}
+
+.active-tool-display {
+  margin-top: 30px;
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #232535;
+}
+
+.active-tool-display h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-bottom: 15px;
+}
+
+.cipher-loading, .cipher-error {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.3rem;
+}
+
+.cipher-error {
+  color: #f44336;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .cipher-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .cipher-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #232535;
+  }
+}
+
+@media (max-width: 600px) {
+  .cipher-header h1 {
+    font-size: 2rem;
+  }
+  
+  .challenge-metadata {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

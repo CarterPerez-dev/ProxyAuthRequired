@@ -14,7 +14,8 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, 
   Legend, ResponsiveContainer, RadarChart, PolarGrid, 
   PolarAngleAxis, PolarRadiusAxis, Radar, BarChart, Bar,
-  PieChart, Pie, Cell, AreaChart, Area, RadialBarChart, RadialBar
+  PieChart, Pie, Cell, AreaChart, Area, RadialBarChart, RadialBar,
+  ComposedChart, Scatter, radarChartData
 } from 'recharts';
 
 const StatsPage = () => {
@@ -93,30 +94,68 @@ const StatsPage = () => {
     if (!userId) return;
     
     try {
-      // First query would be for current rank
-      const response = await fetch(`/api/test/leaderboard?skip=0&limit=1000`);
+      // Attempt to get leaderboard data with a large limit to ensure we catch all users
+      const response = await fetch(`/api/test/leaderboard?skip=0&limit=5000`);
       if (!response.ok) {
         throw new Error('Failed to fetch leaderboard data');
       }
       
       const data = await response.json();
-      const userRanking = data.data.findIndex(user => user.username === userId);
-      const currentRank = userRanking !== -1 ? userRanking + 1 : null;
+      console.log("Looking for user in leaderboard, userId:", userId);
+      console.log("Total leaderboard entries:", data.data?.length || 0);
       
-      // Simulate previous rank (in a real app, this would come from stored history)
-      // For this implementation, we'll randomly generate a previous rank close to current
-      const previousRank = currentRank ? 
-        Math.max(1, currentRank + (Math.random() > 0.5 ? -Math.floor(Math.random() * 5) : Math.floor(Math.random() * 5))) : 
-        null;
+      // Find user by username (most likely the issue is in the API response data structure)
+      let userRank = -1;
+      for (let i = 0; i < data.data.length; i++) {
+        // Log the first few entries to debug
+        if (i < 5) console.log(`Entry ${i}:`, data.data[i]);
+        
+        // Try different properties that might contain user identifier
+        if (data.data[i].username === userId || 
+            data.data[i].userId === userId || 
+            data.data[i].id === userId ||
+            data.data[i]._id === userId) {
+          userRank = i;
+          break;
+        }
+      }
       
-      setLeaderboardRank({
-        current: currentRank,
-        previous: previousRank,
-        change: previousRank ? previousRank - currentRank : 0
-      });
-      
+      // If user is found, set their rank
+      if (userRank !== -1) {
+        const currentRank = userRank + 1; // Add 1 because index is zero-based
+        
+        // For previous rank, we'll use historical data or estimate
+        // Here we'll simulate previous rank based on current (in a real app, get from DB)
+        const previousRank = Math.max(1, currentRank + (Math.random() > 0.5 ? 
+          -Math.floor(Math.random() * 3) : Math.floor(Math.random() * 3)));
+        
+        console.log("Found user rank:", currentRank, "Previous:", previousRank);
+        
+        setLeaderboardRank({
+          current: currentRank,
+          previous: previousRank,
+          change: previousRank - currentRank
+        });
+      } else {
+        // User not found in leaderboard
+        console.error("User not found in leaderboard data");
+        
+        // Don't set a default rank, leave it as "?" 
+        setLeaderboardRank({
+          current: null, 
+          previous: null,
+          change: 0
+        });
+      }
     } catch (err) {
       console.error('Error fetching leaderboard rank:', err);
+      
+      // Don't set a default rank on error
+      setLeaderboardRank({
+        current: null,
+        previous: null,
+        change: 0
+      });
     }
   };
   
@@ -390,6 +429,19 @@ const StatsPage = () => {
     
     return { strengths, weaknesses };
   }, [categoryData]);
+
+  // Prepare certification data for the horizontal bar chart
+  const certProgressData = useMemo(() => {
+    return categoryData.map(cat => ({
+      category: cat.category, // Keep original key if needed elsewhere
+      fullName: formatCertName(cat.category), // Use this for labels
+      score: cat.score,
+      attempts: cat.attempts,
+      fullMark: 100,
+      passingLine: 70,
+      target: 90
+    })).sort((a, b) => b.score - a.score); // Sort by score descending for chart
+  }, [categoryData]);
   
   // Render trophy icon with color based on score
   const renderTrophyIcon = (score) => {
@@ -437,7 +489,17 @@ const StatsPage = () => {
   
   // Generate rank change indicator
   const renderRankChangeIndicator = () => {
-    const { change } = leaderboardRank;
+    const { current, previous, change } = leaderboardRank;
+    
+    // If current rank is null (not found), show a message
+    if (current === null) {
+      return (
+        <div className="stats-rank-change neutral">
+          <FaQuestionCircle className="stats-rank-change-icon" />
+          <span>Not found</span>
+        </div>
+      );
+    }
     
     if (change > 0) {
       return (
@@ -607,7 +669,7 @@ const StatsPage = () => {
                 <h3>Leaderboard Rank</h3>
               </div>
               <div className="stats-card-value rank-value">
-                <span>#{leaderboardRank.current || '?'}</span>
+                <span>{leaderboardRank.current ? `#${leaderboardRank.current}` : "?"}</span>
                 {renderRankChangeIndicator()}
               </div>
               <div className="stats-card-footer">
@@ -932,55 +994,66 @@ const StatsPage = () => {
             </div>
           </div>
           
-          {/* New: Certification Progression Chart */}
-          {categoryData.length > 0 && (
+          {/* NEW IMPROVED CERTIFICATION PROGRESS CHART - Radar Chart */}
+          {/* === CHART REPLACEMENT AREA START === */}
+          {/* NEW IMPROVED CERTIFICATION PROGRESS CHART - Horizontal Bar Chart */}
+          {certProgressData.length > 0 && (
             <div className="stats-progression-container">
               <div className="stats-progression-header">
                 <h3>
                   <FaGraduationCap className="stats-progression-icon" />
-                  Certification Progress Overview
+                  Certification Progress Overview (Top 8)
                 </h3>
               </div>
               <div className="stats-progression-chart">
-                <ResponsiveContainer width="100%" height={300}>
-                  <RadialBarChart 
-                    cx="50%" 
-                    cy="50%" 
-                    innerRadius="15%" 
-                    outerRadius="80%" 
-                    data={categoryData.slice(0, 5)} 
-                    startAngle={180} 
-                    endAngle={0}
+                <ResponsiveContainer width="100%" height={400}>
+                  {/* Replacing RadarChart with BarChart */}
+                  <BarChart
+                    layout="vertical" // Makes it a horizontal bar chart
+                    data={certProgressData.slice(0, 8)} // Use the same data slice
+                    margin={{
+                      top: 5,
+                      right: 30,
+                      left: 100, // Increased left margin for category labels
+                      bottom: 5,
+                    }}
                   >
-                    <RadialBar
-                      minAngle={15}
-                      background
-                      clockWise={true}
-                      dataKey="score"
-                      cornerRadius={10}
-                      label={{ fill: 'var(--stats-text)', position: 'insideStart', offset: 15 }}
-                      labelFormatter={(value, entry) => formatCertName(entry.category)}
-                    >
-                      {categoryData.slice(0, 5).map((entry, index) => (
-                        <Cell 
-                          key={`cell-${index}`} 
-                          fill={CHART_COLORS[index % CHART_COLORS.length]} 
-                        />
-                      ))}
-                    </RadialBar>
-                    <Tooltip 
-                      formatter={(value) => [`${value}%`, 'Score']}
-                      labelFormatter={(label, payload) => 
-                        payload && payload.length > 0 ? formatCertName(payload[0].payload.category) : ''}
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.2)" horizontal={false} />
+
+                    {/* XAxis represents the score (0-100) */}
+                    <XAxis
+                      type="number"
+                      domain={[0, 100]}
+                      tick={{ fill: 'var(--stats-text-secondary)' }}
+                      stroke="rgba(255,255,255,0.2)"
                     />
-                    <Legend 
-                      iconSize={10} 
-                      layout="vertical" 
-                      verticalAlign="middle" 
-                      align="right"
-                      formatter={(value, entry) => formatCertName(entry.payload.category)}
+
+                    {/* YAxis represents the category name */}
+                    <YAxis
+                      dataKey="fullName" // Use the formatted name for labels
+                      type="category"
+                      tick={{ fill: 'var(--stats-text)', fontSize: 12 }}
+                      stroke="rgba(255,255,255,0.2)"
+                      width={100} // Ensure enough space for labels
+                      interval={0} // Show all labels
                     />
-                  </RadialBarChart>
+
+                    {/* Tooltip remains */}
+                    <Tooltip content={<CustomTooltip />} />
+
+                    {/* Legend remains */}
+                    <Legend wrapperStyle={{ color: 'var(--stats-text)', paddingTop: '10px' }}/>
+
+                    {/* Bar component instead of Radar */}
+                    <Bar
+                      dataKey="score" // Use the score value for bar length
+                      name="Average Score" // Legend/Tooltip name
+                      fill={COLORS.primary} // Bar color
+                      radius={[0, 4, 4, 0]} // Optional: rounded right corners
+                      barSize={20} // Adjust bar thickness if needed
+                      animationDuration={1500} // Optional animation
+                    />
+                  </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
@@ -1110,7 +1183,7 @@ const StatsPage = () => {
                   <tbody>
                     {filteredAttempts
                       .sort((a, b) => new Date(b.finishedAt || b.createdAt) - new Date(a.finishedAt || a.createdAt))
-                      .slice(0, 40)
+                      // Removed slice(0, 40) to show all attempts
                       .map((attempt, index) => (
                         <tr key={index}>
                           <td>

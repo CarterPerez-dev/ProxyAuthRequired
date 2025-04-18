@@ -1,0 +1,281 @@
+/* src/components/pages/games/CipherChallenge/CipherInfoModal.css */
+.cipher-info-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease;
+}
+
+.cipher-info-modal {
+  background-color: #161625;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(95, 75, 182, 0.4);
+  animation: slideIn 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  background-color: #232535;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2d2d40;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #7a68d4;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #e2e2e2;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #3d3d50;
+  color: #f44336;
+}
+
+.modal-content {
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cipher-tabs {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid #232535;
+  background-color: #1a1a2e;
+  padding: 0 15px;
+}
+
+.cipher-tab {
+  padding: 15px 20px;
+  background: none;
+  border: none;
+  color: #e2e2e2;
+  font-size: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.cipher-tab:hover {
+  background-color: #232535;
+}
+
+.cipher-tab.active {
+  border-bottom-color: #5f4bb6;
+  color: #7a68d4;
+}
+
+.cipher-details {
+  padding: 25px;
+}
+
+.cipher-details h3 {
+  color: #7a68d4;
+  font-size: 1.6rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.cipher-description,
+.cipher-example,
+.cipher-history {
+  margin-bottom: 25px;
+}
+
+.cipher-description h4,
+.cipher-example h4,
+.cipher-history h4 {
+  color: #7a68d4;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cipher-description p,
+.cipher-history p {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.example-container {
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #232535;
+}
+
+.example-text {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.example-label {
+  font-weight: bold;
+  min-width: 100px;
+}
+
+.example-value {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  color: #7a68d4;
+}
+
+.example-explanation {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #232535;
+}
+
+.modal-footer {
+  background-color: #1a1a2e;
+  padding: 20px;
+  border-top: 1px solid #232535;
+  text-align: center;
+}
+
+.modal-footer p {
+  opacity: 0.8;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.close-modal-button {
+  background-color: #5f4bb6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-modal-button:hover {
+  background-color: #7a68d4;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
+}
+
+/* Scrollbar styling */
+.cipher-info-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cipher-info-modal::-webkit-scrollbar-track {
+  background: #161625;
+}
+
+.cipher-info-modal::-webkit-scrollbar-thumb {
+  background-color: #2d2d40;
+  border-radius: 10px;
+}
+
+.cipher-info-modal::-webkit-scrollbar-thumb:hover {
+  background-color: #3d3d50;
+}
+
+.cipher-tabs::-webkit-scrollbar {
+  height: 5px;
+}
+
+.cipher-tabs::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+.cipher-tabs::-webkit-scrollbar-thumb {
+  background-color: #2d2d40;
+  border-radius: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .cipher-info-modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .cipher-tab {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .cipher-details {
+    padding: 15px;
+  }
+  
+  .cipher-details h3 {
+    font-size: 1.4rem;
+  }
+  
+  .example-text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .example-label {
+    min-width: auto;
+  }
+}

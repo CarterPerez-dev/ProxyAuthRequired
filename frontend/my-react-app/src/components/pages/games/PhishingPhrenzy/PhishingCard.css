@@ -1,0 +1,247 @@
+/* src/components/pages/games/PhishingPhrenzy/PhishingCard.css */
+.phishing-card {
+  background-color: #161625;
+  border-radius: 8px;
+  border: 1px solid #232535;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.phishing-card:hover {
+  box-shadow: 0 8px 25px rgba(95, 75, 182, 0.4);
+}
+
+.card-header {
+  background-color: #232535;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #2d2d40;
+}
+
+.card-icon {
+  font-size: 1.4rem;
+  color: #7a68d4;
+}
+
+.card-type {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e2e2e2;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-instruction {
+  padding: 15px;
+  background-color: #1a1a2e;
+  text-align: center;
+  font-size: 1.1rem;
+  border-top: 1px solid #2d2d40;
+  color: #7a68d4;
+}
+
+/* Email Styling */
+.phishing-email {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.email-header {
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.email-from, .email-subject, .email-date {
+  font-size: 0.9rem;
+}
+
+.email-body {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 20px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  min-height: 150px;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+.email-links {
+  background-color: #1a1a2e;
+  padding: 12px;
+  border-radius: 5px;
+}
+
+.link-label {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #7a68d4;
+}
+
+.email-link {
+  background-color: #232535;
+  padding: 8px 12px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  word-break: break-all;
+  font-size: 0.85rem;
+}
+
+.link-text {
+  color: #4da6ff;
+  text-decoration: underline;
+}
+
+/* Website Styling */
+.phishing-website {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.website-url {
+  background-color: #1a1a2e;
+  padding: 10px 15px;
+  border-radius: 5px 5px 0 0;
+  font-size: 0.9rem;
+  color: #4da6ff;
+  border: 1px solid #2d2d40;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.website-preview {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid #2d2d40;
+  min-height: 200px;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.website-header {
+  background-color: #f2f2f2;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.website-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.website-content {
+  padding: 20px;
+  line-height: 1.5;
+}
+
+.website-form {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+.form-field {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field label {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.form-field input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+.form-submit {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* SMS Styling */
+.phishing-sms {
+  background-color: #1a1a2e;
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sms-from {
+  font-size: 0.9rem;
+  color: #7a68d4;
+  margin-bottom: 5px;
+}
+
+.sms-message {
+  background-color: #232535;
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.sms-links {
+  margin-top: 10px;
+}
+
+.sms-link {
+  background-color: #2d2d40;
+  padding: 8px 12px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  color: #4da6ff;
+  word-break: break-all;
+  font-size: 0.85rem;
+}
+
+/* Scrollbar Styling */
+.phishing-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.phishing-card::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+.phishing-card::-webkit-scrollbar-thumb {
+  background-color: #2d2d40;
+  border-radius: 10px;
+}
+
+.phishing-card::-webkit-scrollbar-thumb:hover {
+  background-color: #3d3d50;
+}

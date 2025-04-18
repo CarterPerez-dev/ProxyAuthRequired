@@ -7,14 +7,15 @@ from helpers.celery_app import app
 from mongodb.database import db
 
 # ---------  AI Generation Imports -----------
-from helpers.analogy_stream_helper import generate_analogy_stream
-from helpers.scenario_helper import (
+# Update imports for any route functions you call directly
+from routes.AI.analogy_stream_helper import generate_analogy_stream
+from routes.AI.scenario_helper import (
     generate_scenario,
     break_down_scenario,
     generate_interactive_questions
 )
-from helpers.xploitcraft_helper import Xploits
-from helpers.grc_stream_helper import generate_grc_question, generate_grc_questions_stream
+from routes.AI.xploitcraft_helper import Xploits
+from routes.AI.grc_stream_helper import generate_grc_question, generate_grc_questions_stream
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
