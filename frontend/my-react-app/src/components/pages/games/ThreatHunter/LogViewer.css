@@ -1,0 +1,336 @@
+/* src/components/pages/games/ThreatHunter/LogViewer.css */
+.log-viewer {
+  background-color: #161625;
+  border-radius: 8px;
+  border: 1px solid #232535;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.log-header {
+  background-color: #232535;
+  padding: 12px 15px;
+  border-bottom: 1px solid #2d2d40;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.log-tabs {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.log-tab {
+  padding: 8px 12px;
+  background-color: #161625;
+  border: none;
+  border-radius: 5px;
+  color: #e2e2e2;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.log-tab:hover {
+  background-color: #2d2d40;
+}
+
+.log-tab.active {
+  background-color: #5f4bb6;
+  color: white;
+}
+
+.log-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.log-search input {
+  padding: 8px 12px;
+  background-color: #1a1a2e;
+  border: 1px solid #2d2d40;
+  border-radius: 5px 0 0 5px;
+  color: #e2e2e2;
+  width: 180px;
+  font-size: 0.9rem;
+}
+
+.search-button {
+  background-color: #5f4bb6;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-navigation {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.results-count {
+  font-size: 0.85rem;
+  color: #e2e2e2;
+}
+
+.nav-button {
+  background-color: #2d2d40;
+  color: #e2e2e2;
+  border: none;
+  border-radius: 3px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.nav-button:hover {
+  background-color: #3d3d50;
+}
+
+.log-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.log-info {
+  background-color: #1a1a2e;
+  padding: 12px 15px;
+  border-bottom: 1px solid #232535;
+}
+
+.log-info-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.log-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.log-type {
+  background-color: #2d2d40;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
+
+.log-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.log-lines {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.log-line {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  border-bottom: 1px solid #1a1a2e;
+  transition: background-color 0.2s ease;
+}
+
+.log-line:hover {
+  background-color: #1a1a2e;
+}
+
+.log-line.highlighted {
+  background-color: rgba(95, 75, 182, 0.15);
+  border-top: 1px solid #5f4bb6;
+  border-bottom: 1px solid #5f4bb6;
+}
+
+.log-line.flagged {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.log-line.search-match:not(.highlighted) {
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.line-number {
+  padding: 6px 10px;
+  text-align: right;
+  color: #5f4bb6;
+  border-right: 1px solid #232535;
+  user-select: none;
+}
+
+.line-text {
+  padding: 6px 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.line-text pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+}
+
+.line-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #232535;
+}
+
+.flag-button {
+  background: none;
+  border: none;
+  color: #e2e2e2;
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 4px;
+  transition: all 0.2s ease;
+}
+
+.flag-button:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.flag-button.active {
+  color: #f44336;
+  opacity: 1;
+}
+
+.log-viewer-footer {
+  background-color: #232535;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #2d2d40;
+  font-size: 0.85rem;
+}
+
+.log-statistics {
+  display: flex;
+  gap: 15px;
+}
+
+.help-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0.7;
+}
+
+.log-viewer-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #161625;
+  border-radius: 8px;
+  border: 1px solid #232535;
+  padding: 30px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: #5f4bb6;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+/* Scrollbar styling */
+.log-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.log-content::-webkit-scrollbar-track {
+  background: #161625;
+}
+
+.log-content::-webkit-scrollbar-thumb {
+  background-color: #2d2d40;
+  border-radius: 10px;
+}
+
+.log-content::-webkit-scrollbar-thumb:hover {
+  background-color: #3d3d50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .log-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .log-tabs {
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  
+  .log-search {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .log-search input {
+    flex: 1;
+  }
+  
+  .log-info-header, .log-meta {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .log-viewer-footer {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 500px) {
+  .log-line {
+    grid-template-columns: 30px 1fr 30px;
+  }
+  
+  .line-number {
+    padding: 6px 5px;
+    font-size: 0.8rem;
+  }
+  
+  .line-text {
+    padding: 6px 5px;
+    font-size: 0.8rem;
+  }
+  
+  .flag-button {
+    padding: 2px;
+    font-size: 0.8rem;
+  }
+}

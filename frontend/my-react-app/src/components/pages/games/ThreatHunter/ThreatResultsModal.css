@@ -1,0 +1,531 @@
+/* src/components/pages/games/ThreatHunter/ThreatResultsModal.css */
+.threat-results-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.threat-results-modal {
+  background-color: #161625;
+  border-radius: 10px;
+  border: 2px solid #5f4bb6;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(95, 75, 182, 0.4);
+  font-family: 'Orbitron', sans-serif;
+  color: #e2e2e2;
+  animation: scaleIn 0.4s ease;
+  padding: 0;
+}
+
+.results-header {
+  background-color: #232535;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #2d2d40;
+}
+
+.results-header h2 {
+  font-size: 1.8rem;
+  color: #7a68d4;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.results-header h3 {
+  font-size: 1.3rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.results-overview {
+  display: flex;
+  padding: 25px;
+  gap: 30px;
+  border-bottom: 1px solid #232535;
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid #5f4bb6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a2e;
+}
+
+.score-percentage {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e2e2e2;
+}
+
+.score-points {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.rating-container {
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 150px;
+  border: 2px solid;
+}
+
+.rating-container.expert {
+  border-color: #4caf50;
+}
+
+.rating-container.senior {
+  border-color: #8bc34a;
+}
+
+.rating-container.analyst {
+  border-color: #ffc107;
+}
+
+.rating-container.junior {
+  border-color: #ff9800;
+}
+
+.rating-container.trainee {
+  border-color: #f44336;
+}
+
+.rating-icon {
+  font-size: 1.8rem;
+  color: #ffd700;
+}
+
+.rating-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.threat-stats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #1a1a2e;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.stat-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.stat-row.correct .stat-icon {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+.stat-row.missed .stat-icon {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+}
+
+.stat-row.false .stat-icon {
+  background-color: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.stat-row.time .stat-icon {
+  background-color: rgba(95, 75, 182, 0.2);
+  color: #5f4bb6;
+}
+
+.stat-label {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.rewards-summary {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding: 20px;
+  background-color: #1a1a2e;
+  border-bottom: 1px solid #232535;
+}
+
+.reward-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #232535;
+  padding: 15px 25px;
+  border-radius: 8px;
+  min-width: 100px;
+}
+
+.reward-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.reward-label {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.new-achievements {
+  padding: 25px;
+  border-bottom: 1px solid #232535;
+}
+
+.new-achievements h3 {
+  font-size: 1.3rem;
+  color: #7a68d4;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.achievements-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.achievement-item {
+  background-color: #1a1a2e;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: calc(50% - 10px);
+  border: 1px solid #232535;
+}
+
+.achievement-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #232535;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #ffd700;
+  flex-shrink: 0;
+}
+
+.achievement-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.achievement-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.achievement-description {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.detection-details {
+  padding: 25px;
+  border-bottom: 1px solid #232535;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.details-section h3 {
+  font-size: 1.2rem;
+  color: #7a68d4;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.threats-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.threats-list .threat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #232535;
+}
+
+.threat-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.threat-icon.correct {
+  color: #4caf50;
+}
+
+.threat-icon.missed {
+  color: #f44336;
+}
+
+.threat-info {
+  flex: 1;
+}
+
+.threat-name {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.threat-description {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.no-threats {
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.feedback-section {
+  padding: 25px;
+  border-bottom: 1px solid #232535;
+}
+
+.feedback-section h3 {
+  font-size: 1.2rem;
+  color: #7a68d4;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.feedback-section p {
+  line-height: 1.6;
+  background-color: #1a1a2e;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.results-actions {
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.restart-button,
+.home-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.restart-button {
+  background-color: #5f4bb6;
+  color: white;
+}
+
+.restart-button:hover {
+  background-color: #7a68d4;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
+}
+
+.home-button {
+  background-color: #232535;
+  color: #e2e2e2;
+}
+
+.home-button:hover {
+  background-color: #2d2d40;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.share-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.share-container span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.twitter-share,
+.linkedin-share {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.twitter-share {
+  background-color: #1da1f2;
+  color: white;
+}
+
+.linkedin-share {
+  background-color: #0077b5;
+  color: white;
+}
+
+.twitter-share:hover,
+.linkedin-share:hover {
+  transform: scale(1.1);
+}
+
+/* Scrollbar styling */
+.threat-results-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.threat-results-modal::-webkit-scrollbar-track {
+  background: #161625;
+}
+
+.threat-results-modal::-webkit-scrollbar-thumb {
+  background-color: #2d2d40;
+  border-radius: 10px;
+}
+
+.threat-results-modal::-webkit-scrollbar-thumb:hover {
+  background-color: #3d3d50;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .results-overview {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .score-container {
+    margin-bottom: 20px;
+  }
+  
+  .achievement-item {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .results-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .share-container {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .results-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .results-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .rewards-summary {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .reward-item {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

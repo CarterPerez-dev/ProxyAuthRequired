@@ -1,0 +1,108 @@
+/* src/components/pages/games/ThreatHunter/ThreatHunter.css */
+.threat-hunter-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  color: #e2e2e2;
+}
+
+.threat-hunter-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #5f4bb6;
+}
+
+.threat-hunter-header h1 {
+  font-size: 2.5rem;
+  color: #7a68d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.threat-hunter-header p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.threat-hunter-content {
+  background-color: #0f0f18;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Log Analysis Layout */
+.threat-hunter-gameplay {
+  padding: 20px;
+}
+
+.log-analysis-container {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 20px;
+  height: calc(100vh - 250px);
+  min-height: 600px;
+}
+
+.analysis-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.threat-hunter-loading, .threat-hunter-error {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.3rem;
+}
+
+.threat-hunter-error {
+  color: #f44336;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .log-analysis-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    height: auto;
+  }
+  
+  .analysis-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .threat-hunter-header h1 {
+    font-size: 2rem;
+  }
+  
+  .log-analysis-container {
+    min-height: 400px;
+  }
+  
+  .analysis-panel {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .threat-hunter-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .threat-hunter-header p {
+    font-size: 1rem;
+  }
+  
+  .threat-hunter-gameplay {
+    padding: 10px;
+  }
+}
