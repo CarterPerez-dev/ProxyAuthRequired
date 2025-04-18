@@ -99,7 +99,7 @@ def log_request_info():
 def log_api_request():
     # Skip logging static files and certain endpoints
     if request.path.startswith('/static/') or request.path == '/health':
-    return
+        return
     
     # Create a log entry
     log_entry = {

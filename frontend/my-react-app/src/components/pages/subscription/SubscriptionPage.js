@@ -1,7 +1,8 @@
 // src/components/pages/subscription/SubscriptionPage.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUserData } from '../store/slice/userSlice';
 import axios from 'axios';
 import {
   FaCheckCircle,
@@ -38,6 +39,7 @@ const SubscriptionPage = () => {
   
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // Initialize dispatch here
   const { userId } = useSelector((state) => state.user);
   
   // Check if there's registration data in the location state
@@ -117,15 +119,22 @@ const SubscriptionPage = () => {
           // Set userId in localStorage
           localStorage.setItem('userId', response.data.user_id);
           
-          // Navigate to login page with success message
+          // Set a session flag to prevent the subscription redirect
+          sessionStorage.setItem('escapeSubscriptionRenewal', 'true');
+          
+          // Instead of navigating to login, fetch user data to populate Redux store
+          await dispatch(fetchUserData(response.data.user_id));
+          
+          // Navigate directly to profile
           navigate('/profile', { 
             state: { 
-              message: 'Your account has been created! Please sign in with your credentials. You are using the free tier.' 
+              message: 'Your account has been created! You are using the free tier.' 
             } 
           });
         }
       } else if (isOauthFlow) {
         // For OAuth flow, just navigate to profile
+        sessionStorage.setItem('escapeSubscriptionRenewal', 'true');
         navigate('/profile', {
           state: {
             message: 'Welcome to CertGames! You are using the free tier.'
@@ -133,6 +142,7 @@ const SubscriptionPage = () => {
         });
       } else if (userId) {
         // For existing users, just navigate back to profile
+        sessionStorage.setItem('escapeSubscriptionRenewal', 'true');
         navigate('/profile');
       }
     } catch (err) {

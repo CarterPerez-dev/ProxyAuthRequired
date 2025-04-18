@@ -66,6 +66,7 @@ const Login = () => {
     }
   }, [userId, navigate]);
   
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError('');
@@ -87,15 +88,29 @@ const Login = () => {
         // Save userId regardless of subscription status
         localStorage.setItem('userId', userId);
         
+        // IMPORTANT NEW CODE: Set escape flag for free users to prevent redirect loop
         if (!isSubscriptionActive) {
+          // Set a temporary flag to prevent subscription redirect
+          sessionStorage.setItem('escapeSubscriptionRenewal', 'true');
+          
+          // Give the flag a 5-minute expiry by setting a timeout to remove it
+          setTimeout(() => {
+            sessionStorage.removeItem('escapeSubscriptionRenewal');
+          }, 5 * 60 * 1000); // 5 minutes
+          
           // If subscription is not active, redirect to subscription page with renewal flag
-          const renewalMode = subscriptionStatus === 'canceled' || !isSubscriptionActive ? '?renewal=true' : '';
-          navigate(`/subscription${renewalMode}`, { 
-            state: { 
-              userId: userId,
-              from: '/login'
-            } 
-          });
+          // but only if explicitly canceled (not for new free users)
+          if (subscriptionStatus === 'canceled') {
+            navigate(`/subscription?renewal=true`, { 
+              state: { 
+                userId: userId,
+                from: '/login'
+              } 
+            });
+          } else {
+            // For free users or other non-active states, just go to profile
+            navigate('/profile');
+          }
         } else {
           // Subscription is active, navigate to profile
           navigate('/profile');
