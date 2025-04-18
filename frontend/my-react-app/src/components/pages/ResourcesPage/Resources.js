@@ -1345,7 +1345,7 @@ return (
               <FaCrown className="resources-premium-icon" />
               <div className="resources-premium-text">
                 <h3>Upgrade to Premium</h3>
-                <p>Unlock access to all resources and links</p>
+                <p>Unlock access to all resources</p>
               </div>
               <button
                 className="resources-premium-button"

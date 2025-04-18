@@ -1,13 +1,11 @@
-// src/components/pages/subscription/SubscriptionPage.js
+// src/components/pages/subscription/PremiumSubscriptionPage.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserData } from '../store/slice/userSlice';
 import axios from 'axios';
 import {
-  FaCheckCircle,
-  FaTimesCircle,
-  FaDragon,
+  FaCrown,
   FaLock,
   FaCreditCard,
   FaInfoCircle,
@@ -16,20 +14,23 @@ import {
   FaArrowRight,
   FaRedo,
   FaTrophy,
-  FaMedal,
-  FaGraduationCap,
-  FaFighterJet,
-  FaUserSecret,
   FaHome,
-  FaCrown,
-  FaCheckSquare,
-  FaRegSquare,
-  FaPlusSquare,
-  FaChevronRight
+  FaCheckCircle,
+  FaTimesCircle,
+  FaChevronRight,
+  FaGem,
+  FaRegGem,
+  FaInfinity,
+  FaCubes,
+  FaShieldAlt,
+  FaWrench,
+  FaClipboardCheck,
+  FaRocket,
+  FaUsers
 } from 'react-icons/fa';
 import './css/SubscriptionPage.css';
 
-const SubscriptionPage = () => {
+const PremiumSubscriptionPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [stripeConfig, setStripeConfig] = useState({});
@@ -39,14 +40,14 @@ const SubscriptionPage = () => {
   
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // Initialize dispatch here
+  const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.user);
   
   // Check if there's registration data in the location state
   const registrationData = location.state?.registrationData;
   const isOauthFlow = location.state?.isOauthFlow || false;
   
-  // New state for showing continue with free option
+  // State for showing continue with free option
   const [showContinueFree, setShowContinueFree] = useState(false);
   
   useEffect(() => {
@@ -66,6 +67,14 @@ const SubscriptionPage = () => {
     // Show continue with free option if this is a new registration
     if (registrationData || isOauthFlow) {
       setShowContinueFree(true);
+    }
+
+    // Add an animation effect for premium plan highlight
+    const premiumPlanCard = document.querySelector('.premium-plan-card.premium');
+    if (premiumPlanCard) {
+      setTimeout(() => {
+        premiumPlanCard.classList.add('premium-highlighted');
+      }, 500);
     }
   }, [registrationData, isOauthFlow]);
   
@@ -106,7 +115,7 @@ const SubscriptionPage = () => {
     }
   };
 
-  // New function to handle continuing with free tier
+  // Function to handle continuing with free tier
   const handleContinueFree = async () => {
     setLoading(true);
     
@@ -122,7 +131,7 @@ const SubscriptionPage = () => {
           // Set a session flag to prevent the subscription redirect
           sessionStorage.setItem('escapeSubscriptionRenewal', 'true');
           
-          // Instead of navigating to login, fetch user data to populate Redux store
+          // Fetch user data to populate Redux store
           await dispatch(fetchUserData(response.data.user_id));
           
           // Navigate directly to profile
@@ -152,7 +161,7 @@ const SubscriptionPage = () => {
     }
   };
   
-  // New function to handle escaping the subscription flow
+  // Function to handle escaping the subscription flow
   const handleEscapeRenewal = () => {
     // Set the escape flag in session storage
     sessionStorage.setItem('escapeSubscriptionRenewal', 'true');
@@ -162,248 +171,255 @@ const SubscriptionPage = () => {
   
   // Premium features
   const premiumFeatures = [
-    { title: 'Unlimited Practice Questions', isPremium: true },
-    { title: 'Access to ScenarioSphere', isPremium: true },
-    { title: 'Access to GRC Wizard', isPremium: true },
-    { title: 'Access to XploitCraft', isPremium: true },
-    { title: 'Interactive Daily Questions', isPremium: true },
-    { title: 'Complete Resource Hub Access', isPremium: true },
-    { title: 'Full Certification Coverage', isPremium: true },
-    { title: 'Full Gamification (XP, Achievements)', isPremium: false },
-    { title: 'Shop & Avatar System', isPremium: false },
-    { title: 'Leaderboard Access', isPremium: false },
+    { title: 'Practice Questions', free: '100 Questions', premium: 'Unlimited', isPremium: true },
+    { title: 'Analogy Hub', free: true, premium: true, isPremium: true },
+    { title: 'ScenarioSphere', free: false, premium: true, isPremium: true },
+    { title: 'GRC Wizard', free: false, premium: true, isPremium: true },
+    { title: 'XploitCraft', free: false, premium: true, isPremium: true },
+    { title: 'Daily Questions', free: false, premium: true, isPremium: true },
+    { title: 'Resource Hub', free: 'Limited', premium: 'Full Access', isPremium: true },
+    { title: 'Certification Coverage', free: 'Limited', premium: 'Full Access', isPremium: true },
+    { title: 'XP & Achievements', free: true, premium: true, isPremium: false },
+    { title: 'Shop & Avatar System', free: true, premium: true, isPremium: false },
+    { title: 'Leaderboard Access', free: true, premium: true, isPremium: false },
   ];
   
   return (
-    <div className="subscription-container">
-      <div className="subscription-background">
-        <div className="subscription-grid"></div>
-        <div className="subscription-particles">
+    <div className="premium-container">
+      <div className="premium-background">
+        <div className="premium-grid"></div>
+        <div className="premium-particles">
           {Array.from({ length: 20 }).map((_, i) => (
-            <div key={i} className="subscription-particle"></div>
+            <div key={i} className="premium-particle"></div>
           ))}
         </div>
-        <div className="subscription-glow"></div>
+        <div className="premium-glow"></div>
       </div>
       
-      <div className="subscription-content">
-        <div className="subscription-card">
-          <div className="subscription-card-accent"></div>
-          
-          <div className="subscription-header">
-            <div className="subscription-logo">
-              <FaDragon className="subscription-logo-icon" />
+      <div className="premium-content">
+        <div className="premium-card">
+          <div className="premium-header">
+            <div className="premium-logo">
+              <FaCrown className="premium-logo-icon" />
             </div>
-            <h1 className="subscription-title">
-              {isRenewal ? 'Reactivate Unlimited Access' : 'Choose Your Plan'}
+            <h1 className="premium-title">
+              {isRenewal ? 'Reactivate Unlimited Access' : 'Choose Your Premium Plan'}
             </h1>
-            <p className="subscription-subtitle">
+            <p className="premium-subtitle">
               {isRenewal 
-                ? 'Continue your learning journey with unlimited access' 
-                : 'Get started for free or unlock everything with premium'}
+                ? 'Continue your learning journey with unlimited access to all premium features' 
+                : 'Get started for free or unlock everything with premium to accelerate your certification journey'}
             </p>
           </div>
           
           {error && (
-            <div className="subscription-error">
+            <div className="premium-error">
               <FaTimesCircle />
               <span>{error}</span>
             </div>
           )}
           
-          {/* New comparison section */}
-          <div className="subscription-comparison">
-            <div className="subscription-plans">
-              <div className="subscription-plan free">
-                <div className="subscription-plan-header">
-                  <h3>Free</h3>
-                  <p className="subscription-plan-price">$0</p>
-                  <p className="subscription-plan-billing">Forever</p>
+          {/* Plans Container */}
+          <div className="premium-plans-container">
+            {/* Free Plan */}
+            <div className="premium-plan-card free">
+              <div className="premium-plan-header">
+                <h3 className="premium-plan-name">Free</h3>
+                <div className="premium-price-container">
+                  <span className="premium-price-currency">$</span>
+                  <span className="premium-price-value">0</span>
                 </div>
-                <div className="subscription-plan-features">
-                  <ul>
-                    <li>
-                      <FaCheckCircle className="feature-available" />
-                      <span>100 Practice Questions</span>
-                    </li>
-                    <li>
-                      <FaCheckCircle className="feature-available" />
-                      <span>Basic Gamification</span>
-                    </li>
-                    <li>
-                      <FaCheckCircle className="feature-available" />
-                      <span>Profile & Leaderboard</span>
-                    </li>
-                    <li>
-                      <FaTimesCircle className="feature-unavailable" />
-                      <span>ScenarioSphere, GRC, XploitCraft</span>
-                    </li>
-                    <li>
-                      <FaTimesCircle className="feature-unavailable" />
-                      <span>Daily Questions & Resources</span>
-                    </li>
-                  </ul>
-                  
-                  {showContinueFree && (
-                    <button 
-                      className="subscription-free-button"
-                      onClick={handleContinueFree}
-                      disabled={loading || redirecting}
-                    >
-                      {loading ? (
-                        <span className="subscription-button-loading">
-                          <div className="subscription-spinner"></div>
-                          <span>Processing...</span>
-                        </span>
-                      ) : (
-                        <span className="subscription-button-text">
-                          <span>Continue with Free</span>
-                          <FaChevronRight className="subscription-button-icon-right" />
-                        </span>
-                      )}
-                    </button>
-                  )}
-                </div>
+                <div className="premium-price-period">Forever</div>
               </div>
               
-              <div className="subscription-plan premium">
-                <div className="subscription-plan-badge">RECOMMENDED</div>
-                <div className="subscription-plan-header">
-                  <h3>Premium</h3>
-                  <div className="subscription-price">
-                    <span className="subscription-price-currency">$</span>
-                    <span className="subscription-price-value">9</span>
-                    <span className="subscription-price-decimal">.99</span>
-                    <span className="subscription-price-period">/month</span>
-                  </div>
-                  <div className="subscription-trial-badge">
-                    <span className="subscription-trial-text">3-Day Free Trial</span>
-                  </div>
-                </div>
-                <div className="subscription-plan-features">
-                  <ul>
-                    <li>
-                      <FaCheckCircle className="feature-available" />
-                      <span><strong>Unlimited</strong> Practice Questions</span>
-                    </li>
-                    <li>
-                      <FaCheckCircle className="feature-available" />
-                      <span>Full Access to All Tools</span>
-                    </li>
-                    <li>
-                      <FaCheckCircle className="feature-available" />
-                      <span>Interactive Daily Questions</span>
-                    </li>
-                    <li>
-                      <FaCheckCircle className="feature-available" />
-                      <span>Complete Resource Hub</span>
-                    </li>
-                    <li>
-                      <FaCheckCircle className="feature-available" />
-                      <span>Everything in Free Plan</span>
-                    </li>
-                  </ul>
-                  
-                  <button
-                    className="subscription-premium-button"
-                    onClick={handleSubscribe}
+              <div className="premium-plan-features">
+                <ul className="premium-features-list">
+                  <li className="premium-feature-item limited">
+                    <FaCheckCircle className="premium-feature-icon available" />
+                    <span className="premium-feature-text">100 Practice Questions</span>
+                  </li>
+                  <li className="premium-feature-item">
+                    <FaCheckCircle className="premium-feature-icon available" />
+                    <span className="premium-feature-text">Basic Gamification</span>
+                  </li>
+                  <li className="premium-feature-item">
+                    <FaCheckCircle className="premium-feature-icon available" />
+                    <span className="premium-feature-text">Profile & Leaderboard</span>
+                  </li>
+                  <li className="premium-feature-item">
+                    <FaTimesCircle className="premium-feature-icon unavailable" />
+                    <span className="premium-feature-text">Interactive Tools (ScenarioSphere, GRC, XploitCraft)</span>
+                  </li>
+                  <li className="premium-feature-item">
+                    <FaTimesCircle className="premium-feature-icon unavailable" />
+                    <span className="premium-feature-text">Daily Questions & Resources</span>
+                  </li>
+                </ul>
+                
+                {showContinueFree && (
+                  <button 
+                    className="premium-free-button"
+                    onClick={handleContinueFree}
                     disabled={loading || redirecting}
                   >
-                    {loading || redirecting ? (
-                      <span className="subscription-button-loading">
-                        <div className="subscription-spinner"></div>
-                        <span>{redirecting ? 'Redirecting...' : 'Processing...'}</span>
+                    {loading ? (
+                      <span className="premium-button-loading">
+                        <div className="premium-spinner"></div>
+                        <span>Processing...</span>
                       </span>
                     ) : (
-                      <span className="subscription-button-text">
-                        <FaCreditCard className="subscription-button-icon" />
-                        <span>{isRenewal ? 'RENEW SUBSCRIPTION' : 'START FREE TRIAL'}</span>
-                        {isRenewal ? 
-                          <FaRedo className="subscription-button-icon-right" /> : 
-                          <FaArrowRight className="subscription-button-icon-right" />}
+                      <span className="premium-button-text">
+                        <span>Continue with Free</span>
+                        <FaChevronRight className="premium-button-icon" />
                       </span>
                     )}
                   </button>
-                </div>
+                )}
               </div>
             </div>
             
-            <div className="subscription-features-comparison">
-              <h3>
-                <FaTrophy className="subscription-section-icon" />
-                <span>Feature Comparison</span>
-              </h3>
-              <div className="subscription-comparison-table">
-                <div className="subscription-comparison-header">
-                  <div className="subscription-comparison-column feature">Feature</div>
-                  <div className="subscription-comparison-column free">Free</div>
-                  <div className="subscription-comparison-column premium">Premium</div>
+            {/* Premium Plan */}
+            <div className="premium-plan-card premium">
+              <div className="premium-plan-badge">RECOMMENDED</div>
+              <div className="premium-plan-header">
+                <h3 className="premium-plan-name">Premium</h3>
+                <div className="premium-price-container">
+                  <span className="premium-price-currency">$</span>
+                  <span className="premium-price-value">9</span>
+                  <span className="premium-price-decimal">.99</span>
                 </div>
-                <div className="subscription-comparison-rows">
-                  {premiumFeatures.map((feature, index) => (
-                    <div key={index} className="subscription-comparison-row">
-                      <div className="subscription-comparison-cell feature">
-                        {feature.title}
-                      </div>
-                      <div className="subscription-comparison-cell free">
-                        {feature.isPremium ? (
-                          feature.title === 'Unlimited Practice Questions' ? (
-                            <span className="limited-feature">100 Questions</span>
-                          ) : (
-                            <FaTimesCircle className="feature-unavailable" />
-                          )
-                        ) : (
-                          <FaCheckCircle className="feature-available" />
-                        )}
-                      </div>
-                      <div className="subscription-comparison-cell premium">
-                        <FaCheckCircle className="feature-available" />
-                      </div>
-                    </div>
-                  ))}
+                <div className="premium-price-period">per month</div>
+                <div className="premium-trial-badge">
+                  3-Day Free Trial
                 </div>
+              </div>
+              
+              <div className="premium-plan-features">
+                <ul className="premium-features-list">
+                  <li className="premium-feature-item">
+                    <FaCheckCircle className="premium-feature-icon available" />
+                    <span className="premium-feature-text"><strong>Unlimited</strong> Practice Questions</span>
+                  </li>
+                  <li className="premium-feature-item">
+                    <FaCheckCircle className="premium-feature-icon available" />
+                    <span className="premium-feature-text">Full Access to All Interactive Tools</span>
+                  </li>
+                  <li className="premium-feature-item">
+                    <FaCheckCircle className="premium-feature-icon available" />
+                    <span className="premium-feature-text">Interactive Daily Questions</span>
+                  </li>
+                  <li className="premium-feature-item">
+                    <FaCheckCircle className="premium-feature-icon available" />
+                    <span className="premium-feature-text">Complete Resource Hub</span>
+                  </li>
+                  <li className="premium-feature-item">
+                    <FaCheckCircle className="premium-feature-icon available" />
+                    <span className="premium-feature-text">Everything in Free Plan</span>
+                  </li>
+                </ul>
+                
+                <button
+                  className="premium-premium-button"
+                  onClick={handleSubscribe}
+                  disabled={loading || redirecting}
+                >
+                  {loading || redirecting ? (
+                    <span className="premium-button-loading">
+                      <div className="premium-spinner"></div>
+                      <span>{redirecting ? 'Redirecting...' : 'Processing...'}</span>
+                    </span>
+                  ) : (
+                    <span className="premium-button-text">
+                      <FaCreditCard />
+                      <span>{isRenewal ? 'RENEW SUBSCRIPTION' : '  START FREE TRIAL'}</span>
+                      {isRenewal ? 
+                        <FaRedo className="premium-button-icon" /> : 
+                        <FaArrowRight className="premium-button-icon" />}
+                    </span>
+                  )}
+                </button>
               </div>
             </div>
           </div>
           
-          <div className="subscription-actions">
+          {/* Feature Comparison Table */}
+          <div className="premium-comparison-table">
+            <div className="premium-comparison-header">
+              <h3>
+                <FaTrophy className="premium-comparison-header-icon" />
+                <span>Detailed Feature Comparison</span>
+              </h3>
+            </div>
+            
+            {premiumFeatures.map((feature, index) => (
+              <div key={index} className="premium-comparison-row">
+                <div className="premium-comparison-cell feature">
+                  {feature.title}
+                </div>
+                <div className="premium-comparison-cell free">
+                  {typeof feature.free === 'boolean' ? (
+                    feature.free ? (
+                      <FaCheckCircle className="premium-comparison-icon available" />
+                    ) : (
+                      <FaTimesCircle className="premium-comparison-icon unavailable" />
+                    )
+                  ) : (
+                    <span className="premium-comparison-limited">{feature.free}</span>
+                  )}
+                </div>
+                <div className="premium-comparison-cell premium">
+                  {typeof feature.premium === 'boolean' ? (
+                    feature.premium ? (
+                      <FaCheckCircle className="premium-comparison-icon available" />
+                    ) : (
+                      <FaTimesCircle className="premium-comparison-icon unavailable" />
+                    )
+                  ) : (
+                    <span>{feature.premium}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="premium-actions">
             {/* Add escape button when in renewal mode */}
             {isRenewal && (
               <button
-                className="subscription-escape-button"
+                className="premium-escape-button"
                 onClick={handleEscapeRenewal}
                 disabled={loading || redirecting}
               >
-                <FaHome className="subscription-button-icon" />
+                <FaHome />
                 <span>GO TO HOME PAGE</span>
               </button>
             )}
             
             <button
-              className="subscription-back-button"
+              className="premium-back-button"
               onClick={handleGoBack}
               disabled={loading || redirecting}
             >
-              <FaArrowLeft className="subscription-button-icon" />
+              <FaArrowLeft />
               <span>Go Back</span>
             </button>
           </div>
           
           {/* Add additional escape notice */}
           {isRenewal && (
-            <div className="subscription-escape-notice">
-              <FaInfoCircle className="subscription-note-icon" />
+            <div className="premium-escape-notice">
+              <FaInfoCircle className="premium-note-icon" />
               <p>
                 Need to explore other sections first? Click "Go to Home Page" to temporarily bypass the subscription reminder.
               </p>
             </div>
           )}
           
-          <div className="subscription-note">
-            <FaInfoCircle className="subscription-note-icon" />
+          <div className="premium-note">
+            <FaInfoCircle className="premium-note-icon" />
             <p>
               By subscribing, you agree to our <a href="/terms">Terms of Service</a> and 
-              <a href="/privacy">Privacy Policy</a>. You can cancel your subscription at any time
+              <a href="/privacy"> Privacy Policy</a>. You can cancel your subscription at any time
               from your profile page.
             </p>
           </div>
@@ -413,4 +429,4 @@ const SubscriptionPage = () => {
   );
 };
 
-export default SubscriptionPage;
+export default PremiumSubscriptionPage;
