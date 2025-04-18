@@ -76,20 +76,20 @@ const ScenarioStage = ({
   };
   
   return (
-    <div className="scenario-stage">
-      <div className="stage-header">
+    <div className="incidentresponder_stage_container">
+      <div className="incidentresponder_stage_header">
         <h2>{scenarioTitle}</h2>
-        <div className="stage-meta">
-          <div className="stage-step">
+        <div className="incidentresponder_stage_meta">
+          <div className="incidentresponder_stage_step">
             <FaClipboardCheck />
             <span>Step {stage.order} of {stage.totalSteps}</span>
           </div>
-          <div className="stage-score">
+          <div className="incidentresponder_stage_score">
             <FaTrophy />
             <span>Score: {score}</span>
           </div>
           {timeLeft !== null && (
-            <div className={`stage-timer ${timeLeft < 10 ? 'urgent' : ''}`}>
+            <div className={`incidentresponder_stage_timer ${timeLeft < 10 ? 'urgent' : ''}`}>
               <FaClock />
               <span>Time: {timeLeft}s</span>
             </div>
@@ -97,15 +97,15 @@ const ScenarioStage = ({
         </div>
       </div>
       
-      <div className="stage-situation">
-        <div className="situation-header">
+      <div className="incidentresponder_stage_situation">
+        <div className="incidentresponder_situation_header">
           <FaExclamationCircle />
           <h3>Current Situation</h3>
         </div>
         <p>{stage.situation}</p>
         
         {stage.additionalInfo && (
-          <div className="additional-info">
+          <div className="incidentresponder_additional_info">
             <h4><FaInfoCircle /> Additional Information</h4>
             <p>{stage.additionalInfo}</p>
           </div>
@@ -113,13 +113,13 @@ const ScenarioStage = ({
       </div>
       
       {!showExplanation ? (
-        <div className="action-selection">
+        <div className="incidentresponder_action_selection">
           <h3>Choose Your Response</h3>
-          <div className="actions-container">
+          <div className="incidentresponder_actions_container">
             {stage.actions.map(action => (
               <button
                 key={action.id}
-                className="action-button"
+                className="incidentresponder_action_button"
                 onClick={() => handleSelectAction(action.id)}
                 disabled={showExplanation}
               >
@@ -129,22 +129,22 @@ const ScenarioStage = ({
           </div>
         </div>
       ) : (
-        <div className="action-explanation">
+        <div className="incidentresponder_action_explanation">
           {(() => {
             const selectedAction = getActionById(selectedActionId);
             const quality = getActionQuality(selectedAction.points);
             
             return (
               <>
-                <div className={`selected-action ${quality}`}>
+                <div className={`incidentresponder_selected_action ${quality}`}>
                   <h3>Your Response:</h3>
                   <p>{selectedAction.text}</p>
-                  <div className="action-result">
-                    <div className="points-awarded">
-                      <span className="points-label">Points:</span>
-                      <span className="points-value">+{selectedAction.points}</span>
+                  <div className="incidentresponder_action_result">
+                    <div className="incidentresponder_points_awarded">
+                      <span className="incidentresponder_points_label">Points:</span>
+                      <span className="incidentresponder_points_value">+{selectedAction.points}</span>
                     </div>
-                    <div className={`quality-indicator ${quality}`}>
+                    <div className={`incidentresponder_quality_indicator ${quality}`}>
                       {quality === 'best' && 'EXCELLENT CHOICE'}
                       {quality === 'good' && 'GOOD CHOICE'}
                       {quality === 'fair' && 'ACCEPTABLE'}
@@ -153,23 +153,23 @@ const ScenarioStage = ({
                   </div>
                 </div>
                 
-                <div className="explanation-container">
+                <div className="incidentresponder_explanation_container">
                   <h3>Outcome & Explanation</h3>
                   <p>{selectedAction.outcome}</p>
-                  <div className="explanation">
+                  <div className="incidentresponder_explanation">
                     <h4>Why this matters:</h4>
                     <p>{selectedAction.explanation}</p>
                   </div>
                   
-                  <div className="best-practice">
+                  <div className="incidentresponder_best_practice">
                     <h4>Best Practice:</h4>
                     <p>{selectedAction.bestPractice}</p>
                   </div>
                 </div>
                 
-                <div className="continue-actions">
+                <div className="incidentresponder_continue_actions">
                   <button 
-                    className="continue-button"
+                    className="incidentresponder_continue_button"
                     onClick={() => onSelectAction('continue')}
                   >
                     Continue

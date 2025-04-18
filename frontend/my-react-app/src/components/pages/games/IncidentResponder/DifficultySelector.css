@@ -1,21 +1,21 @@
 /* src/components/pages/games/IncidentResponder/DifficultySelector.css */
-.difficulty-selector {
+.incidentresponder_diffsel_wrapper {
   margin-top: 10px;
 }
 
-.difficulty-selector h3 {
+.incidentresponder_diffsel_wrapper h3 {
   font-size: 1.3rem;
   color: #7a68d4;
   margin-bottom: 15px;
 }
 
-.difficulty-options {
+.incidentresponder_diffsel_options_container {
   display: flex;
   gap: 15px;
   margin-bottom: 15px;
 }
 
-.difficulty-button {
+.incidentresponder_diffsel_difficulty_btn {
   flex: 1;
   background-color: #232535;
   border: 1px solid transparent;
@@ -26,35 +26,35 @@
   text-align: left;
 }
 
-.difficulty-button:hover {
+.incidentresponder_diffsel_difficulty_btn:hover {
   background-color: #2d2d40;
   transform: translateY(-3px);
 }
 
-.difficulty-button.active {
+.incidentresponder_diffsel_difficulty_btn.active {
   background-color: #1a1a2e;
   border-color: #5f4bb6;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(95, 75, 182, 0.2);
 }
 
-.difficulty-name {
+.incidentresponder_diffsel_name_display {
   font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 10px;
   color: #e2e2e2;
 }
 
-.difficulty-button.active .difficulty-name {
+.incidentresponder_diffsel_difficulty_btn.active .incidentresponder_diffsel_name_display {
   color: #7a68d4;
 }
 
-.difficulty-indicators {
+.incidentresponder_diffsel_indicators_area {
   display: flex;
   gap: 15px;
 }
 
-.indicator {
+.incidentresponder_diffsel_indicator_item {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -62,7 +62,7 @@
   opacity: 0.8;
 }
 
-.selected-difficulty-info {
+.incidentresponder_diffsel_selected_info {
   background-color: #1a1a2e;
   padding: 12px 15px;
   border-radius: 5px;
@@ -73,17 +73,17 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .difficulty-options {
+  .incidentresponder_diffsel_options_container {
     flex-direction: column;
   }
   
-  .difficulty-button {
+  .incidentresponder_diffsel_difficulty_btn {
     width: 100%;
   }
 }
 
 @media (max-width: 500px) {
-  .difficulty-indicators {
+  .incidentresponder_diffsel_indicators_area {
     flex-direction: column;
     gap: 5px;
   }

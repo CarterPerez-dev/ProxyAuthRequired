@@ -12,25 +12,25 @@ const ScenarioIntro = ({ scenario, onStart }) => {
     switch (activeTab) {
       case 'overview':
         return (
-          <div className="tab-content overview">
+          <div className="incidentresponder_scenariointro_tab_content overview">
             <h3>Incident Overview</h3>
             <p>{scenario.description}</p>
-            <div className="scenario-meta-info">
-              <div className="meta-item">
-                <span className="meta-label">Incident Type:</span>
-                <span className="meta-value">{scenario.type}</span>
+            <div className="incidentresponder_scenariointro_meta_info">
+              <div className="incidentresponder_scenariointro_meta_item">
+                <span className="incidentresponder_scenariointro_meta_label">Incident Type:</span>
+                <span className="incidentresponder_scenariointro_meta_value">{scenario.type}</span>
               </div>
-              <div className="meta-item">
-                <span className="meta-label">Organization:</span>
-                <span className="meta-value">{scenario.organization}</span>
+              <div className="incidentresponder_scenariointro_meta_item">
+                <span className="incidentresponder_scenariointro_meta_label">Organization:</span>
+                <span className="incidentresponder_scenariointro_meta_value">{scenario.organization}</span>
               </div>
-              <div className="meta-item">
-                <span className="meta-label">Industry:</span>
-                <span className="meta-value">{scenario.industry}</span>
+              <div className="incidentresponder_scenariointro_meta_item">
+                <span className="incidentresponder_scenariointro_meta_label">Industry:</span>
+                <span className="incidentresponder_scenariointro_meta_value">{scenario.industry}</span>
               </div>
-              <div className="meta-item">
-                <span className="meta-label">Size:</span>
-                <span className="meta-value">{scenario.organizationSize}</span>
+              <div className="incidentresponder_scenariointro_meta_item">
+                <span className="incidentresponder_scenariointro_meta_label">Size:</span>
+                <span className="incidentresponder_scenariointro_meta_value">{scenario.organizationSize}</span>
               </div>
             </div>
           </div>
@@ -38,18 +38,18 @@ const ScenarioIntro = ({ scenario, onStart }) => {
         
       case 'role':
         return (
-          <div className="tab-content role">
+          <div className="incidentresponder_scenariointro_tab_content role">
             <h3>Your Role</h3>
-            <div className="role-info">
-              <div className="role-icon">
+            <div className="incidentresponder_scenariointro_role_info">
+              <div className="incidentresponder_scenariointro_role_icon">
                 <FaUserSecret />
               </div>
-              <div className="role-details">
+              <div className="incidentresponder_scenariointro_role_details">
                 <h4>{scenario.playerRole}</h4>
                 <p>{scenario.roleDescription}</p>
               </div>
             </div>
-            <div className="responsibilities">
+            <div className="incidentresponder_scenariointro_responsibilities">
               <h4>Your Responsibilities:</h4>
               <ul>
                 {scenario.responsibilities.map((resp, index) => (
@@ -62,14 +62,14 @@ const ScenarioIntro = ({ scenario, onStart }) => {
         
       case 'objectives':
         return (
-          <div className="tab-content objectives">
+          <div className="incidentresponder_scenariointro_tab_content objectives">
             <h3>Scenario Objectives</h3>
             <p>{scenario.objectivesDescription}</p>
-            <div className="objectives-list">
+            <div className="incidentresponder_scenariointro_objectives_list">
               {scenario.objectives.map((objective, index) => (
-                <div key={index} className="objective-item">
-                  <div className="objective-number">{index + 1}</div>
-                  <div className="objective-text">{objective}</div>
+                <div key={index} className="incidentresponder_scenariointro_objective_item">
+                  <div className="incidentresponder_scenariointro_objective_number">{index + 1}</div>
+                  <div className="incidentresponder_scenariointro_objective_text">{objective}</div>
                 </div>
               ))}
             </div>
@@ -78,21 +78,21 @@ const ScenarioIntro = ({ scenario, onStart }) => {
         
       case 'tips':
         return (
-          <div className="tab-content tips">
+          <div className="incidentresponder_scenariointro_tab_content tips">
             <h3>Response Tips</h3>
-            <div className="tips-container">
-              <div className="tips-intro">
-                <FaInfoCircle className="tips-icon" />
+            <div className="incidentresponder_scenariointro_tips_container">
+              <div className="incidentresponder_scenariointro_tips_intro">
+                <FaInfoCircle className="incidentresponder_scenariointro_tips_icon" />
                 <p>Keep these best practices in mind as you respond to the incident:</p>
               </div>
-              <ul className="tips-list">
+              <ul className="incidentresponder_scenariointro_tips_list">
                 {scenario.tips.map((tip, index) => (
                   <li key={index}>{tip}</li>
                 ))}
               </ul>
             </div>
-            <div className="warning">
-              <FaExclamationCircle className="warning-icon" />
+            <div className="incidentresponder_scenariointro_warning">
+              <FaExclamationCircle className="incidentresponder_scenariointro_warning_icon" />
               <p>Remember: Your choices will affect the outcome of the incident. Consider each action carefully.</p>
             </div>
           </div>
@@ -104,54 +104,54 @@ const ScenarioIntro = ({ scenario, onStart }) => {
   };
   
   return (
-    <div className="scenario-intro">
-      <div className="intro-header">
+    <div className="incidentresponder_scenariointro_wrapper">
+      <div className="incidentresponder_scenariointro_header">
         <h2>{scenario.title}</h2>
-        <div className="scenario-difficulty">
+        <div className="incidentresponder_scenariointro_difficulty">
           {Array(scenario.difficulty).fill('★').join('')}
         </div>
       </div>
       
-      <div className="alert-banner">
+      <div className="incidentresponder_scenariointro_alert_banner">
         <FaExclamationCircle />
         <span>INCIDENT ALERT: {scenario.alertMessage}</span>
       </div>
       
-      <div className="intro-content">
-        <div className="intro-tabs">
+      <div className="incidentresponder_scenariointro_content">
+        <div className="incidentresponder_scenariointro_tabs">
           <button 
-            className={`tab-button ${activeTab === 'overview' ? 'active' : ''}`}
+            className={`incidentresponder_scenariointro_tab_button ${activeTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveTab('overview')}
           >
             <FaInfoCircle /> Overview
           </button>
           <button 
-            className={`tab-button ${activeTab === 'role' ? 'active' : ''}`}
+            className={`incidentresponder_scenariointro_tab_button ${activeTab === 'role' ? 'active' : ''}`}
             onClick={() => setActiveTab('role')}
           >
             <FaBriefcase /> Your Role
           </button>
           <button 
-            className={`tab-button ${activeTab === 'objectives' ? 'active' : ''}`}
+            className={`incidentresponder_scenariointro_tab_button ${activeTab === 'objectives' ? 'active' : ''}`}
             onClick={() => setActiveTab('objectives')}
           >
             <FaClipboardCheck /> Objectives
           </button>
           <button 
-            className={`tab-button ${activeTab === 'tips' ? 'active' : ''}`}
+            className={`incidentresponder_scenariointro_tab_button ${activeTab === 'tips' ? 'active' : ''}`}
             onClick={() => setActiveTab('tips')}
           >
             <FaLightbulb /> Tips
           </button>
         </div>
         
-        <div className="tab-content-container">
+        <div className="incidentresponder_scenariointro_tab_content_container">
           {renderTabContent()}
         </div>
       </div>
       
-      <div className="intro-actions">
-        <button className="start-button" onClick={onStart}>
+      <div className="incidentresponder_scenariointro_actions">
+        <button className="incidentresponder_scenariointro_start_button" onClick={onStart}>
           <FaPlay /> Begin Response
         </button>
       </div>

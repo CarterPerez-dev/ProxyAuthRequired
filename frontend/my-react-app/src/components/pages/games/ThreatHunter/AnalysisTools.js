@@ -100,57 +100,57 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
   };
   
   return (
-    <div className="analysis-tools">
-      <div className="tools-header">
+    <div className="threathunter_analysistools_container">
+      <div className="threathunter_analysistools_header">
         <h3>Analysis Tools</h3>
       </div>
       
-      <div className="tools-container">
-        <div className="tools-menu">
+      <div className="threathunter_analysistools_container_inner">
+        <div className="threathunter_analysistools_menu">
           <button 
-            className={`tool-button ${activeTool === 'threat-detection' ? 'active' : ''}`}
+            className={`threathunter_analysistools_tool_button ${activeTool === 'threat-detection' ? 'active' : ''}`}
             onClick={() => handleToolSelect('threat-detection')}
           >
-            <FaShieldAlt className="tool-icon" />
+            <FaShieldAlt className="threathunter_analysistools_tool_icon" />
             <span>Threat Detection</span>
           </button>
           <button 
-            className={`tool-button ${activeTool === 'ip-analysis' ? 'active' : ''}`}
+            className={`threathunter_analysistools_tool_button ${activeTool === 'ip-analysis' ? 'active' : ''}`}
             onClick={() => handleToolSelect('ip-analysis')}
           >
-            <FaNetworkWired className="tool-icon" />
+            <FaNetworkWired className="threathunter_analysistools_tool_icon" />
             <span>IP Analysis</span>
           </button>
           <button 
-            className={`tool-button ${activeTool === 'pattern-recognition' ? 'active' : ''}`}
+            className={`threathunter_analysistools_tool_button ${activeTool === 'pattern-recognition' ? 'active' : ''}`}
             onClick={() => handleToolSelect('pattern-recognition')}
           >
-            <FaVirus className="tool-icon" />
+            <FaVirus className="threathunter_analysistools_tool_icon" />
             <span>Pattern Recognition</span>
           </button>
           <button 
-            className={`tool-button ${activeTool === 'user-activity' ? 'active' : ''}`}
+            className={`threathunter_analysistools_tool_button ${activeTool === 'user-activity' ? 'active' : ''}`}
             onClick={() => handleToolSelect('user-activity')}
           >
-            <FaUserSecret className="tool-icon" />
+            <FaUserSecret className="threathunter_analysistools_tool_icon" />
             <span>User Activity</span>
           </button>
         </div>
         
-        <div className="tool-content">
+        <div className="threathunter_analysistools_tool_content">
           {activeTool === 'threat-detection' && (
-            <div className="threat-detection-tool">
-              <div className="tool-actions">
-                <button className="add-threat-button" onClick={showAddThreatForm}>
+            <div className="threathunter_analysistools_threat_detection_tool">
+              <div className="threathunter_analysistools_tool_actions">
+                <button className="threathunter_analysistools_add_threat_button" onClick={showAddThreatForm}>
                   <FaPlus /> Add Detected Threat
                 </button>
               </div>
               
               {showDetectionForm && (
-                <div className="threat-form">
+                <div className="threathunter_analysistools_threat_form">
                   <h4>{editingThreatId ? 'Edit Threat' : 'Add New Threat'}</h4>
                   
-                  <div className="form-group">
+                  <div className="threathunter_analysistools_form_group">
                     <label>Threat Type:</label>
                     <select 
                       value={threatType}
@@ -162,7 +162,7 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
                     </select>
                   </div>
                   
-                  <div className="form-group">
+                  <div className="threathunter_analysistools_form_group">
                     <label>Description:</label>
                     <textarea
                       value={threatDescription}
@@ -172,7 +172,7 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
                     />
                   </div>
                   
-                  <div className="form-group">
+                  <div className="threathunter_analysistools_form_group">
                     <label>Source/Evidence:</label>
                     <input
                       type="text"
@@ -182,47 +182,47 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
                     />
                   </div>
                   
-                  <div className="form-actions">
+                  <div className="threathunter_analysistools_form_actions">
                     <button 
-                      className="submit-threat-button" 
+                      className="threathunter_analysistools_submit_threat_button" 
                       onClick={handleSubmitThreat}
                       disabled={!threatDescription.trim()}
                     >
                       {editingThreatId ? 'Update' : 'Add'} Threat
                     </button>
-                    <button className="cancel-button" onClick={handleCancelForm}>
+                    <button className="threathunter_analysistools_cancel_button" onClick={handleCancelForm}>
                       Cancel
                     </button>
                   </div>
                 </div>
               )}
               
-              <div className="detected-threats">
+              <div className="threathunter_analysistools_detected_threats">
                 <h4>Detected Threats ({detectedThreats.length})</h4>
                 
                 {detectedThreats.length === 0 ? (
-                  <div className="no-threats">
+                  <div className="threathunter_analysistools_no_threats">
                     <p>No threats detected yet. Use the analysis tools and flags to identify suspicious activity.</p>
                   </div>
                 ) : (
-                  <div className="threats-list">
+                  <div className="threathunter_analysistools_threats_list">
                     {detectedThreats.map(threat => (
-                      <div key={threat.id} className="threat-item">
-                        <div className="threat-header">
-                          <div className="threat-type">
+                      <div key={threat.id} className="threathunter_analysistools_threat_item">
+                        <div className="threathunter_analysistools_threat_header">
+                          <div className="threathunter_analysistools_threat_type">
                             {getThreatTypeIcon(threat.type)}
                             <span>{threatTypes.find(t => t.id === threat.type)?.name || 'Unknown Threat'}</span>
                           </div>
-                          <div className="threat-actions">
+                          <div className="threathunter_analysistools_threat_actions">
                             <button 
-                              className="edit-threat" 
+                              className="threathunter_analysistools_edit_threat" 
                               onClick={() => showEditThreatForm(threat)}
                               title="Edit threat"
                             >
                               Edit
                             </button>
                             <button 
-                              className="remove-threat" 
+                              className="threathunter_analysistools_remove_threat" 
                               onClick={() => handleRemoveThreat(threat.id)}
                               title="Remove threat"
                             >
@@ -230,10 +230,10 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
                             </button>
                           </div>
                         </div>
-                        <div className="threat-body">
-                          <div className="threat-description">{threat.description}</div>
+                        <div className="threathunter_analysistools_threat_body">
+                          <div className="threathunter_analysistools_threat_description">{threat.description}</div>
                           {threat.source && (
-                            <div className="threat-source">Source: {threat.source}</div>
+                            <div className="threathunter_analysistools_threat_source">Source: {threat.source}</div>
                           )}
                         </div>
                       </div>
@@ -245,14 +245,14 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
           )}
           
           {activeTool === 'ip-analysis' && (
-            <div className="ip-analysis-tool">
+            <div className="threathunter_analysistools_ip_analysis_tool">
               <h4>IP Analysis</h4>
-              <p className="tool-instruction">Identify suspicious IPs by analyzing log patterns. Look for repeated failed logins, unusual ports, or communication with known malicious hosts.</p>
+              <p className="threathunter_analysistools_tool_instruction">Identify suspicious IPs by analyzing log patterns. Look for repeated failed logins, unusual ports, or communication with known malicious hosts.</p>
               
               {scenario?.knownEntities?.ips && (
-                <div className="entity-accordion">
+                <div className="threathunter_analysistools_entity_accordion">
                   <div 
-                    className="accordion-header"
+                    className="threathunter_analysistools_accordion_header"
                     onClick={() => {
                       const el = document.getElementById('ip-list');
                       el.style.display = el.style.display === 'block' ? 'none' : 'block';
@@ -261,12 +261,12 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
                     <span>Network IPs</span>
                     <FaChevronDown />
                   </div>
-                  <div id="ip-list" className="accordion-content" style={{ display: 'none' }}>
-                    <ul className="entity-list">
+                  <div id="ip-list" className="threathunter_analysistools_accordion_content" style={{ display: 'none' }}>
+                    <ul className="threathunter_analysistools_entity_list">
                       {scenario.knownEntities.ips.map((ip, index) => (
-                        <li key={index} className="entity-item">
-                          <span className="entity-value">{ip.address}</span>
-                          <span className="entity-info">{ip.info}</span>
+                        <li key={index} className="threathunter_analysistools_entity_item">
+                          <span className="threathunter_analysistools_entity_value">{ip.address}</span>
+                          <span className="threathunter_analysistools_entity_info">{ip.info}</span>
                         </li>
                       ))}
                     </ul>
@@ -274,7 +274,7 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
                 </div>
               )}
               
-              <div className="ip-analysis-tips">
+              <div className="threathunter_analysistools_ip_analysis_tips">
                 <h5>Analysis Tips:</h5>
                 <ul>
                   <li>Look for IP addresses that appear in many failed authentication attempts</li>
@@ -287,32 +287,32 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
           )}
           
           {activeTool === 'pattern-recognition' && (
-            <div className="pattern-recognition-tool">
+            <div className="threathunter_analysistools_pattern_recognition_tool">
               <h4>Pattern Recognition</h4>
-              <p className="tool-instruction">Identify repeating patterns and anomalies in logs that might indicate malicious activity.</p>
+              <p className="threathunter_analysistools_tool_instruction">Identify repeating patterns and anomalies in logs that might indicate malicious activity.</p>
               
-              <div className="pattern-tips">
+              <div className="threathunter_analysistools_pattern_tips">
                 <h5>Common Malicious Patterns:</h5>
                 <ul>
                   <li>
-                    <span className="pattern-name">Port Scanning:</span>
-                    <span className="pattern-desc">Multiple connection attempts to different ports from the same IP</span>
+                    <span className="threathunter_analysistools_pattern_name">Port Scanning:</span>
+                    <span className="threathunter_analysistools_pattern_desc">Multiple connection attempts to different ports from the same IP</span>
                   </li>
                   <li>
-                    <span className="pattern-name">Brute Force:</span>
-                    <span className="pattern-desc">Repeated failed login attempts followed by a successful one</span>
+                    <span className="threathunter_analysistools_pattern_name">Brute Force:</span>
+                    <span className="threathunter_analysistools_pattern_desc">Repeated failed login attempts followed by a successful one</span>
                   </li>
                   <li>
-                    <span className="pattern-name">Command & Control:</span>
-                    <span className="pattern-desc">Regular beaconing connections to the same external host</span>
+                    <span className="threathunter_analysistools_pattern_name">Command & Control:</span>
+                    <span className="threathunter_analysistools_pattern_desc">Regular beaconing connections to the same external host</span>
                   </li>
                   <li>
-                    <span className="pattern-name">Data Exfiltration:</span>
-                    <span className="pattern-desc">Large outbound data transfers, especially to unusual destinations</span>
+                    <span className="threathunter_analysistools_pattern_name">Data Exfiltration:</span>
+                    <span className="threathunter_analysistools_pattern_desc">Large outbound data transfers, especially to unusual destinations</span>
                   </li>
                   <li>
-                    <span className="pattern-name">Privilege Escalation:</span>
-                    <span className="pattern-desc">Sudden access to resources by users who typically don't have permission</span>
+                    <span className="threathunter_analysistools_pattern_name">Privilege Escalation:</span>
+                    <span className="threathunter_analysistools_pattern_desc">Sudden access to resources by users who typically don't have permission</span>
                   </li>
                 </ul>
               </div>
@@ -320,14 +320,14 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
           )}
           
           {activeTool === 'user-activity' && (
-            <div className="user-activity-tool">
+            <div className="threathunter_analysistools_user_activity_tool">
               <h4>User Activity Analysis</h4>
-              <p className="tool-instruction">Analyze user login patterns, permissions changes, and unusual behavior.</p>
+              <p className="threathunter_analysistools_tool_instruction">Analyze user login patterns, permissions changes, and unusual behavior.</p>
               
               {scenario?.knownEntities?.users && (
-                <div className="entity-accordion">
+                <div className="threathunter_analysistools_entity_accordion">
                   <div 
-                    className="accordion-header"
+                    className="threathunter_analysistools_accordion_header"
                     onClick={() => {
                       const el = document.getElementById('user-list');
                       el.style.display = el.style.display === 'block' ? 'none' : 'block';
@@ -336,12 +336,12 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
                     <span>Authorized Users</span>
                     <FaChevronDown />
                   </div>
-                  <div id="user-list" className="accordion-content" style={{ display: 'none' }}>
-                    <ul className="entity-list">
+                  <div id="user-list" className="threathunter_analysistools_accordion_content" style={{ display: 'none' }}>
+                    <ul className="threathunter_analysistools_entity_list">
                       {scenario.knownEntities.users.map((user, index) => (
-                        <li key={index} className="entity-item">
-                          <span className="entity-value">{user.username}</span>
-                          <span className="entity-info">{user.role}</span>
+                        <li key={index} className="threathunter_analysistools_entity_item">
+                          <span className="threathunter_analysistools_entity_value">{user.username}</span>
+                          <span className="threathunter_analysistools_entity_info">{user.role}</span>
                         </li>
                       ))}
                     </ul>
@@ -349,7 +349,7 @@ const AnalysisTools = ({ scenario, detectedThreats, onDetectThreat, onRemoveThre
                 </div>
               )}
               
-              <div className="user-activity-tips">
+              <div className="threathunter_analysistools_user_activity_tips">
                 <h5>Suspicious User Behaviors:</h5>
                 <ul>
                   <li>Login attempts outside normal working hours</li>

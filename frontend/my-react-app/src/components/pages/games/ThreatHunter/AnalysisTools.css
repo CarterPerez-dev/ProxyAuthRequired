@@ -1,5 +1,5 @@
 /* src/components/pages/games/ThreatHunter/AnalysisTools.css */
-.analysis-tools {
+.threathunter_analysistools_container {
   background-color: #161625;
   border-radius: 8px;
   border: 1px solid #232535;
@@ -9,33 +9,33 @@
   overflow: hidden;
 }
 
-.tools-header {
+.threathunter_analysistools_header {
   background-color: #232535;
   padding: 12px 15px;
   border-bottom: 1px solid #2d2d40;
 }
 
-.tools-header h3 {
+.threathunter_analysistools_header h3 {
   margin: 0;
   font-size: 1.2rem;
   color: #e2e2e2;
 }
 
-.tools-container {
+.threathunter_analysistools_container_inner {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   overflow: hidden;
 }
 
-.tools-menu {
+.threathunter_analysistools_menu {
   display: flex;
   background-color: #1a1a2e;
   border-bottom: 1px solid #232535;
   overflow-x: auto;
 }
 
-.tool-button {
+.threathunter_analysistools_tool_button {
   padding: 12px 15px;
   background: none;
   border: none;
@@ -50,40 +50,40 @@
   transition: all 0.2s ease;
 }
 
-.tool-button:hover {
+.threathunter_analysistools_tool_button:hover {
   background-color: #232535;
 }
 
-.tool-button.active {
+.threathunter_analysistools_tool_button.active {
   background-color: #232535;
   border-bottom-color: #5f4bb6;
   color: #7a68d4;
 }
 
-.tool-icon {
+.threathunter_analysistools_tool_icon {
   font-size: 1rem;
   color: #5f4bb6;
 }
 
-.tool-content {
+.threathunter_analysistools_tool_content {
   flex-grow: 1;
   padding: 15px;
   overflow-y: auto;
 }
 
 /* Threat Detection Tool */
-.threat-detection-tool {
+.threathunter_analysistools_threat_detection_tool {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.tool-actions {
+.threathunter_analysistools_tool_actions {
   display: flex;
   justify-content: flex-end;
 }
 
-.add-threat-button {
+.threathunter_analysistools_add_threat_button {
   background-color: #5f4bb6;
   color: white;
   border: none;
@@ -97,12 +97,12 @@
   transition: all 0.2s ease;
 }
 
-.add-threat-button:hover {
+.threathunter_analysistools_add_threat_button:hover {
   background-color: #7a68d4;
   transform: translateY(-2px);
 }
 
-.threat-form {
+.threathunter_analysistools_threat_form {
   background-color: #1a1a2e;
   border-radius: 8px;
   padding: 15px;
@@ -110,26 +110,26 @@
   margin-bottom: 15px;
 }
 
-.threat-form h4 {
+.threathunter_analysistools_threat_form h4 {
   margin-top: 0;
   margin-bottom: 15px;
   color: #7a68d4;
   font-size: 1.1rem;
 }
 
-.form-group {
+.threathunter_analysistools_form_group {
   margin-bottom: 15px;
 }
 
-.form-group label {
+.threathunter_analysistools_form_group label {
   display: block;
   margin-bottom: 8px;
   font-size: 0.9rem;
 }
 
-.form-group select,
-.form-group input,
-.form-group textarea {
+.threathunter_analysistools_form_group select,
+.threathunter_analysistools_form_group input,
+.threathunter_analysistools_form_group textarea {
   width: 100%;
   padding: 8px 12px;
   background-color: #232535;
@@ -139,18 +139,18 @@
   font-size: 0.9rem;
 }
 
-.form-group textarea {
+.threathunter_analysistools_form_group textarea {
   resize: vertical;
   min-height: 80px;
 }
 
-.form-actions {
+.threathunter_analysistools_form_actions {
   display: flex;
   gap: 10px;
 }
 
-.submit-threat-button,
-.cancel-button {
+.threathunter_analysistools_submit_threat_button,
+.threathunter_analysistools_cancel_button {
   padding: 8px 15px;
   border-radius: 5px;
   border: none;
@@ -159,31 +159,31 @@
   transition: all 0.2s ease;
 }
 
-.submit-threat-button {
+.threathunter_analysistools_submit_threat_button {
   background-color: #4caf50;
   color: white;
 }
 
-.submit-threat-button:hover:not(:disabled) {
+.threathunter_analysistools_submit_threat_button:hover:not(:disabled) {
   background-color: #45a049;
   transform: translateY(-2px);
 }
 
-.submit-threat-button:disabled {
+.threathunter_analysistools_submit_threat_button:disabled {
   background-color: #666;
   cursor: not-allowed;
 }
 
-.cancel-button {
+.threathunter_analysistools_cancel_button {
   background-color: #666;
   color: white;
 }
 
-.cancel-button:hover {
+.threathunter_analysistools_cancel_button:hover {
   background-color: #777;
 }
 
-.detected-threats h4 {
+.threathunter_analysistools_detected_threats h4 {
   font-size: 1.1rem;
   color: #e2e2e2;
   margin-bottom: 15px;
@@ -192,7 +192,7 @@
   gap: 8px;
 }
 
-.no-threats {
+.threathunter_analysistools_no_threats {
   background-color: #1a1a2e;
   padding: 15px;
   border-radius: 8px;
@@ -201,7 +201,7 @@
   text-align: center;
 }
 
-.threats-list {
+.threathunter_analysistools_threats_list {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -209,14 +209,14 @@
   overflow-y: auto;
 }
 
-.threat-item {
+.threathunter_analysistools_threat_item {
   background-color: #1a1a2e;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #232535;
 }
 
-.threat-header {
+.threathunter_analysistools_threat_header {
   background-color: #232535;
   padding: 10px 15px;
   display: flex;
@@ -224,7 +224,7 @@
   align-items: center;
 }
 
-.threat-type {
+.threathunter_analysistools_threat_type {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -232,17 +232,17 @@
   font-weight: bold;
 }
 
-.threat-type svg {
+.threathunter_analysistools_threat_type svg {
   color: #f44336;
 }
 
-.threat-actions {
+.threathunter_analysistools_threat_actions {
   display: flex;
   gap: 8px;
 }
 
-.edit-threat,
-.remove-threat {
+.threathunter_analysistools_edit_threat,
+.threathunter_analysistools_remove_threat {
   background: none;
   border: none;
   font-size: 0.8rem;
@@ -253,63 +253,63 @@
   transition: all 0.2s ease;
 }
 
-.edit-threat {
+.threathunter_analysistools_edit_threat {
   color: #5f4bb6;
 }
 
-.edit-threat:hover {
+.threathunter_analysistools_edit_threat:hover {
   color: #7a68d4;
 }
 
-.remove-threat {
+.threathunter_analysistools_remove_threat {
   color: #e2e2e2;
   opacity: 0.6;
 }
 
-.remove-threat:hover {
+.threathunter_analysistools_remove_threat:hover {
   color: #f44336;
   opacity: 1;
 }
 
-.threat-body {
+.threathunter_analysistools_threat_body {
   padding: 15px;
 }
 
-.threat-description {
+.threathunter_analysistools_threat_description {
   margin-bottom: 8px;
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-.threat-source {
+.threathunter_analysistools_threat_source {
   font-size: 0.85rem;
   opacity: 0.7;
 }
 
 /* IP Analysis Tool */
-.ip-analysis-tool,
-.pattern-recognition-tool,
-.user-activity-tool {
+.threathunter_analysistools_ip_analysis_tool,
+.threathunter_analysistools_pattern_recognition_tool,
+.threathunter_analysistools_user_activity_tool {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.ip-analysis-tool h4,
-.pattern-recognition-tool h4,
-.user-activity-tool h4 {
+.threathunter_analysistools_ip_analysis_tool h4,
+.threathunter_analysistools_pattern_recognition_tool h4,
+.threathunter_analysistools_user_activity_tool h4 {
   margin-top: 0;
   color: #7a68d4;
   font-size: 1.1rem;
 }
 
-.tool-instruction {
+.threathunter_analysistools_tool_instruction {
   font-size: 0.95rem;
   line-height: 1.5;
   margin-bottom: 15px;
 }
 
-.entity-accordion {
+.threathunter_analysistools_entity_accordion {
   background-color: #1a1a2e;
   border-radius: 8px;
   overflow: hidden;
@@ -317,7 +317,7 @@
   margin-bottom: 15px;
 }
 
-.accordion-header {
+.threathunter_analysistools_accordion_header {
   background-color: #232535;
   padding: 12px 15px;
   display: flex;
@@ -327,52 +327,52 @@
   transition: all 0.2s ease;
 }
 
-.accordion-header:hover {
+.threathunter_analysistools_accordion_header:hover {
   background-color: #2d2d40;
 }
 
-.accordion-content {
+.threathunter_analysistools_accordion_content {
   padding: 15px;
 }
 
-.entity-list {
+.threathunter_analysistools_entity_list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.entity-item {
+.threathunter_analysistools_entity_item {
   display: flex;
   justify-content: space-between;
   padding: 8px 0;
   border-bottom: 1px solid #232535;
 }
 
-.entity-item:last-child {
+.threathunter_analysistools_entity_item:last-child {
   border-bottom: none;
 }
 
-.entity-value {
+.threathunter_analysistools_entity_value {
   font-weight: bold;
   font-family: 'Courier New', monospace;
 }
 
-.entity-info {
+.threathunter_analysistools_entity_info {
   font-size: 0.9rem;
   opacity: 0.8;
 }
 
-.ip-analysis-tips h5,
-.pattern-tips h5,
-.user-activity-tips h5 {
+.threathunter_analysistools_ip_analysis_tips h5,
+.threathunter_analysistools_pattern_tips h5,
+.threathunter_analysistools_user_activity_tips h5 {
   font-size: 1rem;
   color: #e2e2e2;
   margin-bottom: 10px;
 }
 
-.ip-analysis-tips ul,
-.pattern-tips ul,
-.user-activity-tips ul {
+.threathunter_analysistools_ip_analysis_tips ul,
+.threathunter_analysistools_pattern_tips ul,
+.threathunter_analysistools_user_activity_tips ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -382,14 +382,14 @@
   border: 1px solid #232535;
 }
 
-.ip-analysis-tips li,
-.user-activity-tips li {
+.threathunter_analysistools_ip_analysis_tips li,
+.threathunter_analysistools_user_activity_tips li {
   padding: 10px 15px;
   font-size: 0.9rem;
   border-bottom: 1px solid #232535;
 }
 
-.pattern-tips li {
+.threathunter_analysistools_pattern_tips li {
   padding: 10px 15px;
   border-bottom: 1px solid #232535;
   display: flex;
@@ -397,73 +397,73 @@
   gap: 5px;
 }
 
-.ip-analysis-tips li:last-child,
-.pattern-tips li:last-child,
-.user-activity-tips li:last-child {
+.threathunter_analysistools_ip_analysis_tips li:last-child,
+.threathunter_analysistools_pattern_tips li:last-child,
+.threathunter_analysistools_user_activity_tips li:last-child {
   border-bottom: none;
 }
 
-.pattern-name {
+.threathunter_analysistools_pattern_name {
   font-weight: bold;
   color: #5f4bb6;
 }
 
-.pattern-desc {
+.threathunter_analysistools_pattern_desc {
   font-size: 0.85rem;
   opacity: 0.8;
 }
 
 /* Scrollbar styling */
-.tool-content::-webkit-scrollbar,
-.threats-list::-webkit-scrollbar {
+.threathunter_analysistools_tool_content::-webkit-scrollbar,
+.threathunter_analysistools_threats_list::-webkit-scrollbar {
   width: 8px;
 }
 
-.tool-content::-webkit-scrollbar-track,
-.threats-list::-webkit-scrollbar-track {
+.threathunter_analysistools_tool_content::-webkit-scrollbar-track,
+.threathunter_analysistools_threats_list::-webkit-scrollbar-track {
   background: #161625;
 }
 
-.tool-content::-webkit-scrollbar-thumb,
-.threats-list::-webkit-scrollbar-thumb {
+.threathunter_analysistools_tool_content::-webkit-scrollbar-thumb,
+.threathunter_analysistools_threats_list::-webkit-scrollbar-thumb {
   background-color: #2d2d40;
   border-radius: 10px;
 }
 
-.tool-content::-webkit-scrollbar-thumb:hover,
-.threats-list::-webkit-scrollbar-thumb:hover {
+.threathunter_analysistools_tool_content::-webkit-scrollbar-thumb:hover,
+.threathunter_analysistools_threats_list::-webkit-scrollbar-thumb:hover {
   background-color: #3d3d50;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .tools-menu {
+  .threathunter_analysistools_menu {
     flex-wrap: wrap;
   }
   
-  .tool-button {
+  .threathunter_analysistools_tool_button {
     flex: 1;
     justify-content: center;
     min-width: 120px;
   }
   
-  .threat-header {
+  .threathunter_analysistools_threat_header {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
   
-  .threat-actions {
+  .threathunter_analysistools_threat_actions {
     align-self: flex-end;
   }
 }
 
 @media (max-width: 500px) {
-  .form-actions {
+  .threathunter_analysistools_form_actions {
     flex-direction: column;
   }
   
-  .entity-item {
+  .threathunter_analysistools_entity_item {
     flex-direction: column;
     gap: 5px;
   }

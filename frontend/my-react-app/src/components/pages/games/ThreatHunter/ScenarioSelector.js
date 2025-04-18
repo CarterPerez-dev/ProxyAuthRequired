@@ -70,16 +70,16 @@ const ScenarioSelector = ({
   ];
   
   return (
-    <div className="scenario-selection">
-      <div className="selection-header">
+    <div className="threathunter_scenarioselector_main_container">
+      <div className="threathunter_scenarioselector_header">
         <h2>Select Log Analysis Scenario</h2>
         <p>Analyze log files to identify security threats and incidents.</p>
       </div>
       
-      <div className="scenario-filters">
-        <div className="type-filter">
+      <div className="threathunter_scenarioselector_filters">
+        <div className="threathunter_scenarioselector_type_filter">
           <h3>Threat Type</h3>
-          <div className="type-buttons">
+          <div className="threathunter_scenarioselector_type_buttons">
             {threatTypes.map(type => (
               <button
                 key={type}
@@ -93,22 +93,22 @@ const ScenarioSelector = ({
           </div>
         </div>
         
-        <div className="difficulty-selector">
+        <div className="threathunter_scenarioselector_difficulty_selector">
           <h3>Difficulty Level</h3>
-          <div className="difficulty-options">
+          <div className="threathunter_scenarioselector_difficulty_options">
             {difficulties.map(difficulty => (
               <button
                 key={difficulty.id}
-                className={`difficulty-button ${selectedDifficulty === difficulty.id ? 'active' : ''}`}
+                className={`threathunter_scenarioselector_difficulty_button ${selectedDifficulty === difficulty.id ? 'active' : ''}`}
                 onClick={() => onDifficultyChange(difficulty.id)}
               >
-                <div className="difficulty-name">{difficulty.name}</div>
-                <div className="difficulty-indicators">
-                  <div className="indicator">
+                <div className="threathunter_scenarioselector_difficulty_name">{difficulty.name}</div>
+                <div className="threathunter_scenarioselector_difficulty_indicators">
+                  <div className="threathunter_scenarioselector_indicator">
                     <FaTachometerAlt />
                     <span>Time: {difficulty.timeMultiplier}</span>
                   </div>
-                  <div className="indicator">
+                  <div className="threathunter_scenarioselector_indicator">
                     <FaShieldAlt />
                     <span>Complexity: {difficulty.complexity}</span>
                   </div>
@@ -116,7 +116,7 @@ const ScenarioSelector = ({
               </button>
             ))}
           </div>
-          <div className="selected-difficulty-info">
+          <div className="threathunter_scenarioselector_selected_difficulty_info">
             <p>
               {difficulties.find(d => d.id === selectedDifficulty)?.description}
             </p>
@@ -124,39 +124,39 @@ const ScenarioSelector = ({
         </div>
       </div>
       
-      <div className="scenarios-grid">
+      <div className="threathunter_scenarioselector_scenarios_grid">
         {scenarios.length === 0 ? (
-          <div className="no-scenarios">
+          <div className="threathunter_scenarioselector_no_scenarios">
             <p>No scenarios available for the selected threat type. Try another type or check back later.</p>
           </div>
         ) : (
           scenarios.map(scenario => (
             <div
               key={scenario.id}
-              className="scenario-card"
+              className="threathunter_scenarioselector_scenario_card"
               onClick={() => onSelectScenario(scenario.id)}
             >
-              <div className="scenario-icon">
+              <div className="threathunter_scenarioselector_scenario_icon">
                 {getThreatTypeIcon(scenario.threatType)}
               </div>
-              <div className="scenario-info">
+              <div className="threathunter_scenarioselector_scenario_info">
                 <h3>{scenario.title}</h3>
-                <div className="scenario-meta">
-                  <span className="scenario-type">{formatThreatType(scenario.threatType)}</span>
-                  <span className="scenario-difficulty">
+                <div className="threathunter_scenarioselector_scenario_meta">
+                  <span className="threathunter_scenarioselector_scenario_type">{formatThreatType(scenario.threatType)}</span>
+                  <span className="threathunter_scenarioselector_scenario_difficulty">
                     {Array(scenario.difficulty).fill('★').join('')}
                   </span>
                 </div>
                 <p>{scenario.description}</p>
                 
-                <div className="scenario-stats">
-                  <div className="stat-item">
-                    <span className="stat-label">Logs:</span>
-                    <span className="stat-value">{scenario.logCount || scenario.logs?.length || 0}</span>
+                <div className="threathunter_scenarioselector_scenario_stats">
+                  <div className="threathunter_scenarioselector_stat_item">
+                    <span className="threathunter_scenarioselector_stat_label">Logs:</span>
+                    <span className="threathunter_scenarioselector_stat_value">{scenario.logCount || scenario.logs?.length || 0}</span>
                   </div>
-                  <div className="stat-item">
-                    <span className="stat-label">Time Limit:</span>
-                    <span className="stat-value">{scenario.timeLimit} sec</span>
+                  <div className="threathunter_scenarioselector_stat_item">
+                    <span className="threathunter_scenarioselector_stat_label">Time Limit:</span>
+                    <span className="threathunter_scenarioselector_stat_value">{scenario.timeLimit} sec</span>
                   </div>
                 </div>
               </div>

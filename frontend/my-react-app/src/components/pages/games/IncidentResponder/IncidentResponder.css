@@ -1,5 +1,5 @@
 /* src/components/pages/games/IncidentResponder/IncidentResponder.css */
-.incident-responder-container {
+.incidentresponder_main_container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -7,14 +7,14 @@
   color: #e2e2e2;
 }
 
-.incident-header {
+.incidentresponder_header_section {
   text-align: center;
   margin-bottom: 30px;
   padding-bottom: 20px;
   border-bottom: 2px solid #5f4bb6;
 }
 
-.incident-header h1 {
+.incidentresponder_header_section h1 {
   font-size: 2.5rem;
   color: #7a68d4;
   display: flex;
@@ -24,40 +24,40 @@
   margin-bottom: 10px;
 }
 
-.incident-header p {
+.incidentresponder_header_section p {
   font-size: 1.2rem;
   opacity: 0.8;
 }
 
-.incident-content {
+.incidentresponder_content_area {
   background-color: #0f0f18;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0,, 0, 0.5);
   overflow: hidden;
 }
 
 /* Scenario Selection */
-.scenario-selection {
+.incidentresponder_scenario_selection_container {
   padding: 25px;
 }
 
-.selection-header {
+.incidentresponder_selection_header_block {
   text-align: center;
   margin-bottom: 25px;
 }
 
-.selection-header h2 {
+.incidentresponder_selection_header_block h2 {
   font-size: 1.8rem;
   color: #7a68d4;
   margin-bottom: 10px;
 }
 
-.selection-header p {
+.incidentresponder_selection_header_block p {
   font-size: 1.1rem;
   opacity: 0.8;
 }
 
-.scenario-filters {
+.incidentresponder_scenario_filters_section {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -68,19 +68,19 @@
   border: 1px solid #232535;
 }
 
-.type-filter h3 {
+.incidentresponder_type_filter_group h3 {
   font-size: 1.3rem;
   color: #7a68d4;
   margin-bottom: 15px;
 }
 
-.type-buttons {
+.incidentresponder_type_buttons_row {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.type-buttons button {
+.incidentresponder_type_buttons_row button {
   background-color: #232535;
   color: #e2e2e2;
   border: none;
@@ -91,23 +91,23 @@
   transition: all 0.2s ease;
 }
 
-.type-buttons button:hover {
+.incidentresponder_type_buttons_row button:hover {
   background-color: #2d2d40;
   transform: translateY(-2px);
 }
 
-.type-buttons button.active {
+.incidentresponder_type_buttons_row button.active {
   background-color: #5f4bb6;
   color: white;
 }
 
-.scenarios-grid {
+.incidentresponder_scenarios_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
 
-.scenario-card {
+.incidentresponder_scenario_card {
   background-color: #161625;
   border-radius: 8px;
   border: 1px solid #232535;
@@ -118,13 +118,13 @@
   transition: all 0.3s ease;
 }
 
-.scenario-card:hover {
+.incidentresponder_scenario_card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
   border-color: #5f4bb6;
 }
 
-.scenario-icon {
+.incidentresponder_scenario_icon_wrapper {
   background-color: #232535;
   height: 80px;
   display: flex;
@@ -134,26 +134,26 @@
   color: #7a68d4;
 }
 
-.scenario-info {
+.incidentresponder_scenario_info_section {
   padding: 20px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.scenario-info h3 {
+.incidentresponder_scenario_info_section h3 {
   font-size: 1.3rem;
   margin-bottom: 10px;
   color: #e2e2e2;
 }
 
-.scenario-meta {
+.incidentresponder_scenario_meta_data {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
 }
 
-.scenario-type {
+.incidentresponder_scenario_type_label {
   background-color: #232535;
   padding: 5px 10px;
   border-radius: 5px;
@@ -161,53 +161,53 @@
   text-transform: capitalize;
 }
 
-.scenario-difficulty {
+.incidentresponder_scenario_difficulty_rating {
   color: #ffd700;
   font-size: 0.9rem;
 }
 
-.scenario-info p {
+.incidentresponder_scenario_info_section p {
   font-size: 0.95rem;
   opacity: 0.8;
   line-height: 1.5;
   flex-grow: 1;
 }
 
-.incident-loading, .incident-error {
+.incidentresponder_loading_state, .incidentresponder_error_state {
   text-align: center;
   padding: 50px;
   font-size: 1.3rem;
 }
 
-.incident-error {
+.incidentresponder_error_state {
   color: #f44336;
 }
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  .scenarios-grid {
+  .incidentresponder_scenarios_grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 }
 
 @media (max-width: 600px) {
-  .incident-header h1 {
+  .incidentresponder_header_section h1 {
     font-size: 2rem;
   }
   
-  .selection-header h2 {
+  .incidentresponder_selection_header_block h2 {
     font-size: 1.5rem;
   }
   
-  .scenarios-grid {
+  .incidentresponder_scenarios_grid {
     grid-template-columns: 1fr;
   }
   
-  .type-buttons {
+  .incidentresponder_type_buttons_row {
     flex-direction: column;
   }
   
-  .type-buttons button {
+  .incidentresponder_type_buttons_row button {
     width: 100%;
   }
 }

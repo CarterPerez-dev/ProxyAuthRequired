@@ -10,29 +10,29 @@ const PhishingCard = ({ item }) => {
     switch (item.type) {
       case 'email':
         return (
-          <div className="phishing-email">
-            <div className="email-header">
-              <div className="email-from">
+          <div className="phishingphrenzy_phishing_email">
+            <div className="phishingphrenzy_email_header">
+              <div className="phishingphrenzy_email_from">
                 <strong>From:</strong> {item.from}
               </div>
-              <div className="email-subject">
+              <div className="phishingphrenzy_email_subject">
                 <strong>Subject:</strong> {item.subject}
               </div>
               {item.date && (
-                <div className="email-date">
+                <div className="phishingphrenzy_email_date">
                   <strong>Date:</strong> {item.date}
                 </div>
               )}
             </div>
-            <div className="email-body">
+            <div className="phishingphrenzy_email_body">
               {item.body}
             </div>
             {item.links && item.links.length > 0 && (
-              <div className="email-links">
-                <div className="link-label">Links in email:</div>
+              <div className="phishingphrenzy_email_links">
+                <div className="phishingphrenzy_link_label">Links in email:</div>
                 {item.links.map((link, idx) => (
-                  <div className="email-link" key={idx}>
-                    <FaLink /> <span className="link-text">{link}</span>
+                  <div className="phishingphrenzy_email_link" key={idx}>
+                    <FaLink /> <span className="phishingphrenzy_link_text">{link}</span>
                   </div>
                 ))}
               </div>
@@ -42,21 +42,21 @@ const PhishingCard = ({ item }) => {
       
       case 'website':
         return (
-          <div className="phishing-website">
-            <div className="website-url">
+          <div className="phishingphrenzy_phishing_website">
+            <div className="phishingphrenzy_website_url">
               {item.url}
             </div>
-            <div className="website-preview">
-              <div className="website-header">
+            <div className="phishingphrenzy_website_preview">
+              <div className="phishingphrenzy_website_header">
                 <h3>{item.title}</h3>
               </div>
-              <div className="website-content">
+              <div className="phishingphrenzy_website_content">
                 {item.content}
               </div>
               {item.formFields && (
-                <div className="website-form">
+                <div className="phishingphrenzy_website_form">
                   {item.formFields.map((field, idx) => (
-                    <div className="form-field" key={idx}>
+                    <div className="phishingphrenzy_form_field" key={idx}>
                       <label>{field.label}</label>
                       <input 
                         type={field.type} 
@@ -65,7 +65,7 @@ const PhishingCard = ({ item }) => {
                       />
                     </div>
                   ))}
-                  <button className="form-submit" disabled>
+                  <button className="phishingphrenzy_form_submit" disabled>
                     {item.submitButton || "Submit"}
                   </button>
                 </div>
@@ -76,17 +76,17 @@ const PhishingCard = ({ item }) => {
       
       case 'sms':
         return (
-          <div className="phishing-sms">
-            <div className="sms-from">
+          <div className="phishingphrenzy_phishing_sms">
+            <div className="phishingphrenzy_sms_from">
               From: {item.from}
             </div>
-            <div className="sms-message">
+            <div className="phishingphrenzy_sms_message">
               {item.message}
             </div>
             {item.links && item.links.length > 0 && (
-              <div className="sms-links">
+              <div className="phishingphrenzy_sms_links">
                 {item.links.map((link, idx) => (
-                  <div className="sms-link" key={idx}>
+                  <div className="phishingphrenzy_sms_link" key={idx}>
                     {link}
                   </div>
                 ))}
@@ -103,30 +103,30 @@ const PhishingCard = ({ item }) => {
   const getCardIcon = () => {
     switch (item.type) {
       case 'email':
-        return <FaEnvelope className="card-icon" />;
+        return <FaEnvelope className="phishingphrenzy_card_icon" />;
       case 'website':
-        return <FaGlobe className="card-icon" />;
+        return <FaGlobe className="phishingphrenzy_card_icon" />;
       case 'sms':
-        return <FaCommentAlt className="card-icon" />;
+        return <FaCommentAlt className="phishingphrenzy_card_icon" />;
       default:
         return null;
     }
   };
 
   return (
-    <div className={`phishing-card ${item.type}-card`}>
-      <div className="card-header">
+    <div className={`phishingphrenzy_card_container ${item.type}-card`}>
+      <div className="phishingphrenzy_card_header">
         {getCardIcon()}
-        <span className="card-type">
+        <span className="phishingphrenzy_card_type">
           {item.type === 'email' ? 'Email Message' : 
            item.type === 'website' ? 'Website' : 
            item.type === 'sms' ? 'SMS Message' : 'Unknown'}
         </span>
       </div>
-      <div className="card-content">
+      <div className="phishingphrenzy_card_content">
         {renderContent()}
       </div>
-      <div className="card-instruction">
+      <div className="phishingphrenzy_card_instruction">
         <strong>Is this a phishing attempt?</strong>
       </div>
     </div>

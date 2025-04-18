@@ -1,26 +1,26 @@
 /* src/components/pages/games/IncidentResponder/ScenarioIntro.css */
-.scenario-intro {
+.incidentresponder_scenariointro_wrapper {
   padding: 25px;
 }
 
-.intro-header {
+.incidentresponder_scenariointro_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.intro-header h2 {
+.incidentresponder_scenariointro_header h2 {
   font-size: 1.8rem;
   color: #7a68d4;
 }
 
-.scenario-difficulty {
+.incidentresponder_scenariointro_difficulty {
   color: #ffd700;
   font-size: 1.1rem;
 }
 
-.alert-banner {
+.incidentresponder_scenariointro_alert_banner {
   background-color: #f44336;
   color: white;
   padding: 15px 20px;
@@ -32,16 +32,16 @@
   animation: pulse 2s infinite;
 }
 
-.alert-banner svg {
+.incidentresponder_scenariointro_alert_banner svg {
   font-size: 1.5rem;
 }
 
-.alert-banner span {
+.incidentresponder_scenariointro_alert_banner span {
   font-size: 1.1rem;
   font-weight: bold;
 }
 
-.intro-content {
+.incidentresponder_scenariointro_content {
   background-color: #161625;
   border-radius: 8px;
   overflow: hidden;
@@ -49,13 +49,13 @@
   border: 1px solid #232535;
 }
 
-.intro-tabs {
+.incidentresponder_scenariointro_tabs {
   display: flex;
   background-color: #232535;
   border-bottom: 1px solid #2d2d40;
 }
 
-.tab-button {
+.incidentresponder_scenariointro_tab_button {
   background: none;
   border: none;
   color: #e2e2e2;
@@ -69,29 +69,29 @@
   transition: all 0.2s ease;
 }
 
-.tab-button:hover {
+.incidentresponder_scenariointro_tab_button:hover {
   background-color: #2d2d40;
 }
 
-.tab-button.active {
+.incidentresponder_scenariointro_tab_button.active {
   background-color: #1a1a2e;
   border-bottom-color: #5f4bb6;
   color: #7a68d4;
 }
 
-.tab-content-container {
+.incidentresponder_scenariointro_tab_content_container {
   padding: 25px;
   min-height: 300px;
 }
 
-.tab-content h3 {
+.incidentresponder_scenariointro_tab_content h3 {
   font-size: 1.4rem;
   color: #7a68d4;
   margin-bottom: 20px;
 }
 
 /* Overview Tab */
-.tab-content.overview .scenario-meta-info {
+.incidentresponder_scenariointro_tab_content.overview .incidentresponder_scenariointro_meta_info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
@@ -101,24 +101,24 @@
   border-radius: 8px;
 }
 
-.meta-item {
+.incidentresponder_scenariointro_meta_item {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.meta-label {
+.incidentresponder_scenariointro_meta_label {
   font-size: 0.9rem;
   opacity: 0.7;
 }
 
-.meta-value {
+.incidentresponder_scenariointro_meta_value {
   font-size: 1.1rem;
   font-weight: bold;
 }
 
 /* Role Tab */
-.role-info {
+.incidentresponder_scenariointro_role_info {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -128,7 +128,7 @@
   border-radius: 8px;
 }
 
-.role-icon {
+.incidentresponder_scenariointro_role_icon {
   width: 60px;
   height: 60px;
   background-color: #232535;
@@ -140,37 +140,37 @@
   color: #7a68d4;
 }
 
-.role-details {
+.incidentresponder_scenariointro_role_details {
   flex: 1;
 }
 
-.role-details h4 {
+.incidentresponder_scenariointro_role_details h4 {
   font-size: 1.2rem;
   margin-bottom: 10px;
   color: #e2e2e2;
 }
 
-.responsibilities h4 {
+.incidentresponder_scenariointro_responsibilities h4 {
   font-size: 1.1rem;
   margin-bottom: 15px;
   color: #7a68d4;
 }
 
-.responsibilities ul {
+.incidentresponder_scenariointro_responsibilities ul {
   padding-left: 25px;
 }
 
-.responsibilities li {
+.incidentresponder_scenariointro_responsibilities li {
   margin-bottom: 10px;
   line-height: 1.5;
 }
 
 /* Objectives Tab */
-.objectives-list {
+.incidentresponder_scenariointro_objectives_list {
   margin-top: 20px;
 }
 
-.objective-item {
+.incidentresponder_scenariointro_objective_item {
   display: flex;
   gap: 15px;
   margin-bottom: 15px;
@@ -179,7 +179,7 @@
   border-radius: 8px;
 }
 
-.objective-number {
+.incidentresponder_scenariointro_objective_number {
   width: 30px;
   height: 30px;
   background-color: #5f4bb6;
@@ -190,43 +190,43 @@
   font-weight: bold;
 }
 
-.objective-text {
+.incidentresponder_scenariointro_objective_text {
   flex: 1;
   line-height: 1.5;
 }
 
 /* Tips Tab */
-.tips-container {
+.incidentresponder_scenariointro_tips_container {
   margin-bottom: 25px;
 }
 
-.tips-intro {
+.incidentresponder_scenariointro_tips_intro {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 20px;
 }
 
-.tips-icon {
+.incidentresponder_scenariointro_tips_icon {
   font-size: 2rem;
   color: #7a68d4;
 }
 
-.tips-list {
+.incidentresponder_scenariointro_tips_list {
   background-color: #1a1a2e;
   padding: 20px;
   border-radius: 8px;
   list-style-type: none;
 }
 
-.tips-list li {
+.incidentresponder_scenariointro_tips_list li {
   position: relative;
   padding-left: 25px;
   margin-bottom: 15px;
   line-height: 1.5;
 }
 
-.tips-list li::before {
+.incidentresponder_scenariointro_tips_list li::before {
   content: "→";
   position: absolute;
   left: 0;
@@ -234,7 +234,7 @@
   color: #7a68d4;
 }
 
-.warning {
+.incidentresponder_scenariointro_warning {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -244,17 +244,17 @@
   border-radius: 8px;
 }
 
-.warning-icon {
+.incidentresponder_scenariointro_warning_icon {
   color: #f44336;
   font-size: 1.5rem;
 }
 
-.intro-actions {
+.incidentresponder_scenariointro_actions {
   display: flex;
   justify-content: center;
 }
 
-.start-button {
+.incidentresponder_scenariointro_start_button {
   background-color: #5f4bb6;
   color: white;
   border: none;
@@ -268,7 +268,7 @@
   transition: all 0.3s ease;
 }
 
-.start-button:hover {
+.incidentresponder_scenariointro_start_button:hover {
   background-color: #7a68d4;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
@@ -282,33 +282,33 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .intro-header {
+  .incidentresponder_scenariointro_header {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
   
-  .intro-tabs {
+  .incidentresponder_scenariointro_tabs {
     flex-wrap: wrap;
   }
   
-  .tab-button {
+  .incidentresponder_scenariointro_tab_button {
     padding: 10px 15px;
     font-size: 0.9rem;
   }
   
-  .role-info {
+  .incidentresponder_scenariointro_role_info {
     flex-direction: column;
     text-align: center;
   }
 }
 
 @media (max-width: 500px) {
-  .tab-content-container {
+  .incidentresponder_scenariointro_tab_content_container {
     padding: 15px;
   }
   
-  .scenario-meta-info {
+  .incidentresponder_scenariointro_meta_info {
     grid-template-columns: 1fr;
   }
 }

@@ -86,16 +86,16 @@ const IncidentResponder = () => {
     switch (gameStatus) {
       case 'selecting':
         return (
-          <div className="scenario-selection">
-            <div className="selection-header">
+          <div className="incidentresponder_scenario_selection_container">
+            <div className="incidentresponder_selection_header_block">
               <h2>Select an Incident Scenario</h2>
               <p>Test your incident response skills by handling various security incidents.</p>
             </div>
             
-            <div className="scenario-filters">
-              <div className="type-filter">
+            <div className="incidentresponder_scenario_filters_section">
+              <div className="incidentresponder_type_filter_group">
                 <h3>Incident Type</h3>
-                <div className="type-buttons">
+                <div className="incidentresponder_type_buttons_row">
                   {scenarioTypes.map(type => (
                     <button
                       key={type}
@@ -114,24 +114,24 @@ const IncidentResponder = () => {
               />
             </div>
             
-            <div className="scenarios-grid">
+            <div className="incidentresponder_scenarios_grid">
               {filteredScenarios.map(scenario => (
                 <div
                   key={scenario.id}
-                  className="scenario-card"
+                  className="incidentresponder_scenario_card"
                   onClick={() => handleStartScenario(scenario.id)}
                 >
-                  <div className="scenario-icon">
+                  <div className="incidentresponder_scenario_icon_wrapper">
                     {scenario.type === 'malware' && <FaBug />}
                     {scenario.type === 'breach' && <FaExclamationTriangle />}
                     {scenario.type === 'phishing' && <FaShieldAlt />}
                     {!['malware', 'breach', 'phishing'].includes(scenario.type) && <FaClipboardCheck />}
                   </div>
-                  <div className="scenario-info">
+                  <div className="incidentresponder_scenario_info_section">
                     <h3>{scenario.title}</h3>
-                    <div className="scenario-meta">
-                      <span className="scenario-type">{scenario.type}</span>
-                      <span className="scenario-difficulty">
+                    <div className="incidentresponder_scenario_meta_data">
+                      <span className="incidentresponder_scenario_type_label">{scenario.type}</span>
+                      <span className="incidentresponder_scenario_difficulty_rating">
                         {Array(scenario.difficulty).fill('★').join('')}
                       </span>
                     </div>
@@ -180,21 +180,21 @@ const IncidentResponder = () => {
   };
   
   if (loading && scenarios.length === 0) {
-    return <div className="incident-loading">Loading incident scenarios...</div>;
+    return <div className="incidentresponder_loading_state">Loading incident scenarios...</div>;
   }
   
   if (error) {
-    return <div className="incident-error">Error: {error}</div>;
+    return <div className="incidentresponder_error_state">Error: {error}</div>;
   }
   
   return (
-    <div className="incident-responder-container">
-      <div className="incident-header">
+    <div className="incidentresponder_main_container">
+      <div className="incidentresponder_header_section">
         <h1><FaShieldAlt /> Incident Responder</h1>
         <p>Test your cybersecurity incident response skills in realistic scenarios</p>
       </div>
       
-      <div className="incident-content">
+      <div className="incidentresponder_content_area">
         {renderGameContent()}
       </div>
     </div>

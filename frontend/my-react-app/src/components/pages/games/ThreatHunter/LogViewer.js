@@ -1,4 +1,4 @@
-LogViewer.js// src/components/pages/games/ThreatHunter/LogViewer.js
+// src/components/pages/games/ThreatHunter/LogViewer.js
 import React, { useState, useEffect, useRef } from 'react';
 import { FaFlag, FaRegFlag, FaExclamationTriangle, FaSearch } from 'react-icons/fa';
 import './LogViewer.css';
@@ -83,21 +83,21 @@ const LogViewer = ({ logs, selectedLog, flaggedLines, onSelectLog, onFlagLine })
   // If no logs are available, show a message
   if (!logs || logs.length === 0) {
     return (
-      <div className="log-viewer-empty">
-        <FaExclamationTriangle className="empty-icon" />
+      <div className="threathunter_logviewer_empty_state">
+        <FaExclamationTriangle className="threathunter_logviewer_empty_icon" />
         <p>No log files available for analysis.</p>
       </div>
     );
   }
   
   return (
-    <div className="log-viewer">
-      <div className="log-header">
-        <div className="log-tabs">
+    <div className="threathunter_logviewer_main_wrapper">
+      <div className="threathunter_logviewer_header_bar">
+        <div className="threathunter_logviewer_tabs_container">
           {logs.map((log, index) => (
             <button
               key={log.id}
-              className={`log-tab ${index === currentLogIndex ? 'active' : ''}`}
+              className={`threathunter_logviewer_tab_button ${index === currentLogIndex ? 'active' : ''}`}
               onClick={() => handleLogSwitch(index)}
             >
               {log.name}
@@ -105,8 +105,8 @@ const LogViewer = ({ logs, selectedLog, flaggedLines, onSelectLog, onFlagLine })
           ))}
         </div>
         
-        <div className="log-search">
-          <div className="search-input-container">
+        <div className="threathunter_logviewer_search_area">
+          <div className="threathunter_logviewer_search_input_box">
             <input
               type="text"
               placeholder="Search logs..."
@@ -114,24 +114,24 @@ const LogViewer = ({ logs, selectedLog, flaggedLines, onSelectLog, onFlagLine })
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
             />
-            <button className="search-button" onClick={handleSearch}>
+            <button className="threathunter_logviewer_search_button" onClick={handleSearch}>
               <FaSearch />
             </button>
           </div>
           
           {searchResults.length > 0 && (
-            <div className="search-navigation">
-              <span className="results-count">
+            <div className="threathunter_logviewer_search_navigation">
+              <span className="threathunter_logviewer_results_count">
                 {currentSearchIndex + 1}/{searchResults.length}
               </span>
               <button 
-                className="nav-button prev"
+                className="threathunter_logviewer_nav_button prev"
                 onClick={() => navigateSearch('prev')}
               >
                 ↑
               </button>
               <button 
-                className="nav-button next"
+                className="threathunter_logviewer_nav_button next"
                 onClick={() => navigateSearch('next')}
               >
                 ↓
@@ -141,21 +141,21 @@ const LogViewer = ({ logs, selectedLog, flaggedLines, onSelectLog, onFlagLine })
         </div>
       </div>
       
-      <div className="log-content" ref={logViewerRef}>
+      <div className="threathunter_logviewer_content_area" ref={logViewerRef}>
         {currentLog && (
-          <div className="log-info">
-            <div className="log-info-header">
-              <span className="log-name">{currentLog.name}</span>
-              <span className="log-type">{currentLog.type}</span>
+          <div className="threathunter_logviewer_info_section">
+            <div className="threathunter_logviewer_info_header">
+              <span className="threathunter_logviewer_log_name">{currentLog.name}</span>
+              <span className="threathunter_logviewer_log_type">{currentLog.type}</span>
             </div>
-            <div className="log-meta">
-              <span className="log-timestamp">Timestamp: {currentLog.timestamp}</span>
-              <span className="log-source">Source: {currentLog.source}</span>
+            <div className="threathunter_logviewer_log_meta">
+              <span className="threathunter_logviewer_log_timestamp">Timestamp: {currentLog.timestamp}</span>
+              <span className="threathunter_logviewer_log_source">Source: {currentLog.source}</span>
             </div>
           </div>
         )}
         
-        <div className="log-lines">
+        <div className="threathunter_logviewer_log_lines">
           {currentLog && currentLog.content.map((line, index) => {
             const isHighlighted = index === highlightedLineIndex;
             const isFlagged = flaggedLines.includes(index);
@@ -165,15 +165,15 @@ const LogViewer = ({ logs, selectedLog, flaggedLines, onSelectLog, onFlagLine })
               <div 
                 key={index}
                 id={`log-line-${index}`}
-                className={`log-line ${isHighlighted ? 'highlighted' : ''} ${isFlagged ? 'flagged' : ''} ${hasSearchMatch ? 'search-match' : ''}`}
+                className={`threathunter_logviewer_log_line ${isHighlighted ? 'highlighted' : ''} ${isFlagged ? 'flagged' : ''} ${hasSearchMatch ? 'search-match' : ''}`}
               >
-                <div className="line-number">{index + 1}</div>
-                <div className="line-text">
+                <div className="threathunter_logviewer_line_number">{index + 1}</div>
+                <div className="threathunter_logviewer_line_text">
                   <pre>{line.text}</pre>
                 </div>
-                <div className="line-actions">
+                <div className="threathunter_logviewer_line_actions">
                   <button 
-                    className={`flag-button ${isFlagged ? 'active' : ''}`}
+                    className={`threathunter_logviewer_flag_button ${isFlagged ? 'active' : ''}`}
                     onClick={() => handleFlagLine(index)}
                     title={isFlagged ? "Unflag this line" : "Flag as suspicious"}
                   >
@@ -186,13 +186,13 @@ const LogViewer = ({ logs, selectedLog, flaggedLines, onSelectLog, onFlagLine })
         </div>
       </div>
       
-      <div className="log-viewer-footer">
-        <div className="log-statistics">
+      <div className="threathunter_logviewer_footer">
+        <div className="threathunter_logviewer_statistics">
           <span>Total Lines: {currentLog ? currentLog.content.length : 0}</span>
           <span>Flagged: {flaggedLines.length}</span>
         </div>
-        <div className="log-help">
-          <span className="help-text">Click <FaRegFlag /> to flag suspicious log entries</span>
+        <div className="threathunter_logviewer_help_text">
+          <span>Click <FaRegFlag /> to flag suspicious log entries</span>
         </div>
       </div>
     </div>

@@ -61,10 +61,10 @@ const LevelSelector = ({
   };
   
   return (
-    <div className="level-selector">
+    <div className="cipherchallenge_lvlselector_container">
       <h3>Cipher Levels</h3>
       
-      <div className="levels-list">
+      <div className="cipherchallenge_lvlselector_levels_list">
         {levels.map(level => {
           const isLocked = level > maxUnlockedLevel;
           const isActive = activeLevel === level;
@@ -72,45 +72,45 @@ const LevelSelector = ({
           const isComplete = completionPercentage === 100;
           
           return (
-            <div key={level} className="level-container">
+            <div key={level} className="cipherchallenge_lvlselector_level_container">
               <div 
-                className={`level-item ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isComplete ? 'complete' : ''}`}
+                className={`cipherchallenge_lvlselector_level_item ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''} ${isComplete ? 'complete' : ''}`}
                 onClick={() => handleLevelClick(level)}
               >
-                <div className="level-icon">
+                <div className="cipherchallenge_lvlselector_level_icon">
                   {isLocked ? (
-                    <FaLock className="lock-icon" />
+                    <FaLock className="cipherchallenge_lvlselector_lock_icon" />
                   ) : isComplete ? (
-                    <FaCheckCircle className="complete-icon" />
+                    <FaCheckCircle className="cipherchallenge_lvlselector_complete_icon" />
                   ) : (
-                    <FaLockOpen className="unlock-icon" />
+                    <FaLockOpen className="cipherchallenge_lvlselector_unlock_icon" />
                   )}
                 </div>
                 
-                <div className="level-info">
-                  <div className="level-name">{getLevelName(level)}</div>
-                  <div className="level-difficulty">
+                <div className="cipherchallenge_lvlselector_level_info">
+                  <div className="cipherchallenge_lvlselector_level_name">{getLevelName(level)}</div>
+                  <div className="cipherchallenge_lvlselector_level_difficulty">
                     {Array(level).fill().map((_, i) => (
-                      <FaStar key={i} className="level-star" />
+                      <FaStar key={i} className="cipherchallenge_lvlselector_level_star" />
                     ))}
                   </div>
                 </div>
                 
-                <div className="level-progress">
-                  <div className="progress-bar">
+                <div className="cipherchallenge_lvlselector_level_progress">
+                  <div className="cipherchallenge_lvlselector_progress_bar">
                     <div 
-                      className="progress-fill"
+                      className="cipherchallenge_lvlselector_progress_fill"
                       style={{ width: `${completionPercentage}%` }}
                     ></div>
                   </div>
-                  <div className="progress-text">
+                  <div className="cipherchallenge_lvlselector_progress_text">
                     {completionPercentage}%
                   </div>
                 </div>
               </div>
               
               {isActive && challengesByLevel[level] && (
-                <div className="challenges-list">
+                <div className="cipherchallenge_lvlselector_challenges_list">
                   {challengesByLevel[level].map(challenge => {
                     const isCompleted = completedChallenges.includes(challenge.id);
                     const isSelected = currentChallenge && currentChallenge.id === challenge.id;
@@ -118,17 +118,17 @@ const LevelSelector = ({
                     return (
                       <div 
                         key={challenge.id}
-                        className={`challenge-item ${isCompleted ? 'completed' : ''} ${isSelected ? 'selected' : ''}`}
+                        className={`cipherchallenge_lvlselector_challenge_item ${isCompleted ? 'completed' : ''} ${isSelected ? 'selected' : ''}`}
                         onClick={() => handleChallengeClick(challenge)}
                       >
-                        <div className="challenge-indicator">
+                        <div className="cipherchallenge_lvlselector_challenge_indicator">
                           {isCompleted ? (
-                            <FaCheckCircle className="completed-icon" />
+                            <FaCheckCircle className="cipherchallenge_lvlselector_completed_icon" />
                           ) : (
-                            <div className="challenge-number">{challenge.id}</div>
+                            <div className="cipherchallenge_lvlselector_challenge_number">{challenge.id}</div>
                           )}
                         </div>
-                        <div className="challenge-name">
+                        <div className="cipherchallenge_lvlselector_challenge_name">
                           {challenge.title}
                         </div>
                       </div>

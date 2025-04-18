@@ -1,5 +1,5 @@
 /* src/components/pages/games/PhishingPhrenzy/PhishingCard.css */
-.phishing-card {
+.phishingphrenzy_card_container {
   background-color: #161625;
   border-radius: 8px;
   border: 1px solid #232535;
@@ -10,11 +10,11 @@
   overflow-y: auto;
 }
 
-.phishing-card:hover {
+.phishingphrenzy_card_container:hover {
   box-shadow: 0 8px 25px rgba(95, 75, 182, 0.4);
 }
 
-.card-header {
+.phishingphrenzy_card_header {
   background-color: #232535;
   padding: 12px 15px;
   display: flex;
@@ -23,22 +23,22 @@
   border-bottom: 1px solid #2d2d40;
 }
 
-.card-icon {
+.phishingphrenzy_card_icon {
   font-size: 1.4rem;
   color: #7a68d4;
 }
 
-.card-type {
+.phishingphrenzy_card_type {
   font-size: 1rem;
   font-weight: bold;
   color: #e2e2e2;
 }
 
-.card-content {
+.phishingphrenzy_card_content {
   padding: 20px;
 }
 
-.card-instruction {
+.phishingphrenzy_card_instruction {
   padding: 15px;
   background-color: #1a1a2e;
   text-align: center;
@@ -48,13 +48,13 @@
 }
 
 /* Email Styling */
-.phishing-email {
+.phishingphrenzy_phishing_email {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.email-header {
+.phishingphrenzy_email_header {
   background-color: #1a1a2e;
   padding: 15px;
   border-radius: 5px;
@@ -63,11 +63,11 @@
   gap: 8px;
 }
 
-.email-from, .email-subject, .email-date {
+.phishingphrenzy_email_from, .phishingphrenzy_email_subject, .phishingphrenzy_email_date {
   font-size: 0.9rem;
 }
 
-.email-body {
+.phishingphrenzy_email_body {
   background-color: #ffffff;
   color: #000000;
   padding: 20px;
@@ -78,19 +78,19 @@
   line-height: 1.5;
 }
 
-.email-links {
+.phishingphrenzy_email_links {
   background-color: #1a1a2e;
   padding: 12px;
   border-radius: 5px;
 }
 
-.link-label {
+.phishingphrenzy_link_label {
   font-size: 0.9rem;
   margin-bottom: 8px;
   color: #7a68d4;
 }
 
-.email-link {
+.phishingphrenzy_email_link {
   background-color: #232535;
   padding: 8px 12px;
   border-radius: 3px;
@@ -102,19 +102,19 @@
   font-size: 0.85rem;
 }
 
-.link-text {
+.phishingphrenzy_link_text {
   color: #4da6ff;
   text-decoration: underline;
 }
 
 /* Website Styling */
-.phishing-website {
+.phishingphrenzy_phishing_website {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.website-url {
+.phishingphrenzy_website_url {
   background-color: #1a1a2e;
   padding: 10px 15px;
   border-radius: 5px 5px 0 0;
@@ -127,7 +127,7 @@
   gap: 8px;
 }
 
-.website-preview {
+.phishingphrenzy_website_preview {
   background-color: #ffffff;
   color: #000000;
   border-radius: 0 0 5px 5px;
@@ -137,49 +137,49 @@
   overflow: hidden;
 }
 
-.website-header {
+.phishingphrenzy_website_header {
   background-color: #f2f2f2;
   padding: 15px;
   border-bottom: 1px solid #ddd;
 }
 
-.website-header h3 {
+.phishingphrenzy_website_header h3 {
   margin: 0;
   font-size: 1.2rem;
   color: #333;
 }
 
-.website-content {
+.phishingphrenzy_website_content {
   padding: 20px;
   line-height: 1.5;
 }
 
-.website-form {
+.phishingphrenzy_website_form {
   padding: 15px;
   background-color: #f9f9f9;
   border-top: 1px solid #ddd;
 }
 
-.form-field {
+.phishingphrenzy_form_field {
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.form-field label {
+.phishingphrenzy_form_field label {
   font-size: 0.9rem;
   color: #333;
 }
 
-.form-field input {
+.phishingphrenzy_form_field input {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 0.9rem;
 }
 
-.form-submit {
+.phishingphrenzy_form_submit {
   background-color: #4285f4;
   color: white;
   border: none;
@@ -191,7 +191,7 @@
 }
 
 /* SMS Styling */
-.phishing-sms {
+.phishingphrenzy_phishing_sms {
   background-color: #1a1a2e;
   padding: 20px;
   border-radius: 8px;
@@ -201,24 +201,24 @@
   gap: 15px;
 }
 
-.sms-from {
+.phishingphrenzy_sms_from {
   font-size: 0.9rem;
   color: #7a68d4;
   margin-bottom: 5px;
 }
 
-.sms-message {
+.phishingphrenzy_sms_message {
   background-color: #232535;
   padding: 15px;
   border-radius: 8px;
   line-height: 1.5;
 }
 
-.sms-links {
+.phishingphrenzy_sms_links {
   margin-top: 10px;
 }
 
-.sms-link {
+.phishingphrenzy_sms_link {
   background-color: #2d2d40;
   padding: 8px 12px;
   border-radius: 3px;
@@ -229,19 +229,19 @@
 }
 
 /* Scrollbar Styling */
-.phishing-card::-webkit-scrollbar {
+.phishingphrenzy_card_container::-webkit-scrollbar {
   width: 8px;
 }
 
-.phishing-card::-webkit-scrollbar-track {
+.phishingphrenzy_card_container::-webkit-scrollbar-track {
   background: #1a1a2e;
 }
 
-.phishing-card::-webkit-scrollbar-thumb {
+.phishingphrenzy_card_container::-webkit-scrollbar-thumb {
   background-color: #2d2d40;
   border-radius: 10px;
 }
 
-.phishing-card::-webkit-scrollbar-thumb:hover {
+.phishingphrenzy_card_container::-webkit-scrollbar-thumb:hover {
   background-color: #3d3d50;
 }

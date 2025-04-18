@@ -29,22 +29,22 @@ const DifficultySelector = ({ selectedDifficulty, onDifficultyChange }) => {
   ];
   
   return (
-    <div className="difficulty-selector">
+    <div className="incidentresponder_diffsel_wrapper">
       <h3>Difficulty Level</h3>
-      <div className="difficulty-options">
+      <div className="incidentresponder_diffsel_options_container">
         {difficulties.map(difficulty => (
           <button
             key={difficulty.id}
-            className={`difficulty-button ${selectedDifficulty === difficulty.id ? 'active' : ''}`}
+            className={`incidentresponder_diffsel_difficulty_btn ${selectedDifficulty === difficulty.id ? 'active' : ''}`}
             onClick={() => onDifficultyChange(difficulty.id)}
           >
-            <div className="difficulty-name">{difficulty.name}</div>
-            <div className="difficulty-indicators">
-              <div className="indicator">
+            <div className="incidentresponder_diffsel_name_display">{difficulty.name}</div>
+            <div className="incidentresponder_diffsel_indicators_area">
+              <div className="incidentresponder_diffsel_indicator_item">
                 <FaRegClock />
                 <span>Time: {difficulty.timeMultiplier}</span>
               </div>
-              <div className="indicator">
+              <div className="incidentresponder_diffsel_indicator_item">
                 <FaTachometerAlt />
                 <span>Forgiveness: {difficulty.forgivenessLevel}</span>
               </div>
@@ -52,7 +52,7 @@ const DifficultySelector = ({ selectedDifficulty, onDifficultyChange }) => {
           </button>
         ))}
       </div>
-      <div className="selected-difficulty-info">
+      <div className="incidentresponder_diffsel_selected_info">
         <p>
           {difficulties.find(d => d.id === selectedDifficulty)?.description}
         </p>

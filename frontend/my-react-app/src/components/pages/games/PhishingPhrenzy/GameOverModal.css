@@ -1,5 +1,5 @@
 /* src/components/pages/games/PhishingPhrenzy/GameOverModal.css */
-.game-over-overlay {
+.phishingphrenzy_gameover_overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   animation: fadeIn 0.3s ease;
 }
 
-.game-over-modal {
+.phishingphrenzy_gameover_modal {
   background-color: #161625;
   border-radius: 10px;
   border: 2px solid #5f4bb6;
@@ -26,7 +26,7 @@
   animation: scaleIn 0.4s ease;
 }
 
-.game-over-title {
+.phishingphrenzy_gameover_title {
   text-align: center;
   font-size: 2.2rem;
   margin-bottom: 25px;
@@ -34,31 +34,31 @@
   text-shadow: 0 0 10px rgba(95, 75, 182, 0.7);
 }
 
-.score-container {
+.phishingphrenzy_score_container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
 }
 
-.final-score, .rating-container {
+.phishingphrenzy_final_score, .phishingphrenzy_rating_container {
   flex: 1;
   text-align: center;
 }
 
-.final-score h3, .rating-container h3 {
+.phishingphrenzy_final_score h3, .phishingphrenzy_rating_container h3 {
   font-size: 1.3rem;
   color: #7a68d4;
   margin-bottom: 15px;
 }
 
-.score-number {
+.phishingphrenzy_score_number {
   font-size: 3rem;
   font-weight: bold;
   color: #ffffff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.new-high-score {
+.phishingphrenzy_new_high_score {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,11 +69,11 @@
   animation: pulse 1.5s infinite;
 }
 
-.high-score-icon {
+.phishingphrenzy_high_score_icon {
   font-size: 1.3rem;
 }
 
-.rating {
+.phishingphrenzy_rating {
   font-size: 1.8rem;
   margin-bottom: 10px;
   display: flex;
@@ -82,26 +82,26 @@
   gap: 10px;
 }
 
-.gold-trophy, .gold-medal {
+.phishingphrenzy_gold_trophy, .phishingphrenzy_gold_medal {
   color: #ffd700;
 }
 
-.silver-trophy, .silver-medal {
+.phishingphrenzy_silver_trophy, .phishingphrenzy_silver_medal {
   color: #c0c0c0;
 }
 
-.bronze-trophy, .bronze-medal {
+.phishingphrenzy_bronze_trophy, .phishingphrenzy_bronze_medal {
   color: #cd7f32;
 }
 
-.rating-description {
+.phishingphrenzy_rating_description {
   font-size: 0.9rem;
   opacity: 0.8;
   max-width: 250px;
   margin: 0 auto;
 }
 
-.phishing-tip {
+.phishingphrenzy_phishing_tip {
   background-color: #1a1a2e;
   border-radius: 8px;
   padding: 15px;
@@ -109,25 +109,25 @@
   border: 1px solid #232535;
 }
 
-.phishing-tip h3 {
+.phishingphrenzy_phishing_tip h3 {
   font-size: 1.1rem;
   color: #7a68d4;
   margin-bottom: 10px;
 }
 
-.phishing-tip p {
+.phishingphrenzy_phishing_tip p {
   font-size: 0.95rem;
   line-height: 1.5;
 }
 
-.modal-buttons {
+.phishingphrenzy_modal_buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-bottom: 25px;
 }
 
-.play-again-button, .home-button {
+.phishingphrenzy_play_again_button, .phishingphrenzy_home_button {
   padding: 12px 25px;
   font-size: 1rem;
   border-radius: 5px;
@@ -140,45 +140,45 @@
   transition: all 0.2s ease;
 }
 
-.play-again-button {
+.phishingphrenzy_play_again_button {
   background-color: #5f4bb6;
   color: white;
 }
 
-.play-again-button:hover {
+.phishingphrenzy_play_again_button:hover {
   background-color: #7a68d4;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
 }
 
-.home-button {
+.phishingphrenzy_home_button {
   background-color: #232535;
   color: #e2e2e2;
 }
 
-.home-button:hover {
+.phishingphrenzy_home_button:hover {
   background-color: #2d2d40;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.share-container {
+.phishingphrenzy_share_container {
   text-align: center;
 }
 
-.share-container p {
+.phishingphrenzy_share_container p {
   font-size: 0.9rem;
   margin-bottom: 10px;
   opacity: 0.8;
 }
 
-.share-buttons {
+.phishingphrenzy_share_buttons {
   display: flex;
   justify-content: center;
   gap: 15px;
 }
 
-.twitter-share, .facebook-share {
+.phishingphrenzy_twitter_share, .phishingphrenzy_facebook_share {
   padding: 8px 15px;
   font-size: 0.9rem;
   border-radius: 5px;
@@ -190,21 +190,21 @@
   transition: all 0.2s ease;
 }
 
-.twitter-share {
+.phishingphrenzy_twitter_share {
   background-color: #1da1f2;
   color: white;
 }
 
-.twitter-share:hover {
+.phishingphrenzy_twitter_share:hover {
   background-color: #0d8ecf;
 }
 
-.facebook-share {
+.phishingphrenzy_facebook_share {
   background-color: #4267b2;
   color: white;
 }
 
-.facebook-share:hover {
+.phishingphrenzy_facebook_share:hover {
   background-color: #365899;
 }
 
@@ -226,22 +226,22 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .score-container {
+  .phishingphrenzy_score_container {
     flex-direction: column;
     gap: 25px;
   }
   
-  .modal-buttons {
+  .phishingphrenzy_modal_buttons {
     flex-direction: column;
     gap: 15px;
   }
   
-  .play-again-button, .home-button {
+  .phishingphrenzy_play_again_button, .phishingphrenzy_home_button {
     width: 100%;
     justify-content: center;
   }
   
-  .rating-description {
+  .phishingphrenzy_rating_description {
     max-width: 100%;
   }
 }

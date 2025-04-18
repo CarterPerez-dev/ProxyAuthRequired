@@ -1,25 +1,25 @@
 /* src/components/pages/games/ThreatHunter/ScenarioSelector.css */
-.scenario-selection {
+.threathunter_scenarioselector_main_container {
   padding: 25px;
 }
 
-.selection-header {
+.threathunter_scenarioselector_header {
   text-align: center;
   margin-bottom: 25px;
 }
 
-.selection-header h2 {
+.threathunter_scenarioselector_header h2 {
   font-size: 1.8rem;
   color: #7a68d4;
   margin-bottom: 10px;
 }
 
-.selection-header p {
+.threathunter_scenarioselector_header p {
   font-size: 1.1rem;
   opacity: 0.8;
 }
 
-.scenario-filters {
+.threathunter_scenarioselector_filters {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -30,20 +30,20 @@
   border: 1px solid #232535;
 }
 
-.type-filter h3,
-.difficulty-selector h3 {
+.threathunter_scenarioselector_type_filter h3,
+.threathunter_scenarioselector_difficulty_selector h3 {
   font-size: 1.3rem;
   color: #7a68d4;
   margin-bottom: 15px;
 }
 
-.type-buttons {
+.threathunter_scenarioselector_type_buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.type-buttons button {
+.threathunter_scenarioselector_type_buttons button {
   background-color: #232535;
   color: #e2e2e2;
   border: none;
@@ -57,27 +57,27 @@
   gap: 8px;
 }
 
-.type-buttons button:hover {
+.threathunter_scenarioselector_type_buttons button:hover {
   background-color: #2d2d40;
   transform: translateY(-2px);
 }
 
-.type-buttons button.active {
+.threathunter_scenarioselector_type_buttons button.active {
   background-color: #5f4bb6;
   color: white;
 }
 
-.type-buttons button svg {
+.threathunter_scenarioselector_type_buttons button svg {
   font-size: 1rem;
 }
 
-.difficulty-options {
+.threathunter_scenarioselector_difficulty_options {
   display: flex;
   gap: 15px;
   margin-bottom: 15px;
 }
 
-.difficulty-button {
+.threathunter_scenarioselector_difficulty_button {
   flex: 1;
   background-color: #232535;
   border: 1px solid transparent;
@@ -88,35 +88,35 @@
   text-align: left;
 }
 
-.difficulty-button:hover {
+.threathunter_scenarioselector_difficulty_button:hover {
   background-color: #2d2d40;
   transform: translateY(-3px);
 }
 
-.difficulty-button.active {
+.threathunter_scenarioselector_difficulty_button.active {
   background-color: #1a1a2e;
   border-color: #5f4bb6;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(95, 75, 182, 0.2);
 }
 
-.difficulty-name {
+.threathunter_scenarioselector_difficulty_name {
   font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 10px;
   color: #e2e2e2;
 }
 
-.difficulty-button.active .difficulty-name {
+.threathunter_scenarioselector_difficulty_button.active .threathunter_scenarioselector_difficulty_name {
   color: #7a68d4;
 }
 
-.difficulty-indicators {
+.threathunter_scenarioselector_difficulty_indicators {
   display: flex;
   gap: 15px;
 }
 
-.indicator {
+.threathunter_scenarioselector_indicator {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -124,7 +124,7 @@
   opacity: 0.8;
 }
 
-.selected-difficulty-info {
+.threathunter_scenarioselector_selected_difficulty_info {
   background-color: #1a1a2e;
   padding: 12px 15px;
   border-radius: 5px;
@@ -133,13 +133,13 @@
   line-height: 1.5;
 }
 
-.scenarios-grid {
+.threathunter_scenarioselector_scenarios_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 20px;
 }
 
-.scenario-card {
+.threathunter_scenarioselector_scenario_card {
   background-color: #161625;
   border-radius: 8px;
   border: 1px solid #232535;
@@ -150,13 +150,13 @@
   transition: all 0.3s ease;
 }
 
-.scenario-card:hover {
+.threathunter_scenarioselector_scenario_card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
   border-color: #5f4bb6;
 }
 
-.scenario-icon {
+.threathunter_scenarioselector_scenario_icon {
   background-color: #232535;
   height: 80px;
   display: flex;
@@ -166,26 +166,26 @@
   color: #7a68d4;
 }
 
-.scenario-info {
+.threathunter_scenarioselector_scenario_info {
   padding: 20px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.scenario-info h3 {
+.threathunter_scenarioselector_scenario_info h3 {
   font-size: 1.3rem;
   margin-bottom: 10px;
   color: #e2e2e2;
 }
 
-.scenario-meta {
+.threathunter_scenarioselector_scenario_meta {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
 }
 
-.scenario-type {
+.threathunter_scenarioselector_scenario_type {
   background-color: #232535;
   padding: 5px 10px;
   border-radius: 5px;
@@ -193,12 +193,12 @@
   text-transform: capitalize;
 }
 
-.scenario-difficulty {
+.threathunter_scenarioselector_scenario_difficulty {
   color: #ffd700;
   font-size: 0.9rem;
 }
 
-.scenario-info p {
+.threathunter_scenarioselector_scenario_info p {
   font-size: 0.95rem;
   opacity: 0.8;
   line-height: 1.5;
@@ -206,7 +206,7 @@
   margin-bottom: 15px;
 }
 
-.scenario-stats {
+.threathunter_scenarioselector_scenario_stats {
   display: flex;
   justify-content: space-between;
   background-color: #1a1a2e;
@@ -214,23 +214,23 @@
   border-radius: 5px;
 }
 
-.stat-item {
+.threathunter_scenarioselector_stat_item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.stat-label {
+.threathunter_scenarioselector_stat_label {
   font-size: 0.8rem;
   opacity: 0.7;
 }
 
-.stat-value {
+.threathunter_scenarioselector_stat_value {
   font-size: 0.95rem;
   font-weight: bold;
 }
 
-.no-scenarios {
+.threathunter_scenarioselector_no_scenarios {
   grid-column: 1 / -1;
   background-color: #161625;
   padding: 30px;
@@ -241,38 +241,38 @@
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  .scenarios-grid {
+  .threathunter_scenarioselector_scenarios_grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .difficulty-options {
+  .threathunter_scenarioselector_difficulty_options {
     flex-direction: column;
   }
   
-  .difficulty-button {
+  .threathunter_scenarioselector_difficulty_button {
     width: 100%;
   }
 }
 
 @media (max-width: 600px) {
-  .selection-header h2 {
+  .threathunter_scenarioselector_header h2 {
     font-size: 1.6rem;
   }
   
-  .type-buttons button {
+  .threathunter_scenarioselector_type_buttons button {
     flex: 1;
     justify-content: center;
   }
   
-  .scenario-stats {
+  .threathunter_scenarioselector_scenario_stats {
     flex-direction: column;
     gap: 10px;
     align-items: flex-start;
   }
   
-  .stat-item {
+  .threathunter_scenarioselector_stat_item {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;

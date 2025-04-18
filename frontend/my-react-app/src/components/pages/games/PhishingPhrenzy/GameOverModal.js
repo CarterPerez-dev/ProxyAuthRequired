@@ -7,11 +7,11 @@ const GameOverModal = ({ score, highScore, onClose, onPlayAgain }) => {
   const isNewHighScore = score > highScore;
   
   const getScoreRating = () => {
-    if (score >= 500) return { rating: 'Legendary', icon: <FaTrophy className="gold-trophy" /> };
-    if (score >= 300) return { rating: 'Expert', icon: <FaTrophy className="silver-trophy" /> };
-    if (score >= 200) return { rating: 'Advanced', icon: <FaTrophy className="bronze-trophy" /> };
-    if (score >= 100) return { rating: 'Skilled', icon: <FaMedal className="gold-medal" /> };
-    if (score >= 50) return { rating: 'Competent', icon: <FaMedal className="silver-medal" /> };
+    if (score >= 500) return { rating: 'Legendary', icon: <FaTrophy className="phishingphrenzy_gold_trophy" /> };
+    if (score >= 300) return { rating: 'Expert', icon: <FaTrophy className="phishingphrenzy_silver_trophy" /> };
+    if (score >= 200) return { rating: 'Advanced', icon: <FaTrophy className="phishingphrenzy_bronze_trophy" /> };
+    if (score >= 100) return { rating: 'Skilled', icon: <FaMedal className="phishingphrenzy_gold_medal" /> };
+    if (score >= 50) return { rating: 'Competent', icon: <FaMedal className="phishingphrenzy_silver_medal" /> };
     return { rating: 'Novice', icon: null };
   };
 
@@ -55,51 +55,51 @@ const GameOverModal = ({ score, highScore, onClose, onPlayAgain }) => {
   };
   
   return (
-    <div className="game-over-overlay">
-      <div className="game-over-modal">
-        <h2 className="game-over-title">Game Over!</h2>
+    <div className="phishingphrenzy_gameover_overlay">
+      <div className="phishingphrenzy_gameover_modal">
+        <h2 className="phishingphrenzy_gameover_title">Game Over!</h2>
         
-        <div className="score-container">
-          <div className="final-score">
+        <div className="phishingphrenzy_score_container">
+          <div className="phishingphrenzy_final_score">
             <h3>Your Score</h3>
-            <div className="score-number">{score}</div>
+            <div className="phishingphrenzy_score_number">{score}</div>
             {isNewHighScore && (
-              <div className="new-high-score">
-                <FaTrophy className="high-score-icon" /> New High Score!
+              <div className="phishingphrenzy_new_high_score">
+                <FaTrophy className="phishingphrenzy_high_score_icon" /> New High Score!
               </div>
             )}
           </div>
           
-          <div className="rating-container">
+          <div className="phishingphrenzy_rating_container">
             <h3>Rating</h3>
-            <div className="rating">
+            <div className="phishingphrenzy_rating">
               {icon} {rating}
             </div>
-            <p className="rating-description">{getRatingDescription()}</p>
+            <p className="phishingphrenzy_rating_description">{getRatingDescription()}</p>
           </div>
         </div>
         
-        <div className="phishing-tip">
+        <div className="phishingphrenzy_phishing_tip">
           <h3>Phishing Tip:</h3>
           <p>{getPhishingTip()}</p>
         </div>
         
-        <div className="modal-buttons">
-          <button className="play-again-button" onClick={onPlayAgain}>
+        <div className="phishingphrenzy_modal_buttons">
+          <button className="phishingphrenzy_play_again_button" onClick={onPlayAgain}>
             <FaRedo /> Play Again
           </button>
-          <button className="home-button" onClick={onClose}>
+          <button className="phishingphrenzy_home_button" onClick={onClose}>
             <FaHome /> Return to Menu
           </button>
         </div>
         
-        <div className="share-container">
+        <div className="phishingphrenzy_share_container">
           <p>Share your score:</p>
-          <div className="share-buttons">
-            <button className="twitter-share">
+          <div className="phishingphrenzy_share_buttons">
+            <button className="phishingphrenzy_twitter_share">
               <FaTwitter /> Twitter
             </button>
-            <button className="facebook-share">
+            <button className="phishingphrenzy_facebook_share">
               <FaFacebook /> Facebook
             </button>
           </div>

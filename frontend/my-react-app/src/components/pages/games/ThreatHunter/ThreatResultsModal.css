@@ -1,5 +1,5 @@
 /* src/components/pages/games/ThreatHunter/ThreatResultsModal.css */
-.threat-results-overlay {
+.threathunter_resultsmodal_overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   animation: fadeIn 0.3s ease;
 }
 
-.threat-results-modal {
+.threathunter_resultsmodal_container {
   background-color: #161625;
   border-radius: 10px;
   border: 2px solid #5f4bb6;
@@ -28,41 +28,41 @@
   padding: 0;
 }
 
-.results-header {
+.threathunter_resultsmodal_header {
   background-color: #232535;
   padding: 20px;
   text-align: center;
   border-bottom: 1px solid #2d2d40;
 }
 
-.results-header h2 {
+.threathunter_resultsmodal_header h2 {
   font-size: 1.8rem;
   color: #7a68d4;
   margin-bottom: 10px;
   margin-top: 0;
 }
 
-.results-header h3 {
+.threathunter_resultsmodal_header h3 {
   font-size: 1.3rem;
   margin: 0;
   opacity: 0.9;
 }
 
-.results-overview {
+.threathunter_resultsmodal_overview {
   display: flex;
   padding: 25px;
   gap: 30px;
   border-bottom: 1px solid #232535;
 }
 
-.score-container {
+.threathunter_resultsmodal_score_container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
 }
 
-.score-circle {
+.threathunter_resultsmodal_score_circle {
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -74,18 +74,18 @@
   background-color: #1a1a2e;
 }
 
-.score-percentage {
+.threathunter_resultsmodal_score_percentage {
   font-size: 2rem;
   font-weight: bold;
   color: #e2e2e2;
 }
 
-.score-points {
+.threathunter_resultsmodal_score_points {
   font-size: 0.9rem;
   opacity: 0.7;
 }
 
-.rating-container {
+.threathunter_resultsmodal_rating_container {
   background-color: #1a1a2e;
   padding: 15px;
   border-radius: 8px;
@@ -97,45 +97,45 @@
   border: 2px solid;
 }
 
-.rating-container.expert {
+.threathunter_resultsmodal_rating_container.expert {
   border-color: #4caf50;
 }
 
-.rating-container.senior {
+.threathunter_resultsmodal_rating_container.senior {
   border-color: #8bc34a;
 }
 
-.rating-container.analyst {
+.threathunter_resultsmodal_rating_container.analyst {
   border-color: #ffc107;
 }
 
-.rating-container.junior {
+.threathunter_resultsmodal_rating_container.junior {
   border-color: #ff9800;
 }
 
-.rating-container.trainee {
+.threathunter_resultsmodal_rating_container.trainee {
   border-color: #f44336;
 }
 
-.rating-icon {
+.threathunter_resultsmodal_rating_icon {
   font-size: 1.8rem;
   color: #ffd700;
 }
 
-.rating-value {
+.threathunter_resultsmodal_rating_value {
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
 }
 
-.threat-stats {
+.threathunter_resultsmodal_threat_stats {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.stat-row {
+.threathunter_resultsmodal_stat_row {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -144,7 +144,7 @@
   border-radius: 5px;
 }
 
-.stat-icon {
+.threathunter_resultsmodal_stat_icon {
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -154,37 +154,37 @@
   font-size: 0.9rem;
 }
 
-.stat-row.correct .stat-icon {
+.threathunter_resultsmodal_stat_row.correct .threathunter_resultsmodal_stat_icon {
   background-color: rgba(76, 175, 80, 0.2);
   color: #4caf50;
 }
 
-.stat-row.missed .stat-icon {
+.threathunter_resultsmodal_stat_row.missed .threathunter_resultsmodal_stat_icon {
   background-color: rgba(244, 67, 54, 0.2);
   color: #f44336;
 }
 
-.stat-row.false .stat-icon {
+.threathunter_resultsmodal_stat_row.false .threathunter_resultsmodal_stat_icon {
   background-color: rgba(255, 193, 7, 0.2);
   color: #ffc107;
 }
 
-.stat-row.time .stat-icon {
+.threathunter_resultsmodal_stat_row.time .threathunter_resultsmodal_stat_icon {
   background-color: rgba(95, 75, 182, 0.2);
   color: #5f4bb6;
 }
 
-.stat-label {
+.threathunter_resultsmodal_stat_label {
   flex: 1;
   font-size: 0.9rem;
 }
 
-.stat-value {
+.threathunter_resultsmodal_stat_value {
   font-weight: bold;
   font-size: 1rem;
 }
 
-.rewards-summary {
+.threathunter_resultsmodal_rewards_summary {
   display: flex;
   justify-content: center;
   gap: 50px;
@@ -193,7 +193,7 @@
   border-bottom: 1px solid #232535;
 }
 
-.reward-item {
+.threathunter_resultsmodal_reward_item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -203,23 +203,23 @@
   min-width: 100px;
 }
 
-.reward-value {
+.threathunter_resultsmodal_reward_value {
   font-size: 1.5rem;
   font-weight: bold;
   color: #ffd700;
 }
 
-.reward-label {
+.threathunter_resultsmodal_reward_label {
   font-size: 0.9rem;
   opacity: 0.7;
 }
 
-.new-achievements {
+.threathunter_resultsmodal_new_achievements {
   padding: 25px;
   border-bottom: 1px solid #232535;
 }
 
-.new-achievements h3 {
+.threathunter_resultsmodal_new_achievements h3 {
   font-size: 1.3rem;
   color: #7a68d4;
   margin-top: 0;
@@ -227,14 +227,14 @@
   text-align: center;
 }
 
-.achievements-list {
+.threathunter_resultsmodal_achievements_list {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
 }
 
-.achievement-item {
+.threathunter_resultsmodal_achievement_item {
   background-color: #1a1a2e;
   border-radius: 8px;
   padding: 15px;
@@ -245,7 +245,7 @@
   border: 1px solid #232535;
 }
 
-.achievement-icon {
+.threathunter_resultsmodal_achievement_icon {
   width: 40px;
   height: 40px;
   background-color: #232535;
@@ -258,23 +258,23 @@
   flex-shrink: 0;
 }
 
-.achievement-details {
+.threathunter_resultsmodal_achievement_details {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.achievement-name {
+.threathunter_resultsmodal_achievement_name {
   font-weight: bold;
   font-size: 1rem;
 }
 
-.achievement-description {
+.threathunter_resultsmodal_achievement_description {
   font-size: 0.85rem;
   opacity: 0.8;
 }
 
-.detection-details {
+.threathunter_resultsmodal_detection_details {
   padding: 25px;
   border-bottom: 1px solid #232535;
   display: flex;
@@ -282,14 +282,14 @@
   gap: 25px;
 }
 
-.details-section h3 {
+.threathunter_resultsmodal_details_section h3 {
   font-size: 1.2rem;
   color: #7a68d4;
   margin-top: 0;
   margin-bottom: 15px;
 }
 
-.threats-list {
+.threathunter_resultsmodal_threats_list {
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -298,7 +298,7 @@
   gap: 10px;
 }
 
-.threats-list .threat-item {
+.threathunter_resultsmodal_threats_list .threathunter_resultsmodal_threat_item {
   display: flex;
   align-items: flex-start;
   gap: 15px;
@@ -308,36 +308,36 @@
   border: 1px solid #232535;
 }
 
-.threat-icon {
+.threathunter_resultsmodal_threat_icon {
   font-size: 1.1rem;
   flex-shrink: 0;
 }
 
-.threat-icon.correct {
+.threathunter_resultsmodal_threat_icon.correct {
   color: #4caf50;
 }
 
-.threat-icon.missed {
+.threathunter_resultsmodal_threat_icon.missed {
   color: #f44336;
 }
 
-.threat-info {
+.threathunter_resultsmodal_threat_info {
   flex: 1;
 }
 
-.threat-name {
+.threathunter_resultsmodal_threat_name {
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 5px;
 }
 
-.threat-description {
+.threathunter_resultsmodal_threat_description {
   font-size: 0.9rem;
   opacity: 0.8;
   line-height: 1.4;
 }
 
-.no-threats {
+.threathunter_resultsmodal_no_threats {
   background-color: #1a1a2e;
   padding: 15px;
   border-radius: 8px;
@@ -346,19 +346,19 @@
   text-align: center;
 }
 
-.feedback-section {
+.threathunter_resultsmodal_feedback_section {
   padding: 25px;
   border-bottom: 1px solid #232535;
 }
 
-.feedback-section h3 {
+.threathunter_resultsmodal_feedback_section h3 {
   font-size: 1.2rem;
   color: #7a68d4;
   margin-top: 0;
   margin-bottom: 15px;
 }
 
-.feedback-section p {
+.threathunter_resultsmodal_feedback_section p {
   line-height: 1.6;
   background-color: #1a1a2e;
   padding: 15px;
@@ -366,15 +366,15 @@
   font-size: 0.95rem;
 }
 
-.results-actions {
+.threathunter_resultsmodal_actions {
   padding: 25px;
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.restart-button,
-.home-button {
+.threathunter_resultsmodal_restart_button,
+.threathunter_resultsmodal_home_button {
   padding: 12px 20px;
   font-size: 1rem;
   border-radius: 5px;
@@ -387,42 +387,42 @@
   transition: all 0.2s ease;
 }
 
-.restart-button {
+.threathunter_resultsmodal_restart_button {
   background-color: #5f4bb6;
   color: white;
 }
 
-.restart-button:hover {
+.threathunter_resultsmodal_restart_button:hover {
   background-color: #7a68d4;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(95, 75, 182, 0.3);
 }
 
-.home-button {
+.threathunter_resultsmodal_home_button {
   background-color: #232535;
   color: #e2e2e2;
 }
 
-.home-button:hover {
+.threathunter_resultsmodal_home_button:hover {
   background-color: #2d2d40;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.share-container {
+.threathunter_resultsmodal_share_container {
   margin-left: auto;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.share-container span {
+.threathunter_resultsmodal_share_container span {
   font-size: 0.9rem;
   opacity: 0.7;
 }
 
-.twitter-share,
-.linkedin-share {
+.threathunter_resultsmodal_twitter_share,
+.threathunter_resultsmodal_linkedin_share {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -435,36 +435,36 @@
   transition: all 0.2s ease;
 }
 
-.twitter-share {
+.threathunter_resultsmodal_twitter_share {
   background-color: #1da1f2;
   color: white;
 }
 
-.linkedin-share {
+.threathunter_resultsmodal_linkedin_share {
   background-color: #0077b5;
   color: white;
 }
 
-.twitter-share:hover,
-.linkedin-share:hover {
+.threathunter_resultsmodal_twitter_share:hover,
+.threathunter_resultsmodal_linkedin_share:hover {
   transform: scale(1.1);
 }
 
 /* Scrollbar styling */
-.threat-results-modal::-webkit-scrollbar {
+.threathunter_resultsmodal_container::-webkit-scrollbar {
   width: 8px;
 }
 
-.threat-results-modal::-webkit-scrollbar-track {
+.threathunter_resultsmodal_container::-webkit-scrollbar-track {
   background: #161625;
 }
 
-.threat-results-modal::-webkit-scrollbar-thumb {
+.threathunter_resultsmodal_container::-webkit-scrollbar-thumb {
   background-color: #2d2d40;
   border-radius: 10px;
 }
 
-.threat-results-modal::-webkit-scrollbar-thumb:hover {
+.threathunter_resultsmodal_container::-webkit-scrollbar-thumb:hover {
   background-color: #3d3d50;
 }
 
@@ -480,28 +480,28 @@
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  .results-overview {
+  .threathunter_resultsmodal_overview {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
   
-  .score-container {
+  .threathunter_resultsmodal_score_container {
     margin-bottom: 20px;
   }
   
-  .achievement-item {
+  .threathunter_resultsmodal_achievement_item {
     width: 100%;
   }
 }
 
 @media (max-width: 768px) {
-  .results-actions {
+  .threathunter_resultsmodal_actions {
     flex-direction: column;
     gap: 15px;
   }
   
-  .share-container {
+  .threathunter_resultsmodal_share_container {
     margin-left: 0;
     width: 100%;
     justify-content: center;
@@ -509,21 +509,21 @@
 }
 
 @media (max-width: 500px) {
-  .results-header h2 {
+  .threathunter_resultsmodal_header h2 {
     font-size: 1.5rem;
   }
   
-  .results-header h3 {
+  .threathunter_resultsmodal_header h3 {
     font-size: 1.1rem;
   }
   
-  .rewards-summary {
+  .threathunter_resultsmodal_rewards_summary {
     flex-direction: column;
     align-items: center;
     gap: 15px;
   }
   
-  .reward-item {
+  .threathunter_resultsmodal_reward_item {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;

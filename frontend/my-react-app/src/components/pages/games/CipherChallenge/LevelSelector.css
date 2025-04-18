@@ -1,26 +1,26 @@
 /* src/components/pages/games/CipherChallenge/LevelSelector.css */
-.level-selector {
+.cipherchallenge_lvlselector_container {
   margin-bottom: 20px;
 }
 
-.level-selector h3 {
+.cipherchallenge_lvlselector_container h3 {
   font-size: 1.3rem;
   color: #7a68d4;
   margin-bottom: 15px;
 }
 
-.levels-list {
+.cipherchallenge_lvlselector_levels_list {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.level-container {
+.cipherchallenge_lvlselector_level_container {
   display: flex;
   flex-direction: column;
 }
 
-.level-item {
+.cipherchallenge_lvlselector_level_item {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -33,28 +33,28 @@
   border: 1px solid transparent;
 }
 
-.level-item:hover {
+.cipherchallenge_lvlselector_level_item:hover {
   background-color: #2d2d40;
   transform: translateX(3px);
 }
 
-.level-item.locked {
+.cipherchallenge_lvlselector_level_item.locked {
   background-color: #191925;
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.level-item.active {
+.cipherchallenge_lvlselector_level_item.active {
   background-color: #2d2d40;
   border-color: #5f4bb6;
   border-radius: 8px 8px 0 0;
 }
 
-.level-item.complete {
+.cipherchallenge_lvlselector_level_item.complete {
   border-left: 3px solid #4caf50;
 }
 
-.level-icon {
+.cipherchallenge_lvlselector_level_icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,50 +64,50 @@
   background-color: #161625;
 }
 
-.lock-icon {
+.cipherchallenge_lvlselector_lock_icon {
   color: #f44336;
   font-size: 1.1rem;
 }
 
-.unlock-icon {
+.cipherchallenge_lvlselector_unlock_icon {
   color: #7a68d4;
   font-size: 1.1rem;
 }
 
-.complete-icon {
+.cipherchallenge_lvlselector_complete_icon {
   color: #4caf50;
   font-size: 1.1rem;
 }
 
-.level-info {
+.cipherchallenge_lvlselector_level_info {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.level-name {
+.cipherchallenge_lvlselector_level_name {
   font-weight: bold;
   font-size: 1rem;
 }
 
-.level-difficulty {
+.cipherchallenge_lvlselector_level_difficulty {
   display: flex;
   gap: 3px;
 }
 
-.level-star {
+.cipherchallenge_lvlselector_level_star {
   color: #ffd700;
   font-size: 0.8rem;
 }
 
-.level-progress {
+.cipherchallenge_lvlselector_level_progress {
   display: flex;
   flex-direction: column;
   gap: 5px;
   min-width: 60px;
 }
 
-.progress-bar {
+.cipherchallenge_lvlselector_progress_bar {
   width: 60px;
   height: 6px;
   background-color: #161625;
@@ -115,19 +115,19 @@
   overflow: hidden;
 }
 
-.progress-fill {
+.cipherchallenge_lvlselector_progress_fill {
   height: 100%;
   background-color: #5f4bb6;
   border-radius: 3px;
 }
 
-.progress-text {
+.cipherchallenge_lvlselector_progress_text {
   font-size: 0.8rem;
   text-align: center;
   opacity: 0.7;
 }
 
-.challenges-list {
+.cipherchallenge_lvlselector_challenges_list {
   display: flex;
   flex-direction: column;
   background-color: #161625;
@@ -139,7 +139,7 @@
   animation: fadeIn 0.3s ease;
 }
 
-.challenge-item {
+.cipherchallenge_lvlselector_challenge_item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -149,19 +149,19 @@
   transition: all 0.2s ease;
 }
 
-.challenge-item:hover {
+.cipherchallenge_lvlselector_challenge_item:hover {
   background-color: #232535;
 }
 
-.challenge-item.selected {
+.cipherchallenge_lvlselector_challenge_item.selected {
   background-color: #5f4bb6;
 }
 
-.challenge-item.completed {
+.cipherchallenge_lvlselector_challenge_item.completed {
   border-left: 2px solid #4caf50;
 }
 
-.challenge-indicator {
+.cipherchallenge_lvlselector_challenge_indicator {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,16 +172,16 @@
   font-size: 0.8rem;
 }
 
-.challenge-number {
+.cipherchallenge_lvlselector_challenge_number {
   color: #e2e2e2;
 }
 
-.completed-icon {
+.cipherchallenge_lvlselector_completed_icon {
   color: #4caf50;
   font-size: 0.9rem;
 }
 
-.challenge-name {
+.cipherchallenge_lvlselector_challenge_name {
   font-size: 0.9rem;
 }
 
@@ -192,15 +192,15 @@
 
 /* Responsive adjustments */
 @media (max-width: 400px) {
-  .level-item {
+  .cipherchallenge_lvlselector_level_item {
     gap: 10px;
   }
   
-  .level-progress {
+  .cipherchallenge_lvlselector_level_progress {
     min-width: 40px;
   }
   
-  .progress-bar {
+  .cipherchallenge_lvlselector_progress_bar {
     width: 40px;
   }
 }

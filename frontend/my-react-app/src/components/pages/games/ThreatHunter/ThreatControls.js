@@ -38,55 +38,55 @@ const ThreatControls = ({ timeLeft, flaggedLines, detectedThreats, onSubmit }) =
   };
   
   return (
-    <div className="threat-controls">
-      <div className="controls-header">
+    <div className="threathunter_threatcontrols_container">
+      <div className="threathunter_threatcontrols_header">
         <h3>Investigation Controls</h3>
       </div>
       
-      <div className="controls-content">
-        <div className="analysis-status">
-          <div className="status-item">
-            <div className="status-icon flag-icon">
+      <div className="threathunter_threatcontrols_content">
+        <div className="threathunter_threatcontrols_analysis_status">
+          <div className="threathunter_threatcontrols_status_item">
+            <div className="threathunter_threatcontrols_status_icon threathunter_threatcontrols_flag_icon">
               <FaFlag />
             </div>
-            <div className="status-details">
-              <div className="status-value">{flaggedLines.length}</div>
-              <div className="status-label">Flagged Lines</div>
+            <div className="threathunter_threatcontrols_status_details">
+              <div className="threathunter_threatcontrols_status_value">{flaggedLines.length}</div>
+              <div className="threathunter_threatcontrols_status_label">Flagged Lines</div>
             </div>
           </div>
           
-          <div className="status-item">
-            <div className="status-icon threat-icon">
+          <div className="threathunter_threatcontrols_status_item">
+            <div className="threathunter_threatcontrols_status_icon threathunter_threatcontrols_threat_icon">
               <FaExclamationTriangle />
             </div>
-            <div className="status-details">
-              <div className="status-value">{detectedThreats.length}</div>
-              <div className="status-label">Threats Detected</div>
+            <div className="threathunter_threatcontrols_status_details">
+              <div className="threathunter_threatcontrols_status_value">{detectedThreats.length}</div>
+              <div className="threathunter_threatcontrols_status_label">Threats Detected</div>
             </div>
           </div>
           
           {timeLeft !== null && timeLeft !== undefined && (
-            <div className="status-item">
-              <div className={`status-icon time-icon ${timeLeft < 60 ? 'urgent' : ''}`}>
+            <div className="threathunter_threatcontrols_status_item">
+              <div className={`threathunter_threatcontrols_status_icon threathunter_threatcontrols_time_icon ${timeLeft < 60 ? 'urgent' : ''}`}>
                 <FaClock />
               </div>
-              <div className="status-details">
-                <div className={`status-value ${timeLeft < 60 ? 'urgent' : ''}`}>{timerDisplay}</div>
-                <div className="status-label">Time Remaining</div>
+              <div className="threathunter_threatcontrols_status_details">
+                <div className={`threathunter_threatcontrols_status_value ${timeLeft < 60 ? 'urgent' : ''}`}>{timerDisplay}</div>
+                <div className="threathunter_threatcontrols_status_label">Time Remaining</div>
               </div>
             </div>
           )}
         </div>
         
         {warningMessage && (
-          <div className="submission-warning">
+          <div className="threathunter_threatcontrols_submission_warning">
             <FaExclamationTriangle />
             <span>{warningMessage}</span>
           </div>
         )}
         
         <button 
-          className="submit-analysis-button"
+          className="threathunter_threatcontrols_submit_analysis_button"
           onClick={handleSubmitAnalysis}
           disabled={!submitEnabled}
         >
@@ -94,7 +94,7 @@ const ThreatControls = ({ timeLeft, flaggedLines, detectedThreats, onSubmit }) =
           <span>Submit Analysis</span>
         </button>
         
-        <div className="submission-note">
+        <div className="threathunter_threatcontrols_submission_note">
           <p>Submit your analysis when you've identified all threats. Your score will be based on correctly identified threats, evidence quality, and time remaining.</p>
         </div>
       </div>

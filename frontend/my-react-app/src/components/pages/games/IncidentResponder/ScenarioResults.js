@@ -48,41 +48,41 @@ const ScenarioResults = ({ results, scenario, selectedActions, score, onRestart 
   };
   
   return (
-    <div className="scenario-results">
-      <div className="results-header">
+    <div className="incidentresponder_results_container">
+      <div className="incidentresponder_results_header">
         <h2>Incident Response Completed</h2>
         <h3>{scenario.title}</h3>
       </div>
       
-      <div className="results-overview">
-        <div className="score-container">
-          <div className="score-circle">
-            <div className="score-value">{scorePercentage}%</div>
-            <div className="score-label">Score</div>
+      <div className="incidentresponder_results_overview">
+        <div className="incidentresponder_score_container">
+          <div className="incidentresponder_score_circle">
+            <div className="incidentresponder_score_value">{scorePercentage}%</div>
+            <div className="incidentresponder_score_label">Score</div>
           </div>
           
-          <div className={`rating-container ${getResponseRatingClass()}`}>
-            <FaTrophy className="rating-icon" />
-            <div className="rating-value">{responseRating}/100</div>
-            <div className="rating-label">{getResponseRatingText()}</div>
+          <div className={`incidentresponder_rating_container ${getResponseRatingClass()}`}>
+            <FaTrophy className="incidentresponder_rating_icon" />
+            <div className="incidentresponder_rating_value">{responseRating}/100</div>
+            <div className="incidentresponder_rating_label">{getResponseRatingText()}</div>
           </div>
         </div>
         
-        <div className="rewards-container">
+        <div className="incidentresponder_rewards_container">
           <h3>Rewards Earned</h3>
-          <div className="rewards">
-            <div className="reward-item">
-              <div className="reward-value">+{xpAwarded}</div>
-              <div className="reward-label">XP</div>
+          <div className="incidentresponder_rewards">
+            <div className="incidentresponder_reward_item">
+              <div className="incidentresponder_reward_value">+{xpAwarded}</div>
+              <div className="incidentresponder_reward_label">XP</div>
             </div>
-            <div className="reward-item">
-              <div className="reward-value">+{coinsAwarded}</div>
-              <div className="reward-label">Coins</div>
+            <div className="incidentresponder_reward_item">
+              <div className="incidentresponder_reward_value">+{coinsAwarded}</div>
+              <div className="incidentresponder_reward_label">Coins</div>
             </div>
             {timeBonus > 0 && (
-              <div className="reward-item bonus">
-                <div className="reward-value">+{timeBonus}</div>
-                <div className="reward-label">Time Bonus</div>
+              <div className="incidentresponder_reward_item bonus">
+                <div className="incidentresponder_reward_value">+{timeBonus}</div>
+                <div className="incidentresponder_reward_label">Time Bonus</div>
               </div>
             )}
           </div>
@@ -90,17 +90,17 @@ const ScenarioResults = ({ results, scenario, selectedActions, score, onRestart 
       </div>
       
       {achievements && achievements.length > 0 && (
-        <div className="achievements-earned">
+        <div className="incidentresponder_achievements_earned">
           <h3><FaTrophy /> Achievements Unlocked</h3>
-          <div className="achievements-container">
+          <div className="incidentresponder_achievements_container">
             {achievements.map((achievement, index) => (
-              <div key={index} className="achievement-item">
-                <div className="achievement-icon">
+              <div key={index} className="incidentresponder_achievement_item">
+                <div className="incidentresponder_achievement_icon">
                   <FaBookmark />
                 </div>
-                <div className="achievement-details">
-                  <div className="achievement-name">{achievement.name}</div>
-                  <div className="achievement-description">{achievement.description}</div>
+                <div className="incidentresponder_achievement_details">
+                  <div className="incidentresponder_achievement_name">{achievement.name}</div>
+                  <div className="incidentresponder_achievement_description">{achievement.description}</div>
                 </div>
               </div>
             ))}
@@ -108,13 +108,13 @@ const ScenarioResults = ({ results, scenario, selectedActions, score, onRestart 
         </div>
       )}
       
-      <div className="feedback-section">
+      <div className="incidentresponder_feedback_section">
         <h3><FaChartLine /> Response Analysis</h3>
-        <div className="feedback-summary">
+        <div className="incidentresponder_feedback_summary">
           <p>{feedbackSummary}</p>
         </div>
         
-        <div className="key-lessons">
+        <div className="incidentresponder_key_lessons">
           <h4>Key Lessons:</h4>
           <ul>
             {keyLessons.map((lesson, index) => (
@@ -124,19 +124,19 @@ const ScenarioResults = ({ results, scenario, selectedActions, score, onRestart 
         </div>
       </div>
       
-      <div className="response-timeline">
+      <div className="incidentresponder_response_timeline">
         <h3><FaClipboardCheck /> Your Response Timeline</h3>
-        <div className="timeline-container">
+        <div className="incidentresponder_timeline_container">
           {results.actionDetails.map((action, index) => (
-            <div key={index} className="timeline-item">
-              <div className="timeline-step">{index + 1}</div>
-              <div className={`timeline-content ${getActionQuality(action.id)}`}>
-                <div className="timeline-action">{action.text}</div>
-                <div className="timeline-outcome">
+            <div key={index} className="incidentresponder_timeline_item">
+              <div className="incidentresponder_timeline_step">{index + 1}</div>
+              <div className={`incidentresponder_timeline_content ${getActionQuality(action.id)}`}>
+                <div className="incidentresponder_timeline_action">{action.text}</div>
+                <div className="incidentresponder_timeline_outcome">
                   {action.quality === 'best' || action.quality === 'good' ? (
-                    <FaCheck className="positive-icon" />
+                    <FaCheck className="incidentresponder_positive_icon" />
                   ) : (
-                    <FaExclamationTriangle className="negative-icon" />
+                    <FaExclamationTriangle className="incidentresponder_negative_icon" />
                   )}
                   <span>{action.outcome}</span>
                 </div>
@@ -146,19 +146,19 @@ const ScenarioResults = ({ results, scenario, selectedActions, score, onRestart 
         </div>
       </div>
       
-      <div className="results-actions">
-        <button className="restart-button" onClick={onRestart}>
+      <div className="incidentresponder_results_actions">
+        <button className="incidentresponder_restart_button" onClick={onRestart}>
           <FaRedo /> Try Again
         </button>
-        <button className="home-button" onClick={onRestart}>
+        <button className="incidentresponder_home_button" onClick={onRestart}>
           <FaHome /> Choose New Scenario
         </button>
-        <div className="share-container">
+        <div className="incidentresponder_share_container">
           <span>Share your results:</span>
-          <button className="twitter-share">
+          <button className="incidentresponder_twitter_share">
             <FaTwitter />
           </button>
-          <button className="linkedin-share">
+          <button className="incidentresponder_linkedin_share">
             <FaLinkedin />
           </button>
         </div>
