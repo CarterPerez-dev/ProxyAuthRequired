@@ -1,3 +1,4 @@
+// GlobalTestPage.js
 import React, {
   useState,
   useEffect,
@@ -15,6 +16,8 @@ import "./test.css";
 import iconMapping from "./iconMapping";
 import colorMapping from "./colorMapping";
 import FormattedQuestion from './FormattedQuestion';
+import QuestionLimitBanner from './QuestionLimitBanner';
+import UpgradePrompt from './UpgradePrompt';
 import {
   FaTrophy,
   FaMedal,
@@ -163,7 +166,16 @@ const GlobalTestPage = ({
   const dispatch = useDispatch();
 
   // Redux user data
-  const { xp, level, coins, userId, xpBoost, currentAvatar } = useSelector(
+  const { 
+    xp, 
+    level, 
+    coins, 
+    userId, 
+    xpBoost, 
+    currentAvatar, 
+    subscriptionActive, 
+    practiceQuestionsRemaining 
+  } = useSelector(
     (state) => state.user
   );
   const achievements = useSelector((state) => state.achievements.all);
@@ -208,6 +220,9 @@ const GlobalTestPage = ({
   const [selectedLength, setSelectedLength] = useState(100);
   const [activeTestLength, setActiveTestLength] = useState(null);
   const [showTestLengthSelector, setShowTestLengthSelector] = useState(false);
+  
+  // Free user question limit handling
+  const [showQuestionLimitPrompt, setShowQuestionLimitPrompt] = useState(false);
 
   useEffect(() => {
     if (shopStatus === "idle") {
@@ -469,6 +484,12 @@ const GlobalTestPage = ({
           });
           const data = await res.json();
           
+          // NEW: Handle free user question limit
+          if (!subscriptionActive && data.status === 'limit_reached') {
+            setShowQuestionLimitPrompt(true);
+            return data;
+          }
+          
           // IMPORTANT FIX: For exam mode, also update the full attempt
           // This ensures answer choices are saved in exam mode
           if (examMode) {
@@ -524,7 +545,7 @@ const GlobalTestPage = ({
         console.error("Failed to update test attempt on backend", err);
       }
     },
-    [userId, testId, testData, xpBoost, currentQuestionIndex, category, activeTestLength, shuffleOrder, answerOrder, examMode]
+    [userId, testId, testData, xpBoost, currentQuestionIndex, category, activeTestLength, shuffleOrder, answerOrder, examMode, subscriptionActive]
   );
 
   // In exam mode, allow answer switching; in non–exam mode, lock answer selection once chosen.
@@ -532,6 +553,13 @@ const GlobalTestPage = ({
     async (displayOptionIndex) => {
       if (!questionObject) return;
       if (!examMode && isAnswered) return; // Only block if exam mode is off.
+      
+      // NEW: Don't allow selection if free user has reached limit
+      if (!subscriptionActive && practiceQuestionsRemaining <= 0) {
+        setShowQuestionLimitPrompt(true);
+        return;
+      }
+      
       const actualAnswerIndex = answerOrder[realIndex][displayOptionIndex];
       setSelectedOptionIndex(displayOptionIndex);
 
@@ -567,6 +595,12 @@ const GlobalTestPage = ({
           newAnswerObj
         );
         
+        // NEW: Check for question limit status
+        if (awardData && awardData.status === 'limit_reached') {
+          setShowQuestionLimitPrompt(true);
+          return;
+        }
+        
         if (!examMode && awardData && awardData.examMode === false) {
           if (awardData.isCorrect) {
             setScore((prev) => prev + 1);
@@ -597,7 +631,9 @@ const GlobalTestPage = ({
       answers,
       updateServerProgress,
       realIndex,
-      answerOrder
+      answerOrder,
+      subscriptionActive,
+      practiceQuestionsRemaining
     ]
   );
 
@@ -706,6 +742,13 @@ const GlobalTestPage = ({
 
   const handleSkipQuestion = () => {
     if (!questionObject) return;
+    
+    // NEW: Don't allow skipping if free user has reached limit
+    if (!subscriptionActive && practiceQuestionsRemaining <= 0) {
+      setShowQuestionLimitPrompt(true);
+      return;
+    }
+    
     const updatedAnswers = [...answers];
     const idx = updatedAnswers.findIndex(
       (a) => a.questionId === questionObject.id
@@ -1190,6 +1233,11 @@ const GlobalTestPage = ({
     }
   };
 
+  // If free user has hit their question limit, show the upgrade prompt
+  if (showQuestionLimitPrompt) {
+    return <UpgradePrompt feature="questions" />;
+  }
+
   // If no attempt doc was found (on first load), show test length UI:
   if (showTestLengthSelector) {
     return (
@@ -1360,6 +1408,11 @@ const GlobalTestPage = ({
       {renderNextPopup()}
       {renderScoreOverlay()}
       {renderReviewMode()}
+
+      {/* Display question limit banner for free users */}
+      {!subscriptionActive && !isFinished && !showScoreOverlay && !showReviewMode && (
+        <QuestionLimitBanner />
+      )}
 
       <div className="top-control-bar">
         <button 

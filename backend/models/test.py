@@ -276,8 +276,17 @@ def create_user(user_data):
     user_data.setdefault("xp", 0)
     user_data.setdefault("level", 1)
     user_data.setdefault("achievements", [])
+    
+    # Set subscription to false by default (free tier)
     user_data.setdefault("subscriptionActive", False)
-    user_data.setdefault("subscriptionPlan", "premium")  # Default plan name
+    user_data.setdefault("subscriptionPlan", "premium")
+    
+    # Add freemium-specific fields
+    user_data.setdefault("subscriptionType", "free")  # "free" or "premium"
+    user_data.setdefault("practiceQuestionsRemaining", 100)  # Free tier limit
+    user_data.setdefault("freeUserCreatedAt", datetime.utcnow())
+    
+    # Existing fields
     user_data.setdefault("lastDailyClaim", None)
     user_data.setdefault("purchasedItems", [])
     user_data.setdefault("xpBoost", 1.0)
@@ -285,7 +294,6 @@ def create_user(user_data):
     user_data.setdefault("nameColor", None)
     
     # Subscription fields
-    user_data.setdefault("subscriptionActive", False)
     user_data.setdefault("subscriptionStatus", None)
     user_data.setdefault("subscriptionPlatform", None)
     user_data.setdefault("stripeCustomerId", None)
@@ -295,18 +303,14 @@ def create_user(user_data):
     user_data.setdefault("subscriptionEndDate", None)
     user_data.setdefault("subscriptionCanceledAt", None)
 
-    # If you want to ensure new users have the 'achievement_counters'
-    # from Day 1, do it here:
+    # Achievement counters
     user_data.setdefault("achievement_counters", {
         "total_tests_completed": 0,
         "perfect_tests_count": 0,
         "perfect_tests_by_category": {},
-        # "consecutive_perfect_streak": 0, # removing memory_master
         "highest_score_ever": 0.0,
         "lowest_score_ever": 100.0,
         "total_questions_answered": 0,
-        # "tests_completed_by_category": {}, # optional
-        # "tests_completed_set": set()       # optional
     })
 
     # Auto-equip default avatar if cost=None

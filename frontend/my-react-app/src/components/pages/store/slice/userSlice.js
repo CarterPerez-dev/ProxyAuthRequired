@@ -49,6 +49,8 @@ const initialState = {
   purchasedItems: [],
   subscriptionActive: false,
   oauth_provider: null,
+  practiceQuestionsRemaining: 100,
+  subscriptionType: 'free',
 
   status: 'idle',
   loading: false,
@@ -211,6 +213,46 @@ export const cancelSubscription = createAsyncThunk(
   }
 );
 
+
+// Fetch usage limits
+export const fetchUsageLimits = createAsyncThunk(
+  'user/fetchUsageLimits',
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`/api/test/user/${userId}/usage-limits`);
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch usage limits');
+      }
+      return data;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+// Decrement questions
+export const decrementQuestions = createAsyncThunk(
+  'user/decrementQuestions',
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`/api/test/user/${userId}/decrement-questions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to update question count');
+      }
+      return data;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -232,6 +274,9 @@ const userSlice = createSlice({
       state.purchasedItems = [];
       state.subscriptionActive = false;
       state.status = 'idle';
+      // Reset freemium fields
+      state.practiceQuestionsRemaining = 100;
+      state.subscriptionType = 'free';
       localStorage.removeItem('userId');
     },
     setXPAndCoins(state, action) {
@@ -292,7 +337,10 @@ const userSlice = createSlice({
           purchasedItems,
           subscriptionActive,
           password,
-          oauth_provider
+          oauth_provider,
+          // New freemium fields
+          practiceQuestionsRemaining,
+          subscriptionType
         } = action.payload;
 
         state.userId = user_id;
@@ -308,6 +356,9 @@ const userSlice = createSlice({
         state.purchasedItems = purchasedItems || [];
         state.subscriptionActive = subscriptionActive || false;
         state.oauth_provider = oauth_provider || null;
+        // Set freemium fields
+        state.practiceQuestionsRemaining = practiceQuestionsRemaining || 100;
+        state.subscriptionType = subscriptionType || 'free';
 
         localStorage.setItem('userId', user_id);
       })
@@ -344,6 +395,10 @@ const userSlice = createSlice({
         state.stripeCustomerId = userDoc.stripeCustomerId || null;
         state.stripeSubscriptionId = userDoc.stripeSubscriptionId || null;
         state.appleTransactionId = userDoc.appleTransactionId || null;
+        
+        // Set freemium fields
+        state.practiceQuestionsRemaining = userDoc.practiceQuestionsRemaining || 100;
+        state.subscriptionType = userDoc.subscriptionType || 'free';
       })
       .addCase(fetchUserData.rejected, (state, action) => {
         state.status = 'failed';
@@ -408,6 +463,31 @@ const userSlice = createSlice({
       // CANCEL SUBSCRIPTION
       .addCase(cancelSubscription.fulfilled, (state, action) => {
         state.subscriptionStatus = 'canceling';
+      })
+      
+      // NEW FREEMIUM ACTION HANDLERS
+      
+      // Fetch usage limits
+      .addCase(fetchUsageLimits.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchUsageLimits.fulfilled, (state, action) => {
+        state.practiceQuestionsRemaining = action.payload.practiceQuestionsRemaining;
+        state.subscriptionType = action.payload.subscriptionType;
+        state.status = 'idle';
+      })
+      .addCase(fetchUsageLimits.rejected, (state, action) => {
+        state.error = action.payload;
+        state.status = 'failed';
+      })
+      
+      // Decrement questions
+      .addCase(decrementQuestions.fulfilled, (state, action) => {
+        state.practiceQuestionsRemaining = action.payload.practiceQuestionsRemaining;
+      })
+      .addCase(decrementQuestions.rejected, (state, action) => {
+        // Handle error but don't change question count if API call fails
+        state.error = action.payload;
       });
   },
 });

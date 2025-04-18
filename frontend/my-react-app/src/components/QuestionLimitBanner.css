@@ -1,0 +1,219 @@
+/* QuestionLimitBanner.css - Gamified Question Limit Banner */
+
+:root {
+  --banner-bg-dark: #0b0c15;
+  --banner-bg-card: #171a23;
+  --banner-accent: #6543cc;
+  --banner-accent-glow: #8a58fc;
+  --banner-accent-secondary: #ff4c8b;
+  --banner-success: #2ebb77;
+  --banner-error: #ff4e4e;
+  --banner-warning: #ffc107;
+  --banner-text: #e2e2e2;
+  --banner-text-secondary: #9da8b9;
+  --banner-border: #2a2c3d;
+  --banner-input-bg: rgba(0, 0, 0, 0.2);
+  --banner-gradient-primary: linear-gradient(135deg, #6543cc, #8a58fc);
+  --banner-gradient-secondary: linear-gradient(135deg, #ff4c8b, #ff7950);
+  --banner-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --banner-glow: 0 0 15px rgba(134, 88, 252, 0.5);
+}
+
+/* Main Banner Container */
+.question-limit-banner {
+  background: var(--banner-bg-card);
+  border-radius: 10px;
+  border: 1px solid var(--banner-border);
+  box-shadow: var(--banner-shadow);
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Orbitron', 'Roboto', sans-serif;
+  animation: fade-in 0.3s ease;
+}
+
+.question-limit-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--banner-gradient-secondary);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Info Section with Icon and Text */
+.question-limit-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.question-limit-icon {
+  color: var(--banner-warning);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.question-limit-text {
+  color: var(--banner-text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.question-limit-count {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--banner-warning);
+}
+
+/* Progress Bar */
+.question-limit-progress-container {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  height: 8px;
+  overflow: hidden;
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 5px;
+}
+
+.question-limit-progress-bar {
+  height: 100%;
+  background: var(--banner-gradient-secondary);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+/* Upgrade Button */
+.question-limit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--banner-gradient-primary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(101, 67, 204, 0.3);
+}
+
+.question-limit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(101, 67, 204, 0.4);
+}
+
+.question-limit-button-icon {
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+.question-limit-button:hover .question-limit-button-icon {
+  transform: translateX(2px);
+}
+
+/* Progress Bar Colors Based on Remaining Questions */
+/* Add these conditionally with JavaScript if needed */
+.question-limit-progress-bar.high {
+  background: linear-gradient(135deg, #2ebb77, #4dde9c);
+}
+
+.question-limit-progress-bar.medium {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.question-limit-progress-bar.low {
+  background: linear-gradient(135deg, #ff4e4e, #ff7979);
+}
+
+/* =================== */
+/* RESPONSIVE STYLES   */
+/* =================== */
+
+@media (max-width: 768px) {
+  .question-limit-banner {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .question-limit-icon {
+    font-size: 18px;
+  }
+  
+  .question-limit-text {
+    font-size: 13px;
+  }
+  
+  .question-limit-count {
+    font-size: 15px;
+  }
+  
+  .question-limit-button {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .question-limit-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    gap: 10px;
+  }
+  
+  .question-limit-info {
+    width: 100%;
+  }
+  
+  .question-limit-button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 5px;
+  }
+}
+
+/* =================== */
+/* THEME COMPATIBILITY */
+/* =================== */
+
+/* Make sure the component adapts to the global theme settings */
+:root[data-theme] .question-limit-banner::before {
+  background: var(--theme-gradient-secondary, var(--banner-gradient-secondary));
+}
+
+:root[data-theme] .question-limit-progress-bar {
+  background: var(--theme-gradient-secondary, var(--banner-gradient-secondary));
+}
+
+:root[data-theme] .question-limit-button {
+  background: var(--theme-gradient-primary, var(--banner-gradient-primary));
+}
+
+:root[data-theme] .question-limit-icon {
+  color: var(--theme-warning, var(--banner-warning));
+}
+
+:root[data-theme] .question-limit-count {
+  color: var(--theme-warning, var(--banner-warning));
+}

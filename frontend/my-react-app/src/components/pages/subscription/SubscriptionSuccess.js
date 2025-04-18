@@ -79,28 +79,47 @@ const SubscriptionSuccess = () => {
   }, [sessionId, userId]);
   
   // Handle the next steps based on user status
+  // Inside handleContinue of SubscriptionSuccess.js
   const handleContinue = () => {
     if (isNewUser) {
       if (isOauthFlow) {
-        // OAuth flow - needs to create username
-        navigate('/create-username');
+        // OAuth flow - proceed to profile 
+        navigate('/profile', {
+          state: { 
+            message: 'Your account has been created! You are using the free tier.' 
+          }
+        });
       } else {
         // Regular flow - proceed to login
         navigate('/login', { 
           state: { 
-            message: 'Your account has been created! Please sign in with your credentials.'
+            message: 'Your account has been created! Please sign in with your credentials.' 
           }
         });
       }
     } else {
-      // Existing user - proceed to profile
-      navigate('/profile', {
-        state: {
-          message: 'Your subscription has been activated successfully!'
-        }
-      });
+      // For existing users who upgraded to premium
+      // Check if there's a return path in session storage
+      const returnPath = sessionStorage.getItem('upgradeReturnPath');
+      if (returnPath) {
+        // Clear the storage and return to the original page
+        sessionStorage.removeItem('upgradeReturnPath');
+        navigate(returnPath, {
+          state: {
+            message: 'Your subscription has been activated successfully!'
+          }
+        });
+      } else {
+        // Default to profile if no return path
+        navigate('/profile', {
+          state: {
+            message: 'Your subscription has been activated successfully!'
+          }
+        });
+      }
     }
   };
+  
   
   return (
     <div className="success-container">

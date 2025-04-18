@@ -1,31 +1,41 @@
-// DEFENSE IN DEPTH, IF THIS IS BYPASSED WE STILL HAVE API PROTECTION ANYWAY. IF THEY BYPASS THAT SOMEHOW THEN THEY HONESTLY DESERVE A FREE SUBSCRIPTION AT THAT POINT
 // src/components/ProtectedRoute.js
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { checkSubscription } from './pages/store/slice/userSlice';
+import { checkSubscription, fetchUsageLimits } from './pages/store/slice/userSlice';
+import UpgradePrompt from './UpgradePrompt';
 
-const ProtectedRoute = ({ children }) => {
-  const { userId, subscriptionActive, subscriptionStatus, status } = useSelector((state) => state.user);
+const ProtectedRoute = ({ children, requiresPremium = false }) => {
+  const { 
+    userId, 
+    subscriptionActive, 
+    subscriptionStatus, 
+    practiceQuestionsRemaining, 
+    status 
+  } = useSelector((state) => state.user);
+  
   const [isChecking, setIsChecking] = useState(true);
   const location = useLocation();
   const dispatch = useDispatch();
   
   useEffect(() => {
-    const verifySubscription = async () => {
+    const verifyAccess = async () => {
       if (userId) {
         try {
-          // Only check subscription if we don't already know it's active
-          // This prevents unnecessary checks on every route change
+          // Only check subscription if not already marked as active
           if (subscriptionActive === undefined || subscriptionActive === false) {
             console.log('Checking subscription status for user', userId);
             await dispatch(checkSubscription(userId)).unwrap();
           }
+          
+          // For free users, fetch usage limits
+          if (!subscriptionActive) {
+            await dispatch(fetchUsageLimits(userId)).unwrap();
+          }
+          
           setIsChecking(false);
         } catch (err) {
-          console.error('Error checking subscription:', err);
-          // Log more detailed error information
-          console.error('Error details:', err.stack || JSON.stringify(err));
+          console.error('Error checking access:', err);
           setIsChecking(false);
         }
       } else {
@@ -33,7 +43,7 @@ const ProtectedRoute = ({ children }) => {
       }
     };
     
-    verifySubscription();
+    verifyAccess();
   }, [userId, dispatch, subscriptionActive]);
   
   if (isChecking || status === 'loading') {
@@ -51,35 +61,34 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   
-  // Handle different subscription states
-  if (!subscriptionActive) {
-    // Check if subscription is canceled but still has access
-    if (subscriptionStatus === 'canceling') {
-      // Show children with a renewal banner instead of redirecting
-      return (
-        <>
-          <div className="subscription-banner">
-            <div className="subscription-banner-content">
-              <p>Your subscription will end at the end of your current billing period. <a href="/subscription">Renew now</a> to maintain access.</p>
-            </div>
-          </div>
-          {children}
-        </>
-      );
-    }
-    
-    // Special case: if we're already on the subscription page, allow access
-    if (location.pathname === '/subscription') {
-      return children;
-    }
-    
-    // No active subscription, redirect to subscription page
-    // Add renewal=true parameter if subscription was previously canceled or is known to be inactive
-    const renewalMode = subscriptionStatus === 'canceled' || !subscriptionActive ? '?renewal=true' : '';
-    return <Navigate to={`/subscription${renewalMode}`} state={{ userId, from: location }} replace />;
+  // Check if this is a premium feature and user doesn't have premium
+  if (requiresPremium && !subscriptionActive) {
+    return <UpgradePrompt feature="premium" />;
   }
   
-  // User is logged in and has active subscription
+  // For practice tests, check if free user has questions remaining
+  if (location.pathname.includes('/practice-tests') && 
+      !subscriptionActive && 
+      practiceQuestionsRemaining <= 0) {
+    return <UpgradePrompt feature="questions" />;
+  }
+  
+  // Handle existing cancelation case
+  if (!subscriptionActive && subscriptionStatus === 'canceling') {
+    // Show children with a renewal banner instead of redirecting
+    return (
+      <>
+        <div className="subscription-banner">
+          <div className="subscription-banner-content">
+            <p>Your subscription will end at the end of your current billing period. <a href="/subscription">Renew now</a> to maintain access.</p>
+          </div>
+        </div>
+        {children}
+      </>
+    );
+  }
+  
+  // All checks passed, show the protected content
   return children;
 };
 

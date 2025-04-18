@@ -631,7 +631,207 @@
   margin-right: 8px;
   align-self: center;
 }
+.subscription-comparison {
+  margin: 2rem 0;
+}
 
+.subscription-plans {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .subscription-plans {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.subscription-plan {
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subscription-plan.premium {
+  background: linear-gradient(135deg, rgba(41, 86, 167, 0.2), rgba(46, 76, 167, 0.1));
+  transform: translateY(-5px);
+  border: 1px solid rgba(93, 137, 255, 0.3);
+}
+
+.subscription-plan-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #c19b4a, #f6e27a);
+  color: #4a3800;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.8rem;
+  font-weight: bold;
+  border-bottom-left-radius: 8px;
+}
+
+.subscription-plan-header {
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subscription-plan-price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0 0;
+}
+
+.subscription-plan-billing {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.subscription-plan-features {
+  padding: 1.5rem;
+}
+
+.subscription-plan-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.subscription-plan-features li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.feature-available {
+  color: #4CAF50;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.feature-unavailable {
+  color: #F44336;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.limited-feature {
+  font-size: 0.85rem;
+  color: #FFC107;
+}
+
+.subscription-free-button {
+  background-color: #2e3856;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.subscription-free-button:hover {
+  background-color: #3a4675;
+}
+
+.subscription-premium-button {
+  background: linear-gradient(135deg, #4A90E2, #5637DD);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(86, 55, 221, 0.3);
+}
+
+.subscription-premium-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(86, 55, 221, 0.4);
+}
+
+/* Feature Comparison Table */
+.subscription-features-comparison {
+  margin-top: 2.5rem;
+}
+
+.subscription-features-comparison h3 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.subscription-section-icon {
+  margin-right: 0.5rem;
+  color: #FFC107;
+}
+
+.subscription-comparison-table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.subscription-comparison-header {
+  display: flex;
+  background: rgba(46, 56, 86, 0.5);
+  font-weight: bold;
+}
+
+.subscription-comparison-column {
+  padding: 1rem;
+  flex: 1;
+}
+
+.subscription-comparison-column.feature {
+  flex: 2;
+}
+
+.subscription-comparison-column.premium {
+  background: linear-gradient(135deg, rgba(41, 86, 167, 0.5), rgba(46, 76, 167, 0.3));
+}
+
+.subscription-comparison-rows {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.subscription-comparison-row {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.subscription-comparison-row:last-child {
+  border-bottom: none;
+}
+
+.subscription-comparison-cell {
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.subscription-comparison-cell.feature {
+  flex: 2;
+}
 /* Add animation for the badge */
 @keyframes pulse-badge {
   0% {

@@ -215,6 +215,12 @@ def get_user(user_id):
     user = serialize_user(user)
     if "password" not in user:
         user["password"] = user.get("password")
+        
+    # Make sure freemium fields are included
+    user["practiceQuestionsRemaining"] = user.get("practiceQuestionsRemaining", 0)
+    user["subscriptionType"] = user.get("subscriptionType", "free")
+    user["freeUserCreatedAt"] = user.get("freeUserCreatedAt")
+    
     return jsonify(user), 200
 
 @api_bp.route('/user', methods=['POST'])
@@ -875,6 +881,31 @@ def submit_answer(user_id):
 
     if not user:
         return jsonify({"error": "User not found"}), 404
+        
+    # Check if free user has remaining questions
+    if not user.get("subscriptionActive", False):
+        remaining = user.get("practiceQuestionsRemaining", 0)
+        if remaining <= 0:
+            return jsonify({
+                "error": "Practice question limit reached", 
+                "status": "limit_reached",
+                "tier": "free_limit",
+                "practiceQuestionsRemaining": 0
+            }), 403
+            
+        # Decrement question count for free users
+        start_db = time.time()
+        mainusers_collection.update_one(
+            {"_id": user["_id"]},
+            {"$inc": {"practiceQuestionsRemaining": -1}}
+        )
+        duration = time.time() - start_db
+        if not hasattr(g, 'db_time_accumulator'):
+            g.db_time_accumulator = 0.0
+        g.db_time_accumulator += duration
+        
+        # Update remaining count
+        remaining -= 1
 
     start_db = time.time()
     attempt_doc = testAttempts_collection.find_one({
@@ -1004,7 +1035,10 @@ def submit_answer(user_id):
             "awardedXP": awarded_xp,
             "awardedCoins": awarded_coins,
             "newXP": updated_user.get("xp", 0),
-            "newCoins": updated_user.get("coins", 0)
+            "newCoins": updated_user.get("coins", 0),
+            "practiceQuestionsRemaining": updated_user.get("practiceQuestionsRemaining", 0),
+            "subscriptionActive": updated_user.get("subscriptionActive", False),
+            "subscriptionType": updated_user.get("subscriptionType", "free")
         }), 200
     else:
         return jsonify({
@@ -1483,6 +1517,20 @@ def submit_daily_question():
         user_oid = ObjectId(user_id)
     except Exception:
         return jsonify({"error": "Invalid user ID"}), 400
+        
+    # Check if user has premium subscription
+    user = get_user_by_id(user_id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+        
+    subscription_active = user.get("subscriptionActive", False)
+    if not subscription_active:
+        return jsonify({
+            "error": "Premium subscription required to answer daily questions",
+            "status": "subscription_required",
+            "tier": "premium_required",
+            "feature": "daily_questions"
+        }), 403
 
     start_db = time.time()
     daily_doc = dailyQuestions_collection.find_one({"dayIndex": day_index})
@@ -1555,7 +1603,6 @@ def submit_daily_question():
         "newlyUnlocked": newly_unlocked,
         "explanation": daily_doc.get("explanation")
     }), 200
-
 
 #############################################
 # Public Leaderboard Caching (30-minute TTL)
@@ -1710,3 +1757,71 @@ def delete_user_account(user_id):
 
     except Exception as e:
         return jsonify({"error": f"Error deleting account: {str(e)}"}), 500
+        
+        
+        
+@api_bp.route('/user/<user_id>/usage-limits', methods=['GET'])
+def get_usage_limits(user_id):
+    """
+    Get current usage limits for free tier users
+    Returns remaining practice questions and subscription status
+    """
+    start_db = time.time()
+    user = get_user_by_id(user_id)
+    duration = time.time() - start_db
+    if not hasattr(g, 'db_time_accumulator'):
+        g.db_time_accumulator = 0.0
+    g.db_time_accumulator += duration
+    
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+        
+    # Return usage stats and subscription info
+    return jsonify({
+        "practiceQuestionsRemaining": user.get("practiceQuestionsRemaining", 0),
+        "subscriptionActive": user.get("subscriptionActive", False),
+        "subscriptionType": user.get("subscriptionType", "free"),
+        "freeUserCreatedAt": user.get("freeUserCreatedAt", None),
+    }), 200
+
+@api_bp.route('/user/<user_id>/decrement-questions', methods=['POST'])
+def decrement_questions(user_id):
+    """
+    Decrement the practice question counter for free users
+    """
+    start_db = time.time()
+    user = get_user_by_id(user_id)
+    duration = time.time() - start_db
+    if not hasattr(g, 'db_time_accumulator'):
+        g.db_time_accumulator = 0.0
+    g.db_time_accumulator += duration
+    
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+        
+    # Only decrement for free users
+    if not user.get("subscriptionActive", False):
+        remaining = user.get("practiceQuestionsRemaining", 0)
+        if remaining > 0:
+            start_db = time.time()
+            mainusers_collection.update_one(
+                {"_id": ObjectId(user_id)},
+                {"$inc": {"practiceQuestionsRemaining": -1}}
+            )
+            duration = time.time() - start_db
+            if not hasattr(g, 'db_time_accumulator'):
+                g.db_time_accumulator = 0.0
+            g.db_time_accumulator += duration
+            
+    # Get updated user
+    start_db = time.time()
+    updated_user = get_user_by_id(user_id)
+    duration = time.time() - start_db
+    if not hasattr(g, 'db_time_accumulator'):
+        g.db_time_accumulator = 0.0
+    g.db_time_accumulator += duration
+    
+    return jsonify({
+        "practiceQuestionsRemaining": updated_user.get("practiceQuestionsRemaining", 0),
+        "message": "Question count updated"
+    }), 200

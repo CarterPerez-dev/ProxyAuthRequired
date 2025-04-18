@@ -1,0 +1,365 @@
+/* UpgradePrompt.css - Gamified Upgrade Prompt */
+
+:root {
+  --upgrade-bg-dark: #0b0c15;
+  --upgrade-bg-card: #171a23;
+  --upgrade-accent: #6543cc;
+  --upgrade-accent-glow: #8a58fc;
+  --upgrade-accent-secondary: #ff4c8b;
+  --upgrade-success: #2ebb77;
+  --upgrade-error: #ff4e4e;
+  --upgrade-warning: #ffc107;
+  --upgrade-text: #e2e2e2;
+  --upgrade-text-secondary: #9da8b9;
+  --upgrade-border: #2a2c3d;
+  --upgrade-input-bg: rgba(0, 0, 0, 0.2);
+  --upgrade-gradient-primary: linear-gradient(135deg, #6543cc, #8a58fc);
+  --upgrade-gradient-secondary: linear-gradient(135deg, #ff4c8b, #ff7950);
+  --upgrade-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --upgrade-glow: 0 0 15px rgba(134, 88, 252, 0.5);
+}
+
+/* Main Container - Full screen overlay */
+.upgrade-prompt-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(11, 12, 21, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  font-family: 'Orbitron', 'Roboto', sans-serif;
+  color: var(--upgrade-text);
+  padding: 20px;
+  animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Upgrade card */
+.upgrade-prompt-card {
+  background: var(--upgrade-bg-card);
+  border-radius: 15px;
+  border: 1px solid var(--upgrade-border);
+  box-shadow: var(--upgrade-shadow);
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  animation: slide-up 0.4s ease;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.upgrade-prompt-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--upgrade-gradient-primary);
+}
+
+/* Header Section */
+.upgrade-prompt-header {
+  padding: 25px;
+  text-align: center;
+  position: relative;
+}
+
+.upgrade-prompt-icon {
+  font-size: 36px;
+  color: var(--upgrade-accent-glow);
+  margin-bottom: 15px;
+}
+
+.upgrade-prompt-title {
+  font-size: 24px;
+  margin: 0 0 15px 0;
+  background: var(--upgrade-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.upgrade-prompt-message {
+  color: var(--upgrade-text-secondary);
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Features Section */
+.upgrade-prompt-features {
+  padding: 0 25px 15px;
+}
+
+.upgrade-prompt-features-title {
+  font-size: 18px;
+  margin: 0 0 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--upgrade-text);
+}
+
+.upgrade-prompt-features-icon {
+  color: var(--upgrade-success);
+}
+
+.upgrade-prompt-feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.upgrade-prompt-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.upgrade-prompt-feature-check {
+  color: var(--upgrade-success);
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Trial notice */
+.upgrade-prompt-trial {
+  background: rgba(134, 88, 252, 0.1);
+  padding: 15px 25px;
+  margin: 0 15px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.upgrade-prompt-trial-icon {
+  color: var(--upgrade-accent);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.upgrade-prompt-trial p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--upgrade-text);
+}
+
+/* Action Buttons */
+.upgrade-prompt-actions {
+  padding: 20px 25px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.upgrade-prompt-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--upgrade-gradient-primary);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(101, 67, 204, 0.3);
+}
+
+.upgrade-prompt-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(101, 67, 204, 0.4);
+}
+
+.upgrade-prompt-button-icon {
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.upgrade-prompt-button:hover .upgrade-prompt-button-icon {
+  transform: translateX(3px);
+}
+
+.upgrade-prompt-back-button {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--upgrade-text-secondary);
+  border: 1px solid var(--upgrade-border);
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.upgrade-prompt-back-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--upgrade-text);
+}
+
+/* =================== */
+/* RESPONSIVE STYLES   */
+/* =================== */
+
+/* Tablet Styles */
+@media (max-width: 768px) {
+  .upgrade-prompt-card {
+    max-width: 450px;
+  }
+  
+  .upgrade-prompt-header {
+    padding: 20px;
+  }
+  
+  .upgrade-prompt-icon {
+    font-size: 32px;
+  }
+  
+  .upgrade-prompt-title {
+    font-size: 22px;
+  }
+  
+  .upgrade-prompt-message {
+    font-size: 15px;
+  }
+  
+  .upgrade-prompt-features {
+    padding: 0 20px 10px;
+  }
+  
+  .upgrade-prompt-features-title {
+    font-size: 17px;
+  }
+  
+  .upgrade-prompt-feature-item {
+    font-size: 14px;
+  }
+  
+  .upgrade-prompt-trial {
+    padding: 12px 20px;
+    margin: 0 10px 15px;
+  }
+  
+  .upgrade-prompt-actions {
+    padding: 15px 20px 20px;
+  }
+  
+  .upgrade-prompt-button {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 480px) {
+  .upgrade-prompt-card {
+    max-width: 320px;
+  }
+  
+  .upgrade-prompt-header {
+    padding: 15px;
+  }
+  
+  .upgrade-prompt-icon {
+    font-size: 28px;
+  }
+  
+  .upgrade-prompt-title {
+    font-size: 20px;
+  }
+  
+  .upgrade-prompt-message {
+    font-size: 14px;
+  }
+  
+  .upgrade-prompt-features {
+    padding: 0 15px 10px;
+  }
+  
+  .upgrade-prompt-features-title {
+    font-size: 16px;
+  }
+  
+  .upgrade-prompt-feature-item {
+    font-size: 13px;
+  }
+  
+  .upgrade-prompt-trial {
+    padding: 10px 15px;
+    margin: 0 8px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .upgrade-prompt-trial-icon {
+    align-self: center;
+  }
+  
+  .upgrade-prompt-actions {
+    padding: 12px 15px 15px;
+  }
+  
+  .upgrade-prompt-button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  
+  .upgrade-prompt-back-button {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}
+
+/* =================== */
+/* THEME COMPATIBILITY */
+/* =================== */
+
+/* Make sure the component adapts to the global theme settings */
+:root[data-theme] .upgrade-prompt-card::before {
+  background: var(--theme-gradient-primary, var(--upgrade-gradient-primary));
+}
+
+:root[data-theme] .upgrade-prompt-title {
+  background: var(--theme-gradient-primary, var(--upgrade-gradient-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme] .upgrade-prompt-button {
+  background: var(--theme-gradient-primary, var(--upgrade-gradient-primary));
+}
+
+:root[data-theme] .upgrade-prompt-icon,
+:root[data-theme] .upgrade-prompt-trial-icon {
+  color: var(--theme-accent-glow, var(--upgrade-accent-glow));
+}

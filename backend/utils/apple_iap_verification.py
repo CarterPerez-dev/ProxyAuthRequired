@@ -33,7 +33,7 @@ class AppleReceiptVerifier:
         Returns:
             dict: The verification result with status and receipt info
         """
-        try
+        try:
             verification_url = self.PRODUCTION_URL if not sandbox_mode else self.SANDBOX_URL
             
             # Prepare request data

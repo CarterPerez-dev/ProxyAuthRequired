@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { claimDailyBonus, setXPAndCoins, fetchUserData } from './slice/userSlice';
 import './css/DailyStation.css';
 import FormattedQuestion from '../../FormattedQuestion'; 
+import UpgradePrompt from '../../UpgradePrompt';
 
 // Icon imports
 import {
@@ -17,7 +18,9 @@ import {
   FaLightbulb,
   FaChevronRight,
   FaSyncAlt,
-  FaGift
+  FaGift,
+  FaLock,
+  FaCrown
 } from 'react-icons/fa';
 
 // Helper to format seconds as HH:MM:SS
@@ -30,7 +33,7 @@ function formatCountdown(seconds) {
 
 const DailyStationPage = () => {
   const dispatch = useDispatch();
-  const { userId, username, coins, xp, lastDailyClaim, loading: userLoading } = useSelector((state) => state.user);
+  const { userId, username, coins, xp, lastDailyClaim, loading: userLoading, subscriptionActive } = useSelector((state) => state.user);
 
   // Local states
   const [bonusError, setBonusError] = useState(null);
@@ -47,6 +50,9 @@ const DailyStationPage = () => {
   const [submitResult, setSubmitResult] = useState(null);
 
   const [questionCountdown, setQuestionCountdown] = useState(0);
+  
+  // State for freemium functionality
+  const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
 
   // Animations
   const [showBonusAnimation, setShowBonusAnimation] = useState(false);
@@ -208,8 +214,19 @@ const DailyStationPage = () => {
     }
   };
 
+  // Handle attempt to answer as free user
+  const handlePremiumRequired = () => {
+    setShowUpgradePrompt(true);
+  };
+
   // Submit daily answer
   const submitDailyAnswer = async () => {
+    // Check if user has premium subscription
+    if (!subscriptionActive) {
+      handlePremiumRequired();
+      return;
+    }
+    
     if (!questionData || questionData.alreadyAnswered) {
       setQError("You've already answered today's question!");
       return;
@@ -238,7 +255,12 @@ const DailyStationPage = () => {
       const ansData = await res.json();
       
       if (!res.ok) {
-        setQError(ansData.error || 'Error submitting answer.');
+        if (ansData.status === 'subscription_required') {
+          // Handle subscription requirement from API
+          handlePremiumRequired();
+        } else {
+          setQError(ansData.error || 'Error submitting answer.');
+        }
       } else {
         setSubmitResult(ansData);
         
@@ -266,6 +288,11 @@ const DailyStationPage = () => {
       setQError('Error: ' + err.message);
     }
   };
+
+  // If upgrade prompt is shown, render that instead
+  if (showUpgradePrompt) {
+    return <UpgradePrompt feature="daily" />;
+  }
 
   return (
     <div className="daily-station-container">
@@ -363,6 +390,14 @@ const DailyStationPage = () => {
               <div className="daily-station-card-header">
                 <FaLightbulb className="daily-station-card-icon" />
                 <h2>Daily Challenge</h2>
+                
+                {/* Premium indicator for daily question */}
+                {!subscriptionActive && (
+                  <div className="daily-station-premium-badge">
+                    <FaCrown className="daily-station-premium-icon" />
+                    <span>Premium</span>
+                  </div>
+                )}
               </div>
               
               <div className="daily-station-card-content">
@@ -425,19 +460,34 @@ const DailyStationPage = () => {
                       </div>
                     ) : (
                       <div className="daily-station-question-options">
-                        <div className="daily-station-options-list">
+                        {!subscriptionActive && (
+                          <div className="daily-station-premium-required">
+                            <FaLock className="daily-station-lock-icon" />
+                            <p>Premium subscription required to answer daily challenges</p>
+                            <button 
+                              className="daily-station-upgrade-btn"
+                              onClick={handlePremiumRequired}
+                            >
+                              <FaCrown className="daily-station-upgrade-icon" />
+                              <span>Upgrade to Premium</span>
+                            </button>
+                          </div>
+                        )}
+                        
+                        <div className={`daily-station-options-list ${!subscriptionActive ? 'premium-locked' : ''}`}>
                           {questionData.options.map((option, index) => (
                             <label 
                               key={index} 
-                              className={`daily-station-option ${selectedAnswer === index ? 'selected' : ''}`}
+                              className={`daily-station-option ${selectedAnswer === index ? 'selected' : ''} ${!subscriptionActive ? 'disabled' : ''}`}
                             >
                               <input
                                 type="radio"
                                 name="dailyQuestion"
                                 value={index}
                                 checked={selectedAnswer === index}
-                                onChange={() => setSelectedAnswer(index)}
+                                onChange={() => subscriptionActive ? setSelectedAnswer(index) : handlePremiumRequired()}
                                 className="daily-station-option-input"
+                                disabled={!subscriptionActive}
                               />
                               <span className="daily-station-option-text">{option}</span>
                               {selectedAnswer === index && (
@@ -448,11 +498,18 @@ const DailyStationPage = () => {
                         </div>
                         
                         <button 
-                          className="daily-station-submit-btn"
-                          onClick={submitDailyAnswer}
-                          disabled={selectedAnswer === null}
+                          className={`daily-station-submit-btn ${!subscriptionActive ? 'premium-required' : ''}`}
+                          onClick={subscriptionActive ? submitDailyAnswer : handlePremiumRequired}
+                          disabled={selectedAnswer === null || !subscriptionActive}
                         >
-                          Submit Answer
+                          {subscriptionActive ? (
+                            "Submit Answer"
+                          ) : (
+                            <>
+                              <FaLock className="daily-station-lock-icon-sm" />
+                              <span>Premium Required</span>
+                            </>
+                          )}
                         </button>
                         
                         <div className="daily-station-next-question">
@@ -486,6 +543,90 @@ const DailyStationPage = () => {
           </div>
         </div>
       )}
+      
+      {/* Add CSS for new premium elements */}
+      <style jsx>{`
+        .daily-station-premium-badge {
+          display: flex;
+          align-items: center;
+          background: linear-gradient(135deg, #c19b4a, #f6e27a);
+          color: #4a3800;
+          font-size: 0.8rem;
+          padding: 0.2rem 0.5rem;
+          border-radius: 20px;
+          margin-left: 1rem;
+          font-weight: bold;
+        }
+        
+        .daily-station-premium-icon {
+          margin-right: 0.3rem;
+        }
+        
+        .daily-station-premium-required {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 1.5rem;
+          background-color: rgba(0, 0, 0, 0.05);
+          border-radius: 8px;
+          margin-bottom: 1rem;
+          border: 1px dashed #c19b4a;
+        }
+        
+        .daily-station-lock-icon {
+          font-size: 2rem;
+          color: #c19b4a;
+          margin-bottom: 0.5rem;
+        }
+        
+        .daily-station-lock-icon-sm {
+          font-size: 1rem;
+          margin-right: 0.3rem;
+        }
+        
+        .daily-station-upgrade-btn {
+          background: linear-gradient(135deg, #c19b4a, #f6e27a);
+          color: #4a3800;
+          border: none;
+          padding: 0.7rem 1.5rem;
+          border-radius: 50px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          margin-top: 1rem;
+          transition: all 0.2s;
+        }
+        
+        .daily-station-upgrade-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(193, 155, 74, 0.3);
+        }
+        
+        .daily-station-upgrade-icon {
+          margin-right: 0.5rem;
+        }
+        
+        .daily-station-options-list.premium-locked {
+          opacity: 0.7;
+          filter: blur(1px);
+          pointer-events: none;
+        }
+        
+        .daily-station-option.disabled {
+          cursor: not-allowed;
+        }
+        
+        .daily-station-submit-btn.premium-required {
+          background: linear-gradient(135deg, #888, #ccc);
+          cursor: pointer;
+        }
+        
+        .daily-station-submit-btn.premium-required:hover {
+          background: linear-gradient(135deg, #c19b4a, #f6e27a);
+        }
+      `}</style>
     </div>
   );
 };

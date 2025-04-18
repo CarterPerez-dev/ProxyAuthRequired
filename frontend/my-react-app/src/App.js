@@ -236,27 +236,27 @@ function App() {
           
           {/* Protected routes - require login */}
           <Route path="/profile" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <UserProfile />
             </ProtectedRoute>
           }/>
           <Route path="/achievements" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <AchievementPage />
             </ProtectedRoute>
           }/>
           <Route path="/shop" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <ShopPage />
             </ProtectedRoute>
           }/>
           <Route path="/daily" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <DailyStationPage />
             </ProtectedRoute>
           }/>
           <Route path="/leaderboard" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <LeaderboardPage />
             </ProtectedRoute>
           }/>
@@ -271,7 +271,7 @@ function App() {
             </ProtectedRoute>
           }/>
           <Route path="/analogyhub" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <AnalogyHub />
             </ProtectedRoute>
           }/>
@@ -280,137 +280,144 @@ function App() {
               <GRC />
             </ProtectedRoute>
           }/>
-          <Route path="/dailycyberbrief" element={<DailyCyberBrief />} />
-          <Route path="/resources" element={<Resources />} />
-          
-          {/* Practice test routes */}
+          <Route path="/dailycyberbrief" element={
+            <ProtectedRoute requiresPremium={false}> 
+              <DailyCyberBrief />
+            </ProtectedRoute>
+          }/>
+          <Route path="/resources" element={
+            <ProtectedRoute requiresPremium={false}> 
+              <Resources />
+            </ProtectedRoute>
+          }/>
+         
           <Route path="/practice-tests/a-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <APlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/a-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <APlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/aplus-core2" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <APlusCore2TestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/aplus-core2/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <APlusCore2TestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/network-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <NetworkPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/network-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <NetworkPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/security-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <SecurityPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/security-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <SecurityPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/cysa-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <CySAPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/cysa-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <CySAPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/pen-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <PenPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/pen-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <PenPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/casp-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <CaspPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/casp-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <CaspPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/linux-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <LinuxPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/linux-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <LinuxPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/cloud-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <CloudPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/cloud-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <CloudPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/data-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <DataPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/data-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <DataPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/server-plus" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <ServerPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/server-plus/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <ServerPlusTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/cissp" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <CisspTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/cissp/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <CisspTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/aws-cloud" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <AWSCloudTestPage />
             </ProtectedRoute>
           }/>
           <Route path="/practice-tests/aws-cloud/:testId" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={false}>
               <AWSCloudTestPage />
             </ProtectedRoute>
           }/>

@@ -35,7 +35,7 @@ apple_bundle_id = os.getenv('APPLE_BUNDLE_ID', 'com.certgames.app')
 apple_receipt_verifier = AppleReceiptVerifier(shared_secret=apple_shared_secret)
 
 # Front-end URLs
-frontend_url = os.getenv('FRONTEND_URL', 'https://certgames.com')
+frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
 success_url = f"{frontend_url}/subscription/success"
 cancel_url = f"{frontend_url}/subscription/cancel"
 

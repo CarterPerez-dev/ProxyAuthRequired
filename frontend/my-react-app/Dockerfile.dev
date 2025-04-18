@@ -1,29 +1,21 @@
-
 FROM node:23-alpine
-
 
 RUN apk add --no-cache bash curl
 
-
 WORKDIR /app
 
-
+# Copy package files and install dependencies
 COPY package*.json ./
-
-
 RUN npm install
 
+# Enable imports outside of src
+ENV SKIP_PREFLIGHT_CHECK=true
 
+# Copy the rest of the code
 COPY . .
 
-
+# Install global tools
 RUN npm install -g nodemon react-scripts
 
-
-
 EXPOSE 3000
-
-
 CMD ["npm", "start"]
-
-

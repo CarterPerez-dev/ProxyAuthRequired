@@ -96,10 +96,12 @@ def log_request_info():
 
 
 @app.before_request
-def log_api_request():s
+def log_api_request():
+    # Skip logging static files and certain endpoints
     if request.path.startswith('/static/') or request.path == '/health':
     return
     
+    # Create a log entry
     log_entry = {
         "type": "api",
         "timestamp": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
@@ -109,7 +111,9 @@ def log_api_request():s
         "user_agent": request.headers.get('User-Agent', 'Unknown')
     }
     
+    # Add to our log buffer
     api_logs.add(log_entry)
+
 
 
 @app.before_request
