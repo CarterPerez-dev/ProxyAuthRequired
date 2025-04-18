@@ -6,7 +6,7 @@ import {
   submitSolution, 
   resetCurrentChallenge,
   unlockNextLevel
-} from '../store/slice/cipherChallengeSlice';
+} from '../../store/slice/cipherChallengeSlice';
 import { FaLock, FaLockOpen, FaKey, FaQuestionCircle, FaBrain, FaMedal } from 'react-icons/fa';
 import CipherDisplay from './CipherDisplay';
 import CipherInput from './CipherInput';

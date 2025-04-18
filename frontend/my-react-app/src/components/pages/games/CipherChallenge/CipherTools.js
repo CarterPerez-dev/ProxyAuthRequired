@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   FaFont, FaRandom, FaExchangeAlt, FaChartBar, 
-  FaSliders, FaAlignLeft, FaCalculator
+  FaSlidersH, FaAlignLeft, FaCalculator
 } from 'react-icons/fa';
 import './CipherTools.css';
 
@@ -23,7 +23,7 @@ const CipherTools = ({ activeTool, onToolSelect, cipherType, ciphertext }) => {
       { id: 'binary', name: 'Binary Converter', icon: <FaCalculator />, forTypes: ['Binary'] },
       { id: 'hex', name: 'Hex Decoder', icon: <FaCalculator />, forTypes: ['Hex'] },
       { id: 'wordpattern', name: 'Word Pattern', icon: <FaAlignLeft />, forTypes: ['Substitution'] },
-      { id: 'custom', name: 'Custom Mapping', icon: <FaSliders />, forTypes: ['Substitution'] },
+      { id: 'custom', name: 'Custom Mapping', icon: <FaSlidersH />, forTypes: ['Substitution'] },
     ];
     
     return allTools.filter(tool => 

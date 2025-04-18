@@ -1,7 +1,7 @@
 // src/components/pages/games/CipherChallenge/CipherHints.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { unlockHint } from '../store/slice/cipherChallengeSlice';
+import { unlockHint } from '../../store/slice/cipherChallengeSlice';
 import { FaLightbulb, FaLock, FaCoins, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import './CipherHints.css';
 

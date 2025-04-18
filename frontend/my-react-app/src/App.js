@@ -53,8 +53,11 @@ import AchievementPage from './components/pages/store/AchievementPage';
 import SupportAskAnythingPage from './components/pages/store/SupportAskAnythingPage';
 
 
-
-
+// Game Pages
+import ThreatHunter from './components/pages/games/ThreatHunter/ThreatHunter';
+import IncidentResponder from './components/pages/games/IncidentResponder/IncidentResponder';
+import PhishingPhrenzy from './components/pages/games/PhishingPhrenzy/PhishingPhrenzy';
+import CipherChallenge from './components/pages/games/CipherChallenge/CipherChallenge';
 
 
 // Unique Test Pages
@@ -246,6 +249,26 @@ function App() {
               <UserProfile />
             </ProtectedRoute>
           }/>
+          <Route path="/games/threat-hunter" element={
+            <ProtectedRoute requiresPremium={false}>
+              <ThreatHunter />
+            </ProtectedRoute>
+          }/>
+          <Route path="/games/incident-responder" element={
+            <ProtectedRoute requiresPremium={false}>
+              <IncidentResponder />
+            </ProtectedRoute>
+          }/>
+          <Route path="/games/phishing-phrenzy" element={
+            <ProtectedRoute requiresPremium={false}>
+              <PhishingPhrenzy />
+            </ProtectedRoute>
+          }/>
+          <Route path="/games/cipher-challenge" element={
+            <ProtectedRoute requiresPremium={false}>
+              <CipherChallenge />
+            </ProtectedRoute>
+          }/>          
           <Route path="/achievements" element={
             <ProtectedRoute requiresPremium={false}>
               <AchievementPage />

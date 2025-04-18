@@ -6,7 +6,7 @@ import {
   startScenario,
   selectAction,
   resetGame
-} from '../store/slice/incidentResponderSlice';
+} from '../../store/slice/incidentResponderSlice';
 import { FaShieldAlt, FaBug, FaExclamationTriangle, FaAward, FaClipboardCheck } from 'react-icons/fa';
 import ScenarioIntro from './ScenarioIntro';
 import ScenarioStage from './ScenarioStage';

@@ -17,13 +17,15 @@ import {
   FaNewspaper,
   FaBook,
   FaLaptopCode,
-  FaChessKnight
+  FaChessKnight,
+  FaGamepad
 } from 'react-icons/fa';
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [practiceTestsOpen, setPracticeTestsOpen] = useState(false);
+  const [gamesOpen, setGamesOpen] = useState(false);
 
   const navigate = useNavigate();
   const sidebarRef = useRef(null);
@@ -40,6 +42,11 @@ const Sidebar = () => {
   const togglePracticeTests = () => {
     setPracticeTestsOpen(!practiceTestsOpen);
   };
+  
+  const toggleGames = () => {
+    setGamesOpen(!gamesOpen);
+  };  
+  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -103,6 +110,46 @@ const Sidebar = () => {
                   <span className="sidebar-link-text">/Profile</span>
                 </NavLink>
               </li>
+              {/* Games group */}
+              <li className="sidebar-group">
+                <div
+                  className="group-header"
+                  onClick={toggleGames}
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') toggleGames();
+                  }}
+                >
+                  <div className="group-header-content">
+                    <FaGamepad className="sidebar-icon" />
+                    <span className="sidebar-link-text">/Games</span>
+                  </div>
+                  {gamesOpen ? <FaChevronUp className="group-icon" /> : <FaChevronDown className="group-icon" />}
+                </div>
+                <ul className={`group-sublist ${gamesOpen ? 'expanded' : ''}`}>
+                  <li>
+                    <NavLink to="/games/threat-hunter" className={({ isActive }) => `sidebar-sublink ${isActive ? 'active-subtab' : ''}`}>
+                      <span className="sidebar-link-text">Threat Hunter</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/games/incident-responder" className={({ isActive }) => `sidebar-sublink ${isActive ? 'active-subtab' : ''}`}>
+                      <span className="sidebar-link-text">Incident Responder</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/games/phishing-phrenzy" className={({ isActive }) => `sidebar-sublink ${isActive ? 'active-subtab' : ''}`}>
+                      <span className="sidebar-link-text">Phishing Phrenzy</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/games/cipher-challenge" className={({ isActive }) => `sidebar-sublink ${isActive ? 'active-subtab' : ''}`}>
+                      <span className="sidebar-link-text">Cipher Challenge</span>
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>              
               <li>
                 <NavLink to="/achievements" className={({ isActive }) => `sidebar-link ${isActive ? 'active-link' : ''}`}>
                   {getIcon('/achievements')}

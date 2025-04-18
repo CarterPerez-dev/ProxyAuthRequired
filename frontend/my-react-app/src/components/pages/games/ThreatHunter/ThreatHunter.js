@@ -6,7 +6,7 @@ import {
   startScenario, 
   submitAnalysis,
   resetGame
-} from '../store/slice/threatHunterSlice';
+} from '../../store/slice/threatHunterSlice';
 import { FaSearch, FaFileAlt, FaChartLine, FaExclamationTriangle, FaTrophy } from 'react-icons/fa';
 import LogViewer from './LogViewer';
 import AnalysisTools from './AnalysisTools';
