@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ScenarioSphere.css';
 import { ATTACK_TYPES } from './attacks';
+import SubscriptionErrorHandler from '../../SubscriptionErrorHandler';
 import { 
   FaRandom, 
   FaDatabase, 
@@ -30,6 +31,9 @@ import {
 const ENDPOINT = "/api";
 
 const ScenarioSphere = () => {
+  // Add subscription error handler
+  const subscriptionErrorHandler = SubscriptionErrorHandler();
+  
   const [isGenerating, setIsGenerating] = useState(false);
   const [industry, setIndustry] = useState("Finance");
   const [attackType, setAttackType] = useState("");
@@ -167,6 +171,16 @@ const ScenarioSphere = () => {
         if (!response.ok) {
           setIsGenerating(false);
           return response.text().then((text) => {
+            try {
+              // Check if this is a subscription error
+              const errorData = JSON.parse(text);
+              if (subscriptionErrorHandler.handleApiError(errorData, 'scenariosphere')) {
+                // Error was handled, no need to set error message
+                return;
+              }
+            } catch (e) {
+              // Not JSON or other error
+            }
             setErrorMessage(`Error: ${text}`);
           });
         }
@@ -194,7 +208,11 @@ const ScenarioSphere = () => {
       })
       .catch((err) => {
         console.error(err);
-        setErrorMessage("An error occurred while streaming scenario");
+        // Check if this is a subscription error
+        if (!subscriptionErrorHandler.handleApiError(err, 'scenariosphere')) {
+          // Only set error message if not a subscription error
+          setErrorMessage("An error occurred while streaming scenario");
+        }
         setIsGenerating(false);
       });
   };
@@ -216,7 +234,19 @@ const ScenarioSphere = () => {
       .then((response) => {
         if (!response.ok) {
           console.error("Error fetching questions.");
-          return response.text().then((t) => console.error(t));
+          return response.text().then((t) => {
+            try {
+              // Check if this is a subscription error
+              const errorData = JSON.parse(t);
+              if (subscriptionErrorHandler.handleApiError(errorData, 'scenariosphere')) {
+                // Error was handled, no need to set error message
+                return;
+              }
+            } catch (e) {
+              // Not JSON or other error
+            }
+            console.error(t);
+          });
         }
 
         const reader = response.body.getReader();
@@ -261,7 +291,11 @@ const ScenarioSphere = () => {
       })
       .catch((error) => {
         console.error("Error streaming questions:", error);
-        setErrorMessage("Error streaming questions");
+        // Check if this is a subscription error
+        if (!subscriptionErrorHandler.handleApiError(error, 'scenariosphere')) {
+          // Only set error message if not a subscription error
+          setErrorMessage("Error streaming questions");
+        }
       });
   };
 
@@ -362,6 +396,9 @@ const ScenarioSphere = () => {
 
   return (
     <div className="scenario-container">
+      {/* Render the subscription error handler UI if needed */}
+      {subscriptionErrorHandler.render()}
+      
       <div className="scenario-header">
         <div className="scenario-title-container">
           <h1 className="scenario-title">
@@ -643,4 +680,3 @@ const ScenarioSphere = () => {
 };
 
 export default ScenarioSphere;
-

@@ -5,7 +5,7 @@ import logo from './logo5.png';
 import loadingIcon from './loading3.png';
 import './App.css';
 
-
+import SubscriptionErrorHandler from '../../SubscriptionErrorHandler';
 import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 import { pojoaque } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -694,7 +694,10 @@ const evasionTechniquesList = [
 ];
 
 
-function Home() {
+const Xploitcraft = () => {
+  // Add subscription error handler
+  const subscriptionErrorHandler = SubscriptionErrorHandler();
+  
   const [vulnerability, setVulnerability] = useState("");
   const [evasionTechnique, setEvasionTechnique] = useState("");
   const [payload, setPayload] = useState("");
@@ -823,6 +826,16 @@ function Home() {
         if (!response.ok) {
           setLoading(false);
           return response.text().then((text) => {
+            try {
+              // Check if this is a subscription error
+              const errorData = JSON.parse(text);
+              if (subscriptionErrorHandler.handleApiError(errorData, 'xploitcraft')) {
+                // Error was handled, no need to alert
+                return;
+              }
+            } catch (e) {
+              // Not JSON or other error
+            }
             alert(`Error: ${text}`);
           });
         }
@@ -860,7 +873,13 @@ function Home() {
       })
       .catch((error) => {
         console.error('Error:', error);
-        alert('Failed to connect to the backend server. Please check the server connection.');
+        
+        // Check if this is a subscription error
+        if (!subscriptionErrorHandler.handleApiError(error, 'xploitcraft')) {
+          // Only show generic error if not a subscription error
+          alert('Failed to connect to the backend server. Please check the server connection.');
+        }
+        
         setLoading(false);
       });
   };
@@ -888,6 +907,9 @@ function Home() {
 
   return (
     <header className="App-header">
+      {/* Render the subscription error handler UI if needed */}
+      {subscriptionErrorHandler.render()}
+      
       <img src={logo} className="App-logo" alt="logo" />
       <h1 className="header-title">XploitCraft</h1>
 
@@ -998,4 +1020,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Xploitcraft;

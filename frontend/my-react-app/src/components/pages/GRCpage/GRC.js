@@ -1,6 +1,7 @@
 // GRC.js - Redesigned with gamified UI
 import React, { useState, useCallback, useEffect } from "react";
 import "./GRC.css";
+import SubscriptionErrorHandler from '../../SubscriptionErrorHandler';
 import { 
   FaRandom, 
   FaBalanceScale, 
@@ -57,6 +58,9 @@ const difficultyColors = {
 };
 
 const GRC = () => {
+  // Add subscription error handler
+  const subscriptionErrorHandler = SubscriptionErrorHandler();
+  
   const [category, setCategory] = useState("Random");
   const [difficulty, setDifficulty] = useState("Easy");
   const [loading, setLoading] = useState(false);
@@ -109,6 +113,14 @@ const GRC = () => {
 
       if (!response.ok) {
         const errData = await response.json();
+        
+        // Check if this is a subscription error
+        if (subscriptionErrorHandler.handleApiError(errData, 'grc')) {
+          // Error was handled, clean up UI state
+          setLoading(false);
+          return;
+        }
+        
         throw new Error(errData.error || "Failed to fetch question");
       }
 
@@ -116,11 +128,16 @@ const GRC = () => {
       setQuestionData(data);
     } catch (error) {
       console.error("Error fetching question:", error);
-      setFeedback("Error fetching question. Please try again.");
+      
+      // Check if this is a subscription error
+      if (!subscriptionErrorHandler.handleApiError(error, 'grc')) {
+        // Only set feedback if not a subscription error
+        setFeedback("Error fetching question. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
-  }, [category, difficulty]);
+  }, [category, difficulty, subscriptionErrorHandler]);
 
   const handleAnswer = useCallback(
     (index) => {
@@ -158,6 +175,9 @@ const GRC = () => {
 
   return (
     <div className="grc-wizard-page">
+      {/* Render the subscription error handler UI if needed */}
+      {subscriptionErrorHandler.render()}
+      
       <div className="grc-header">
         <div className="grc-title-container">
           <h1 className="grc-title">GRC Wizard</h1>

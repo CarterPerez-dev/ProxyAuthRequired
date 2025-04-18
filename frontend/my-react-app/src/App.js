@@ -261,12 +261,12 @@ function App() {
             </ProtectedRoute>
           }/>
           <Route path="/xploitcraft" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={true}>
               <Xploitcraft />
             </ProtectedRoute>
           }/>
           <Route path="/scenariosphere" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={true}>
               <ScenarioSphere />
             </ProtectedRoute>
           }/>
@@ -276,7 +276,7 @@ function App() {
             </ProtectedRoute>
           }/>
           <Route path="/grc" element={
-            <ProtectedRoute>
+            <ProtectedRoute requiresPremium={true}>
               <GRC />
             </ProtectedRoute>
           }/>

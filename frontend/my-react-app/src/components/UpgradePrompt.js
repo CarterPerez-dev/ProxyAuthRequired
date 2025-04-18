@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { FaLock, FaTrophy, FaExclamationCircle, FaArrowRight, FaInfoCircle } from 'react-icons/fa';
+import { FaLock, FaTrophy, FaExclamationCircle, FaArrowRight, FaInfoCircle, FaUserSecret } from 'react-icons/fa';
 import './UpgradePrompt.css'; // You'll need to create this CSS file
 
 const UpgradePrompt = ({ feature }) => {
@@ -33,6 +33,24 @@ const UpgradePrompt = ({ feature }) => {
         return {
           title: 'Premium Feature',
           message: 'Accessing resource links is only available with a premium subscription.',
+          icon: <FaLock className="upgrade-prompt-icon" />
+        };
+      case 'xploitcraft':
+        return {
+          title: 'Unlock XploitCraft',
+          message: 'XploitCraft is a premium tool for exploring cybersecurity exploits and vulnerabilities.',
+          icon: <FaUserSecret className="upgrade-prompt-icon" />
+        };
+      case 'scenariosphere':
+        return {
+          title: 'Unlock ScenarioSphere',
+          message: 'ScenarioSphere is a premium tool for generating realistic cybersecurity scenarios.',
+          icon: <FaLock className="upgrade-prompt-icon" />
+        };
+      case 'grc':
+        return {
+          title: 'Unlock GRC Wizard',
+          message: 'GRC Wizard is a premium tool for learning about Governance, Risk, and Compliance.',
           icon: <FaLock className="upgrade-prompt-icon" />
         };
       default:
