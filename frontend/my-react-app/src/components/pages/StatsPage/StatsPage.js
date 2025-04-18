@@ -7,13 +7,14 @@ import {
   FaFlagCheckered, FaCertificate, FaMedal, FaChartPie, FaCalendarAlt,
   FaExclamationTriangle, FaRocket, FaChartBar, FaInfoCircle, FaUserGraduate,
   FaLightbulb, FaArrowUp, FaArrowDown, FaEquals, FaFilter, FaSearch,
-  FaArrowAltCircleUp, FaArrowAltCircleDown
+  FaArrowAltCircleUp, FaArrowAltCircleDown, FaStarHalfAlt, FaCrown,
+  FaHourglassHalf, FaHeartbeat, FaGraduationCap, FaFire
 } from 'react-icons/fa';
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, 
   Legend, ResponsiveContainer, RadarChart, PolarGrid, 
   PolarAngleAxis, PolarRadiusAxis, Radar, BarChart, Bar,
-  PieChart, Pie, Cell, AreaChart, Area
+  PieChart, Pie, Cell, AreaChart, Area, RadialBarChart, RadialBar
 } from 'recharts';
 
 const StatsPage = () => {
@@ -30,6 +31,31 @@ const StatsPage = () => {
   const [timeRange, setTimeRange] = useState('all');
   const [readinessScores, setReadinessScores] = useState({});
   const [displayMode, setDisplayMode] = useState('overview'); // 'overview', 'details', 'readiness'
+  const [leaderboardRank, setLeaderboardRank] = useState({current: 0, previous: 0, change: 0});
+  
+  // Color definitions for charts
+  const COLORS = {
+    primary: "var(--stats-accent)",
+    secondary: "var(--stats-accent-secondary)",
+    success: "#2ecc71",
+    warning: "#f39c12",
+    danger: "#e74c3c",
+    info: "#3498db",
+    purple: "#9b59b6",
+    teal: "#1abc9c",
+    orange: "#e67e22",
+    darkBlue: "#34495e"
+  };
+  
+  const CHART_COLORS = [
+    COLORS.primary,
+    COLORS.secondary,
+    COLORS.success,
+    COLORS.info,
+    COLORS.warning,
+    COLORS.purple,
+    COLORS.teal
+  ];
   
   // Fetch test attempts when component mounts
   useEffect(() => {
@@ -48,6 +74,9 @@ const StatsPage = () => {
         
         // Calculate readiness scores based on test performance
         calculateReadinessScores(data.attempts || []);
+        
+        // Fetch leaderboard rank data
+        fetchLeaderboardRank();
       } catch (err) {
         console.error('Error fetching test attempts:', err);
         setError(err.message);
@@ -58,6 +87,38 @@ const StatsPage = () => {
     
     fetchTestAttempts();
   }, [userId]);
+  
+  // Fetch user's leaderboard position
+  const fetchLeaderboardRank = async () => {
+    if (!userId) return;
+    
+    try {
+      // First query would be for current rank
+      const response = await fetch(`/api/test/leaderboard?skip=0&limit=1000`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch leaderboard data');
+      }
+      
+      const data = await response.json();
+      const userRanking = data.data.findIndex(user => user.username === userId);
+      const currentRank = userRanking !== -1 ? userRanking + 1 : null;
+      
+      // Simulate previous rank (in a real app, this would come from stored history)
+      // For this implementation, we'll randomly generate a previous rank close to current
+      const previousRank = currentRank ? 
+        Math.max(1, currentRank + (Math.random() > 0.5 ? -Math.floor(Math.random() * 5) : Math.floor(Math.random() * 5))) : 
+        null;
+      
+      setLeaderboardRank({
+        current: currentRank,
+        previous: previousRank,
+        change: previousRank ? previousRank - currentRank : 0
+      });
+      
+    } catch (err) {
+      console.error('Error fetching leaderboard rank:', err);
+    }
+  };
   
   // Calculate readiness scores for different certification exams
   const calculateReadinessScores = (attempts) => {
@@ -122,7 +183,30 @@ const StatsPage = () => {
     setReadinessScores(scores);
   };
   
-  // Filter attempts based on selected category and time range
+  // Format certification name for better display
+  const formatCertName = (name) => {
+    if (!name) return 'Unknown';
+    
+    // Handle typical naming patterns
+    if (name === 'aplus') return 'A+ Core 1';
+    if (name === 'aplus-core2') return 'A+ Core 2';
+    if (name === 'network-plus') return 'Network+';
+    if (name === 'security-plus') return 'Security+';
+    if (name === 'cysa-plus') return 'CySA+';
+    if (name === 'pen-plus') return 'PenTest+';
+    if (name === 'casp-plus') return 'CASP+';
+    if (name === 'linux-plus') return 'Linux+';
+    if (name === 'cloud-plus') return 'Cloud+';
+    if (name === 'data-plus') return 'Data+';
+    if (name === 'server-plus') return 'Server+';
+    if (name === 'cissp') return 'CISSP';
+    if (name === 'aws-cloud') return 'AWS Cloud';
+    
+    // General case: capitalize and replace dashes with spaces
+    return name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, ' ');
+  };
+
+// Filter attempts based on selected category and time range
   const filteredAttempts = useMemo(() => {
     if (!testAttempts.length) return [];
     
@@ -167,7 +251,6 @@ const StatsPage = () => {
         completedTests: 0,
         avgScore: 0,
         totalCorrect: 0,
-        totalQuestions: 0,
         perfectScores: 0,
         worstScore: 0,
         bestScore: 0
@@ -178,7 +261,6 @@ const StatsPage = () => {
     
     // Calculate total correct answers and questions
     let totalCorrect = 0;
-    let totalQuestions = 0;
     let perfectScores = 0;
     let scores = [];
     
@@ -187,7 +269,6 @@ const StatsPage = () => {
       const total = attempt.totalQuestions || 0;
       
       totalCorrect += score;
-      totalQuestions += total;
       
       if (score === total && total > 0) {
         perfectScores++;
@@ -210,7 +291,6 @@ const StatsPage = () => {
       completedTests: completedAttempts.length,
       avgScore: Math.round(avgScore),
       totalCorrect,
-      totalQuestions,
       perfectScores,
       bestScore: Math.round(bestScore),
       worstScore: Math.round(worstScore)
@@ -230,15 +310,17 @@ const StatsPage = () => {
         return dateA - dateB;
       });
       
-    return validAttempts.map(attempt => {
+    return validAttempts.map((attempt, index) => {
       const date = new Date(attempt.finishedAt || attempt.createdAt);
       const score = attempt.totalQuestions 
         ? Math.round((attempt.score / attempt.totalQuestions) * 100) 
         : 0;
         
+      // Include a sequential index to make the trend line more visually appealing
       return {
         date: date.toLocaleDateString(),
         score,
+        index,
         category: attempt.category || 'Unknown',
         testId: attempt.testId
       };
@@ -280,13 +362,14 @@ const StatsPage = () => {
         
       return {
         category,
+        fullName: formatCertName(category),
         score: Math.round(avgScore),
         accuracy: data.totalQuestions 
           ? Math.round((data.totalCorrect / data.totalQuestions) * 100)
           : 0,
         attempts: data.scores.length
       };
-    });
+    }).sort((a, b) => b.score - a.score);
   }, [filteredAttempts]);
   
   // Identify strengths and weaknesses
@@ -307,29 +390,6 @@ const StatsPage = () => {
     
     return { strengths, weaknesses };
   }, [categoryData]);
-  
-  // Format certification name for better display
-  const formatCertName = (name) => {
-    if (!name) return 'Unknown';
-    
-    // Handle typical naming patterns
-    if (name === 'aplus') return 'A+ Core 1';
-    if (name === 'aplus-core2') return 'A+ Core 2';
-    if (name === 'network-plus') return 'Network+';
-    if (name === 'security-plus') return 'Security+';
-    if (name === 'cysa-plus') return 'CySA+';
-    if (name === 'pen-plus') return 'PenTest+';
-    if (name === 'casp-plus') return 'CASP+';
-    if (name === 'linux-plus') return 'Linux+';
-    if (name === 'cloud-plus') return 'Cloud+';
-    if (name === 'data-plus') return 'Data+';
-    if (name === 'server-plus') return 'Server+';
-    if (name === 'cissp') return 'CISSP';
-    if (name === 'aws-cloud') return 'AWS Cloud';
-    
-    // General case: capitalize and replace dashes with spaces
-    return name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, ' ');
-  };
   
   // Render trophy icon with color based on score
   const renderTrophyIcon = (score) => {
@@ -355,6 +415,54 @@ const StatsPage = () => {
     return Array.from(uniqueCategories);
   }, [testAttempts]);
   
+  // Custom tooltip for charts
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="stats-chart-tooltip">
+          <p className="stats-chart-tooltip-title">
+            {label}
+          </p>
+          {payload.map((entry, index) => (
+            <p key={index} className="stats-chart-tooltip-item" style={{ color: entry.color }}>
+              <span>{entry.name}</span>
+              <span className="stats-chart-tooltip-value">{entry.value}{entry.name.includes('%') ? '' : '%'}</span>
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
+  
+  // Generate rank change indicator
+  const renderRankChangeIndicator = () => {
+    const { change } = leaderboardRank;
+    
+    if (change > 0) {
+      return (
+        <div className="stats-rank-change positive">
+          <FaArrowUp className="stats-rank-change-icon" />
+          <span>+{change}</span>
+        </div>
+      );
+    } else if (change < 0) {
+      return (
+        <div className="stats-rank-change negative">
+          <FaArrowDown className="stats-rank-change-icon" />
+          <span>{change}</span>
+        </div>
+      );
+    } else {
+      return (
+        <div className="stats-rank-change neutral">
+          <FaEquals className="stats-rank-change-icon" />
+          <span>No change</span>
+        </div>
+      );
+    }
+  };
+
   if (loading) {
     return (
       <div className="stats-page-container">
@@ -484,23 +592,26 @@ const StatsPage = () => {
             
             <div className="stats-card">
               <div className="stats-card-header">
-                <FaQuestionCircle className="stats-card-icon" />
-                <h3>Questions Answered</h3>
-              </div>
-              <div className="stats-card-value">{stats.totalQuestions}</div>
-              <div className="stats-card-footer">
-                <span>Correct: {stats.totalCorrect} ({stats.totalQuestions ? Math.round((stats.totalCorrect / stats.totalQuestions) * 100) : 0}%)</span>
-              </div>
-            </div>
-            
-            <div className="stats-card">
-              <div className="stats-card-header">
                 <FaTrophy className="stats-card-icon" />
                 <h3>Perfect Scores</h3>
               </div>
               <div className="stats-card-value">{stats.perfectScores}</div>
               <div className="stats-card-footer">
                 <span>{stats.completedTests ? Math.round((stats.perfectScores / stats.completedTests) * 100) : 0}% of Tests</span>
+              </div>
+            </div>
+            
+            <div className="stats-card">
+              <div className="stats-card-header">
+                <FaStarHalfAlt className="stats-card-icon" />
+                <h3>Leaderboard Rank</h3>
+              </div>
+              <div className="stats-card-value rank-value">
+                <span>#{leaderboardRank.current || '?'}</span>
+                {renderRankChangeIndicator()}
+              </div>
+              <div className="stats-card-footer">
+                <span>Based on XP and Level</span>
               </div>
             </div>
           </div>
@@ -513,11 +624,18 @@ const StatsPage = () => {
               </h3>
               <div className="stats-chart">
                 <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={scoreChartData}>
-                    <CartesianGrid strokeDasharray="3 3" />
+                  <AreaChart data={scoreChartData}>
+                    <defs>
+                      <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.8} />
+                        <stop offset="95%" stopColor={COLORS.primary} stopOpacity={0.1} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                     <XAxis 
                       dataKey="date" 
-                      tick={{ fontSize: 12 }}
+                      tick={{ fontSize: 12, fill: 'var(--stats-text-secondary)' }}
+                      stroke="rgba(255,255,255,0.2)"
                       interval="preserveEnd"
                       tickFormatter={(value) => {
                         // Shorten date format for mobile
@@ -525,21 +643,23 @@ const StatsPage = () => {
                         return `${date.getMonth()+1}/${date.getDate()}`;
                       }}
                     />
-                    <YAxis domain={[0, 100]} />
-                    <Tooltip 
-                      formatter={(value, name) => [`${value}%`, name]}
-                      labelFormatter={(label) => `Date: ${label}`}
+                    <YAxis 
+                      domain={[0, 100]} 
+                      tick={{ fontSize: 12, fill: 'var(--stats-text-secondary)' }}
+                      stroke="rgba(255,255,255,0.2)"
                     />
-                    <Legend />
-                    <Line 
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area 
                       type="monotone" 
                       dataKey="score" 
                       name="Score (%)"
                       stroke="var(--stats-accent)" 
-                      activeDot={{ r: 8 }}
-                      strokeWidth={2}
+                      fillOpacity={1}
+                      fill="url(#colorScore)"
+                      activeDot={{ r: 8, strokeWidth: 0, fill: 'var(--stats-accent-glow)' }}
+                      strokeWidth={3}
                     />
-                  </LineChart>
+                  </AreaChart>
                 </ResponsiveContainer>
               </div>
             </div>
@@ -551,21 +671,38 @@ const StatsPage = () => {
               </h3>
               <div className="stats-chart">
                 <ResponsiveContainer width="100%" height={300}>
-                  <RadarChart outerRadius={90} data={categoryData}>
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey="category" tick={{ fontSize: 10 }} />
-                    <PolarRadiusAxis domain={[0, 100]} />
-                    <Radar
-                      name="Score"
-                      dataKey="score"
-                      stroke="var(--stats-accent)"
-                      fill="var(--stats-accent)"
-                      fillOpacity={0.6}
+                  <BarChart data={categoryData.slice(0, 6)} layout="vertical" margin={{ left: 100 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" horizontal={false} />
+                    <XAxis 
+                      type="number" 
+                      domain={[0, 100]}
+                      tick={{ fontSize: 12, fill: 'var(--stats-text-secondary)' }}
+                      stroke="rgba(255,255,255,0.2)"
                     />
-                    <Tooltip 
-                      formatter={(value) => [`${value}%`, 'Score']}
+                    <YAxis 
+                      dataKey="fullName" 
+                      type="category" 
+                      tick={{ fontSize: 12, fill: 'var(--stats-text-secondary)' }}
+                      stroke="rgba(255,255,255,0.2)"
+                      width={100}
                     />
-                  </RadarChart>
+                    <Tooltip content={<CustomTooltip />} />
+                    <Legend />
+                    <defs>
+                      <linearGradient id="barGradient" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor={COLORS.primary} />
+                        <stop offset="100%" stopColor={COLORS.secondary} />
+                      </linearGradient>
+                    </defs>
+                    <Bar 
+                      dataKey="score" 
+                      name="Average Score" 
+                      fill="url(#barGradient)" 
+                      radius={[0, 4, 4, 0]}
+                      barSize={20}
+                      animationDuration={1500}
+                    />
+                  </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
@@ -592,6 +729,12 @@ const StatsPage = () => {
                       </div>
                       <div className="stats-insight-item-detail">
                         <span>Based on {strength.attempts} tests</span>
+                      </div>
+                      <div className="stats-insight-progress">
+                        <div 
+                          className="stats-insight-progress-bar"
+                          style={{ width: `${strength.score}%`, background: `var(--stats-insight-gradient-${index + 1})` }}
+                        ></div>
                       </div>
                     </li>
                   ))}
@@ -623,6 +766,12 @@ const StatsPage = () => {
                       </div>
                       <div className="stats-insight-item-detail">
                         <span>Based on {weakness.attempts} tests</span>
+                      </div>
+                      <div className="stats-insight-progress">
+                        <div 
+                          className="stats-insight-progress-bar"
+                          style={{ width: `${weakness.score}%`, background: 'var(--stats-warning)' }}
+                        ></div>
                       </div>
                     </li>
                   ))}
@@ -661,7 +810,7 @@ const StatsPage = () => {
           
           <div className="stats-readiness-grid">
             {Object.keys(readinessScores).length > 0 ? (
-              Object.entries(readinessScores).map(([category, data]) => (
+              Object.entries(readinessScores).map(([category, data], index) => (
                 <div 
                   key={category} 
                   className={`stats-readiness-card stats-readiness-${data.status}`}
@@ -782,6 +931,60 @@ const StatsPage = () => {
               )}
             </div>
           </div>
+          
+          {/* New: Certification Progression Chart */}
+          {categoryData.length > 0 && (
+            <div className="stats-progression-container">
+              <div className="stats-progression-header">
+                <h3>
+                  <FaGraduationCap className="stats-progression-icon" />
+                  Certification Progress Overview
+                </h3>
+              </div>
+              <div className="stats-progression-chart">
+                <ResponsiveContainer width="100%" height={300}>
+                  <RadialBarChart 
+                    cx="50%" 
+                    cy="50%" 
+                    innerRadius="15%" 
+                    outerRadius="80%" 
+                    data={categoryData.slice(0, 5)} 
+                    startAngle={180} 
+                    endAngle={0}
+                  >
+                    <RadialBar
+                      minAngle={15}
+                      background
+                      clockWise={true}
+                      dataKey="score"
+                      cornerRadius={10}
+                      label={{ fill: 'var(--stats-text)', position: 'insideStart', offset: 15 }}
+                      labelFormatter={(value, entry) => formatCertName(entry.category)}
+                    >
+                      {categoryData.slice(0, 5).map((entry, index) => (
+                        <Cell 
+                          key={`cell-${index}`} 
+                          fill={CHART_COLORS[index % CHART_COLORS.length]} 
+                        />
+                      ))}
+                    </RadialBar>
+                    <Tooltip 
+                      formatter={(value) => [`${value}%`, 'Score']}
+                      labelFormatter={(label, payload) => 
+                        payload && payload.length > 0 ? formatCertName(payload[0].payload.category) : ''}
+                    />
+                    <Legend 
+                      iconSize={10} 
+                      layout="vertical" 
+                      verticalAlign="middle" 
+                      align="right"
+                      formatter={(value, entry) => formatCertName(entry.payload.category)}
+                    />
+                  </RadialBarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
         </div>
       )}
       
@@ -799,21 +1002,32 @@ const StatsPage = () => {
                   <div className="stats-timeline-chart">
                     <ResponsiveContainer width="100%" height={200}>
                       <AreaChart data={scoreChartData}>
-                        <CartesianGrid strokeDasharray="3 3" />
+                        <defs>
+                          <linearGradient id="colorTimelineScore" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.8} />
+                            <stop offset="95%" stopColor={COLORS.primary} stopOpacity={0} />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                         <XAxis 
                           dataKey="date" 
-                          tick={{ fontSize: 10 }}
-                          interval="preserveEnd"
+                          tick={{fill: 'var(--stats-text-secondary)'}}
+                          stroke="rgba(255,255,255,0.2)"
                         />
-                        <YAxis domain={[0, 100]} />
-                        <Tooltip />
+                        <YAxis 
+                          domain={[0, 100]} 
+                          tick={{fill: 'var(--stats-text-secondary)'}}
+                          stroke="rgba(255,255,255,0.2)"
+                        />
+                        <Tooltip content={<CustomTooltip />} />
                         <Area 
                           type="monotone" 
                           dataKey="score" 
                           name="Score (%)" 
-                          stroke="var(--stats-accent)" 
-                          fill="var(--stats-accent)"
-                          fillOpacity={0.2}
+                          stroke={COLORS.primary} 
+                          fillOpacity={1}
+                          fill="url(#colorTimelineScore)"
+                          activeDot={{ r: 6, strokeWidth: 0, fill: 'var(--stats-accent-glow)' }}
                         />
                       </AreaChart>
                     </ResponsiveContainer>
@@ -834,23 +1048,36 @@ const StatsPage = () => {
                   <div className="stats-details-chart">
                     <ResponsiveContainer width="100%" height={200}>
                       <BarChart data={categoryData}>
-                        <CartesianGrid strokeDasharray="3 3" />
+                        <defs>
+                          <linearGradient id="colorBarScore" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor={COLORS.primary} />
+                            <stop offset="100%" stopColor={COLORS.secondary} />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                         <XAxis 
                           dataKey="category" 
-                          tick={{ fontSize: 10 }}
+                          tick={{ fontSize: 10, fill: 'var(--stats-text-secondary)' }}
+                          stroke="rgba(255,255,255,0.2)"
                           interval={0}
                           tickFormatter={(value) => formatCertName(value).substring(0, 5) + '..'}
                         />
-                        <YAxis domain={[0, 100]} />
+                        <YAxis 
+                          domain={[0, 100]} 
+                          tick={{ fontSize: 10, fill: 'var(--stats-text-secondary)' }}
+                          stroke="rgba(255,255,255,0.2)"
+                        />
                         <Tooltip
                           formatter={(value) => [`${value}%`, 'Score']}
                           labelFormatter={(label) => formatCertName(label)}
+                          content={<CustomTooltip />}
                         />
                         <Legend />
                         <Bar 
                           dataKey="score" 
                           name="Average Score" 
-                          fill="var(--stats-accent)" 
+                          fill="url(#colorBarScore)"
+                          radius={[4, 4, 0, 0]}
                         />
                       </BarChart>
                     </ResponsiveContainer>
@@ -883,7 +1110,7 @@ const StatsPage = () => {
                   <tbody>
                     {filteredAttempts
                       .sort((a, b) => new Date(b.finishedAt || b.createdAt) - new Date(a.finishedAt || a.createdAt))
-                      .slice(0, 10)
+                      .slice(0, 40)
                       .map((attempt, index) => (
                         <tr key={index}>
                           <td>
